@@ -6,27 +6,27 @@
   <meta name="theme-color" content="#f7efe9" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <title>今日、恵比寿ですれ違った可愛い人 プロンプト生成器</title>
+  <title>今日恵比寿ですれ違った素敵な女性｜画像プロンプトメーカー</title>
   <style>
     :root { color-scheme: light; --ink:#2e2a2a; --muted:#716b6b; --paper:#fffdfb; --wash:#f7efe9; --accent:#9b6571; --line:#e8dcd6; }
     * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; } body { margin:0; color:var(--ink); background:var(--wash); font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif; }
-    main { max-width:1040px; margin:0 auto; padding:42px max(20px, env(safe-area-inset-right)) max(56px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left)); } h1 { font-size:clamp(24px,4vw,38px); margin:0 0 10px; letter-spacing:.03em; } .lead { color:var(--muted); margin:0 0 28px; line-height:1.7; }
+    main { max-width:1040px; margin:0 auto; padding:42px max(20px, env(safe-area-inset-right)) max(56px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left)); } h1 { font-size:clamp(24px,4vw,38px); margin:0 0 4px; letter-spacing:.03em; } .product-name { margin:0 0 10px; color:var(--accent); font-size:14px; font-weight:700; letter-spacing:.08em; } .lead { color:var(--muted); margin:0 0 28px; line-height:1.7; }
     .panel { background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:22px; box-shadow:0 8px 30px #7f5d5210; } .controls { display:flex; flex-wrap:wrap; gap:12px; align-items:end; }
     label { display:grid; gap:6px; color:var(--muted); font-size:13px; font-weight:600; } select, button { min-height:44px; border-radius:10px; padding:10px 12px; font:inherit; } select { min-width:175px; border:1px solid var(--line); background:white; color:var(--ink); } button { touch-action:manipulation; cursor:pointer; border:0; background:var(--accent); color:white; font-weight:700; } button:hover { filter:brightness(.95); } button.secondary { background:white; color:var(--accent); border:1px solid var(--accent); }
     #results { display:grid; gap:16px; margin-top:24px; } article { background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:22px; scroll-margin-top:16px; } h2 { font-size:15px; margin:0 0 10px; color:var(--accent); } pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font:14px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace; } .copy-row { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 22px; } .copy-row button { min-height:40px; padding:7px 10px; font-size:12px; } .meta { margin:12px 0 0; font-size:12px; color:var(--muted); }
-    .notes { margin:26px 0 0; color:var(--muted); font-size:13px; line-height:1.7; } .mobile-tip { margin:16px 0 0; padding:14px 16px; background:#fff8f4; border:1px solid var(--line); border-radius:14px; color:var(--muted); font-size:13px; line-height:1.65; } .mobile-tip strong { color:var(--ink); } code { color:#69444c; }
+    .summary { margin:0; color:var(--ink); font-size:15px; line-height:1.85; } .notes { margin:26px 0 0; color:var(--muted); font-size:13px; line-height:1.7; } .mobile-tip { margin:16px 0 0; padding:14px 16px; background:#fff8f4; border:1px solid var(--line); border-radius:14px; color:var(--muted); font-size:13px; line-height:1.65; } .mobile-tip strong { color:var(--ink); } code { color:#69444c; }
     @media (max-width:600px) {
       main { padding-top:24px; padding-bottom:max(32px, env(safe-area-inset-bottom)); }
       h1 { font-size:25px; line-height:1.35; }
       .lead { margin-bottom:20px; font-size:14px; }
       .panel, article { border-radius:14px; padding:16px; }
       .controls { display:grid; grid-template-columns:1fr 1fr; align-items:stretch; gap:10px; }
-      .controls label { grid-column:1 / -1; }
       .controls select, .controls button { width:100%; min-width:0; }
       #generate { grid-column:1 / -1; }
+      #share-page { grid-column:1 / -1; }
       #results { margin-top:16px; gap:12px; }
       h2 { font-size:14px; }
-      pre { font-size:12px; line-height:1.68; }
+      .summary { font-size:14px; line-height:1.8; }
       .copy-row { margin-bottom:18px; }
       .copy-row button { width:100%; }
       .meta, .notes, .mobile-tip { font-size:12px; }
@@ -35,22 +35,18 @@
 </head>
 <body>
 <main>
-  <h1>今日、恵比寿ですれ違った可愛い人 プロンプト生成器</h1>
-  <p class="lead">恵比寿で働く架空の成人女性を、通勤・昼休み・帰宅途中のさりげない一瞬として組み合わせます。人物はすべて実在人物とは無関係の22〜29歳の成人女性で、受付、外資系、IT、広報、接客などの仕事設定を毎回変えます。</p>
+  <h1>今日恵比寿ですれ違った素敵な女性</h1>
+  <p class="product-name">画像プロンプトメーカー</p>
+  <p class="lead">恵比寿で働く架空の成人女性を、通勤・昼休み・帰宅途中のさりげない一瞬として組み合わせます。すべて実在人物とは無関係の22〜29歳の成人女性で、容姿・職業・ファッション・場面を毎回変えます。</p>
   <section class="panel" aria-label="生成設定">
     <div class="controls">
-      <label>出力数
-        <select id="count"><option>1</option><option>3</option><option>5</option><option>10</option></select>
-      </label>
       <button id="generate">ランダム生成</button>
-      <button class="secondary" id="copy-ja">日本語をすべてコピー</button>
-      <button class="secondary" id="copy-en">英語をすべてコピー</button>
       <button class="secondary" id="share-page">この生成器を共有</button>
     </div>
   </section>
   <div id="results" aria-live="polite"></div>
   <p class="mobile-tip"><strong>iPhoneで使うには:</strong> このHTMLをGoogle Driveで共有し、iPhoneのSafariで共有リンクを開いてください。Safariの共有メニューから「ホーム画面に追加」を選ぶと、アプリのようにすぐ開けます。下の共有ボタンは、公開・共有済みのURLで開いたときに使えます。</p>
-  <p class="notes">設計メモ: 仕事設定・服装・動作・背景・構図を毎回ランダムに組み合わせます。すべて、恵比寿の公共空間で通行人が縦向きのiPhone 15で日常的な距離から撮った、ポーズを取っていない架空の成人女性の一枚です。盗撮や隠し撮りの表現、実在人物の再現は含めません。</p>
+  <p class="notes">設計メモ: 仕事設定・服装・動作・背景・構図を毎回ランダムに組み合わせます。すべて、恵比寿の共有された公共空間で自然な距離から撮った、ポーズを取っていない架空の成人女性の一枚です。盗撮や隠し撮りの表現、実在人物の再現は含めません。</p>
 </main>
 <script>
 const pick = a => a[Math.floor(Math.random() * a.length)];
@@ -61,7 +57,7 @@ const data = {
   noseMouth: ["a small rounded nose, a modest nose bridge, and softly full lips", "a petite nose and a small, natural mouth with a fuller lower lip"],
   skin: ["natural, light makeup with soft healthy color", "barely-there makeup and subtle, natural complexion"],
   hair: ["straight black bob with blunt bangs", "dark chestnut medium hair with soft inward curls and sheer bangs", "dark brown semi-long hair with a loose wave and side-swept bangs", "long black hair, lightly layered, worn down with no bangs", "dark chestnut hair in a simple half-up style with wispy bangs", "a dark, sleek tassel bob with airy see-through bangs", "a face-framing layered bob in natural black", "a shoulder-length lob with subtle inward ends and thin bangs", "a soft hush cut with long face-framing layers", "a dark wolf-layer cut with a restrained, natural texture", "a neat chin-length bob with a gentle inward curl", "a medium C-curl style with a light face-framing layer", "a long dark S-wave with a soft, natural finish", "a shoulder-length straight cut with a delicate side part", "a low ponytail with wispy bangs and loose face-framing strands", "a simple half-up ponytail with light curtain bangs", "a loose side braid in dark brown hair", "two low, relaxed braids with soft center-parted bangs", "a low, slightly loose bun with fine strands around the face", "a sleek low ponytail with a soft center part", "long straight black hair with a clean center part", "dark brown medium hair with a natural deep side part", "a blunt black mini bob with an understated fringe", "a short layered bob with rounded ends", "a softly waved shoulder-length lob with thin bangs", "a medium-length inward-curl cut with a small side fringe", "a medium wolf cut with gentle, wearable layers", "long dark hair with restrained hime-cut face-framing pieces", "a dark, loose natural perm with light bangs", "a long layered cut with soft curtain bangs"],
-  expression: ["a reserved small smile", "a shy, slightly bashful smile", "a calm near-neutral expression", "a thoughtful downward glance"],
+  expression: ["a reserved small smile", "a shy, slightly bashful smile", "a calm, naturally pleasant expression", "a soft relaxed smile while briefly glancing downward"],
   pose: ["sitting slightly sideways, one hand loosely moving a paper cup while the other rests on her knee", "turning a page with one hand, with one shoulder slightly relaxed", "having just adjusted the strap of her tote bag, with her ankles naturally offset", "resting one hand near a ceramic mug while the other lightly touches the edge of the chair", "settling into the chair with a small ordinary shift in posture, rather than a posed stance"],
   noFace: ["the back of her head is visible and her face is fully out of frame", "her face is turned away and partly obscured by loose hair", "only a quiet side profile is visible, with her gaze directed downward", "her face is obscured by the shadow from a window curtain", "the camera observes from behind at shoulder height, with no identifiable face visible"],
   film: ["a subtle Kodak Portra 400-inspired neutral-warm color palette", "a restrained Fujifilm Superia-inspired everyday color palette", "a neutral contemporary digital color palette with subtle natural grain"],
@@ -81,7 +77,7 @@ const ja = {
   noseMouth:["小さめの団子鼻、控えめな鼻筋、ふっくらした唇","小ぶりな鼻と、下唇がややふっくらした自然な口元"],
   skin:["薄いナチュラルメイクと自然な血色","すっぴん風の控えめなメイクと柔らかな肌感"],
   hair:["ぱっつん前髪の黒髪ストレートボブ","シースルー前髪の暗め栗色ミディアム、内巻き","斜め前髪のダークブラウン・ゆるふわセミロング","前髪なしの黒髪ロング、軽いレイヤー","薄い前髪とハーフアップの暗め栗色ヘア","エアリーなシースルー前髪の、暗髪タッセルボブ","顔まわりにレイヤーを入れたナチュラルな黒髪ボブ","薄い前髪と控えめな内巻きの肩上ロブ","長めの顔まわりレイヤーを入れた、やわらかなハッシュカット","自然な質感に抑えた暗髪ウルフレイヤー","毛先をゆるく内巻きにした、あごラインの整ったボブ","軽い顔まわりレイヤーを入れたミディアムのCカール","自然な仕上がりのダークカラー・ロングSウェーブ","繊細なサイド分けの、肩までのストレートヘア","薄い前髪と顔まわりの後れ毛がある低めポニーテール","軽いカーテンバングのシンプルなハーフアップポニー","ダークブラウンの髪をゆるく編んだサイド三つ編み","センター分けの薄い前髪を添えた、ゆるい低めツイン三つ編み","顔まわりに細い後れ毛を残した、少しゆるめの低いお団子","やわらかなセンター分けの、すっきりしたローポニーテール","センター分けの黒髪ストレートロング","ナチュラルな深めサイド分けのダークブラウン・ミディアム","控えめな前髪を添えた、黒髪のぱつっとミニボブ","丸みのある毛先に仕上げたショートレイヤーボブ","薄い前髪の、肩丈でゆるく波打つロブ","短めのサイド前髪と内巻きのミディアムヘア","日常になじむ穏やかなレイヤーのミディアムウルフ","控えめな姫カットの顔まわりを添えたダークロング","軽い前髪のある、暗髪のゆるいナチュラルパーマ","やわらかなカーテンバングを添えたロングレイヤーカット"],
-  expression:["控えめな微笑み","少しはにかんだ笑顔","落ち着いた無表情気味の表情","考えごとをするような伏し目"],
+  expression:["控えめな微笑み","少しはにかんだ笑顔","落ち着いた自然で感じのよい表情","ふと伏し目になったときの、やわらかなリラックスした笑顔"],
   pose:["少し横向きに座り、片手で紙コップをゆるく動かし、もう片方は膝に置く","片手でページをめくり、片方の肩だけを少しゆるめる","トートバッグのストラップを直した直後で、足首を自然に少しずらす","片手を陶器のマグカップのそばに置き、もう片方は椅子の端に軽く触れる","ポーズを取らず、座り姿をほんの少しだけ崩して腰を落ち着ける"],
   noFace:["後頭部だけを写し、顔は完全にフレーム外にする","顔をそむけ、ゆるい髪で一部を隠す","伏し目の静かな横顔だけを写す","窓のカーテンが作る影で顔を隠す","肩の高さから後ろ姿を観察するように写し、識別できる顔を出さない"],
   film:["Kodak Portra 400を思わせる、ニュートラルで少し温かい色調","Fujifilm Superiaを思わせる、抑えめで日常的な色調","ごく薄い自然な粒子感を伴う、ニュートラルな現代デジタルの色調"],
@@ -99,13 +95,27 @@ const adultFaceCore = {
   en:"adult, age-appropriate facial structure and an unforced everyday expression; non-identifiable and not based on a real person"
 };
 const everydayAttractiveness = {
-  ja:"今日、恵比寿でたまたますれ違ったら少し印象に残る、一般人として自然に可愛い架空の成人女性。仕事に合った清潔感のある身だしなみで、プロモデルのような演出ではない",
-  en:"a fictional adult woman who is naturally attractive in the understated, memorable way of someone one might happen to pass in Ebisu today; professionally groomed for her work without looking like a fashion model or celebrity"
+  ja:"女優・アイドル・モデルのように整った、印象的で容姿端麗な架空の成人女性。ただし実在人物を想起させない非識別的な顔立ちで、日常になじむ自然で親しみやすい可愛さを持つ",
+  en:"a strikingly beautiful fictional adult woman with the polished, memorable appeal associated with an actress, idol, or model, while remaining non-identifiable and not based on any real person; naturally approachable and believable in everyday life"
 };
 const ebisuStyle = {
-  ja:"上質な国内外コンテンポラリーブランドの服を、ロゴを見せず自然に着こなす恵比寿らしい洗練されたオフィスカジュアル。日時・気温・天候に合わせた現実的なレイヤードを選び、肌見せは季節に応じて首元・肩まわり・腕を中心に、仕事着として品よくやや多めに取り入れる",
-  en:"refined Ebisu office-casual styling in well-made contemporary Japanese and international brands, naturally worn without visible logos. Choose realistic layers for the stated date, temperature, and weather, with a tastefully increased but work-appropriate amount of skin visible at the neckline, shoulders, or arms when seasonally plausible"
+  ja:"上質な国内外コンテンポラリーブランドを、ロゴを見せず自然に着こなす恵比寿らしい洗練された装い。選んだ服装系統と日時・気温・天候に合わせた現実的なレイヤードを優先し、肌見せは季節に応じて首元・肩まわり・腕を中心に品よく取り入れる",
+  en:"refined Ebisu styling in well-made contemporary Japanese and international brands, naturally worn without visible logos. Prioritize the selected fashion direction and realistic seasonal layering for the stated date, temperature, and weather; use a tasteful, work-appropriate amount of visible neckline, shoulders, or arms only when seasonally plausible"
 };
+const fashionDirections = [
+  {ja:"ふわふわ系：やわらかなシャギーニット、淡色のシフォンスカート、丸みのある小物を使った、軽くロマンティックな大人の装い", en:"soft and fluffy style: a light shaggy knit, pale chiffon skirt, and softly rounded accessories in a lightly romantic adult look"},
+  {ja:"ガーリー系：控えめなパフスリーブ、リボンや小粒ボタン、Aラインのミディスカートを品よく合わせた大人フェミニン", en:"girly style: restrained puff sleeves, a small ribbon or fine buttons, and an A-line midi skirt in polished adult feminine styling"},
+  {ja:"スタイリッシュ系：シャープなテーラードジレ、細身のスラックス、ミニマルなレザーバッグによるモダンな装い", en:"stylish look: a sharp tailored vest, slim slacks, and a minimal leather bag in a modern polished outfit"},
+  {ja:"きれいめカジュアル系：上質なTシャツまたは薄手ニット、端正なデニム、ローファーを自然に合わせた洗練カジュアル", en:"polished casual: a quality T-shirt or fine knit, neat denim, and loafers in an effortless refined outfit"},
+  {ja:"オフィスカジュアル系：ハイゲージニット、落ち感のあるスラックスまたはミディスカート、細いアクセサリーを合わせた通勤スタイル", en:"office casual: a fine-gauge knit, fluid slacks or a midi skirt, and delicate accessories in a realistic commute-ready look"},
+  {ja:"フォーマル寄り：端正なワンピースまたはセットアップ、控えめなジュエリー、上質なパンプスを使った会食や式典にもなじむ装い", en:"formal-leaning style: a neat dress or coordinated set, understated jewelry, and quality pumps suitable for a dinner or event"},
+  {ja:"成人の職業制服系：ホテル・航空地上職・ショールームなどの接客職に自然な、上質で端正な大人用ユニフォーム。学校制服ではない", en:"adult professional uniform style: a polished work uniform believable for hotel, airline ground staff, or showroom service; explicitly an adult workplace uniform, not a school uniform"},
+  {ja:"ミニマル系：白・黒・グレー・ベージュを基調に、直線的なシルエットと控えめなアクセサリーでまとめた都会的な装い", en:"minimal style: an urban outfit in white, black, gray, and beige with clean lines and understated accessories"},
+  {ja:"フェミニン・モノトーン系：シアー素材やサテンの質感を一点だけ使い、黒・白・チャコールでまとめた大人っぽい装い", en:"feminine monochrome: an adult black, white, and charcoal look using one sheer or satin textural accent"},
+  {ja:"フレンチカジュアル系：ボーダー、コンパクトカーディガン、ストレートデニム、バレエシューズを上品に合わせた装い", en:"French casual: a striped top, compact cardigan, straight denim, and ballet flats styled with understated polish"},
+  {ja:"リラックスドレッシー系：落ち感のあるブラウス、ワイドパンツまたはナロースカート、華奢なサンダルで作る余裕のある装い", en:"relaxed dressy style: a fluid blouse, wide trousers or a narrow skirt, and delicate sandals in an easy yet polished outfit"},
+  {ja:"コンテンポラリー・レイヤード系：透け感のあるシャツ、ノースリーブニット、軽いアウターを重ねた、季節感のある洗練レイヤード", en:"contemporary layered style: a translucent shirt, sleeveless knit, and light outer layer in seasonally appropriate refined layers"}
+];
 const upperBodyFocus = {
   ja:"全身ではなく、胸元から腰あたりまでを中心にした上半身の自然なスナップ。服の重なり、シアー素材の質感、髪の動き、バッグを持つ手元など、日常の細部が目に留まり、あとで見返したくなる視覚的に印象的な一枚。性的な演出や誇張はしない",
   en:"a natural upper-body candid framed mainly from the chest to around the waist, rather than a full-body image. Make the layering of clothing, texture of sheer fabric, movement of hair, and hands holding a bag visually engaging and memorable in everyday detail, without sexualized posing or exaggeration"
@@ -115,12 +125,12 @@ const backgroundCrowd = {
   en:"include several natural passersby in the Ebisu background. Keep the street, clothing, and main subject moderately legible overall; neither the subject nor background is overly blurred, with no strong background blur or extreme contrast. Only the passersby’s facial details are indistinct because of distance, softly blurred or very lightly pixelated so that nobody is identifiable"
 };
 const phoneRealism = {
-  ja:"iPhone 15のメインカメラ相当（26mm相当・f/1.6）で撮った、未加工に近い現実的なスマホ写真。撮影条件に合わせ、晴天下は1/250秒・ISO 100前後、曇天は1/120秒・ISO 200前後、夕方は1/60秒・ISO 400〜640程度の自然なシャッター速度と感度。ひとつの自然な光源方向に整合する露出・影・反射、現実的なダイナミックレンジ、控えめなスマホJPEGの輪郭処理と小センサー由来のわずかなノイズ。撮影距離で見える範囲だけに、肌の色むら・毛穴・うぶ毛・小さなほくろや薄いそばかすを自然に写す。個々の後れ毛、衣服の自然なしわ、接地部の影、手・家具・背景の正しい縮尺と物理的な接触を保つ。映画的な色調補正、不自然なポートレートぼけ、極端な明瞭度は加えない",
-  en:"a plausible, near-unedited iPhone 15 main-camera photograph (26mm equivalent, f/1.6). Use natural smartphone exposure settings appropriate to the stated light: about 1/250 s at ISO 100 in strong sun, 1/120 s at ISO 200 under bright overcast, or 1/60 s at ISO 400–640 at dusk. Exposure, shadows, and reflections are consistent with one available-light direction; realistic dynamic range; restrained smartphone-JPEG edge processing and slight small-sensor noise. Show natural tonal variation, pores, fine vellus hair, small moles, or faint freckles only where they would be visible at this distance. Preserve individual flyaway hairs, believable clothing wrinkles, contact shadows, and physically plausible scale and contact among hands, furniture, and background. No cinematic color grade, unnatural portrait-mode blur, or extreme clarity"
+  ja:"少し離れた自然な公共距離から、iPhone 15のメインカメラを2倍クロップ（52mm相当の画角・f/1.6相当）で使って撮った、未加工に近い現実的なスマホ写真。望遠らしい自然な圧縮感はあるが、盗撮ではなく周囲に配慮した非侵襲的な共有空間の撮影。撮影条件に合わせ、晴天下は1/250秒・ISO 100前後、曇天は1/120秒・ISO 200前後、夕方は1/60秒・ISO 400〜640程度の自然なシャッター速度と感度。ひとつの自然な光源方向に整合する露出・影・反射、現実的なダイナミックレンジ、控えめなスマホJPEGの輪郭処理と小センサー由来のわずかなノイズ。撮影距離で見える範囲だけに、肌の色むら・毛穴・うぶ毛・小さなほくろや薄いそばかすを自然に写す。個々の後れ毛、衣服の自然なしわ、接地部の影、手・家具・背景の正しい縮尺と物理的な接触を保つ。映画的な色調補正、不自然なポートレートぼけ、極端な明瞭度は加えない",
+  en:"a plausible, near-unedited iPhone 15 image taken from a respectful ordinary public distance using the main camera's 2x crop (52mm-equivalent field of view, f/1.6 appearance). It has gentle real-world telephoto compression without being voyeuristic or intrusive. Use natural smartphone exposure settings appropriate to the stated light: about 1/250 s at ISO 100 in strong sun, 1/120 s at ISO 200 under bright overcast, or 1/60 s at ISO 400–640 at dusk. Exposure, shadows, and reflections are consistent with one available-light direction; realistic dynamic range; restrained smartphone-JPEG edge processing and slight small-sensor noise. Show natural tonal variation, pores, fine vellus hair, small moles, or faint freckles only where they would be visible at this distance. Preserve individual flyaway hairs, believable clothing wrinkles, contact shadows, and physically plausible scale and contact among hands, furniture, and background. No cinematic color grade, unnatural portrait-mode blur, or extreme clarity"
 };
 const negativePrompt = {
-  ja:"アニメ、イラスト、CG、3Dレンダリング、AI風の肌、ビューティーフィルター、プラスチック肌、陶器肌、過度な肌の平滑化、完璧すぎる左右対称、ドールのような顔、過度に大きい目、プロモデル、セレブ、ハイファッションのエディトリアル、グラマーポーズ、スタジオのビューティーライティング、過度なポートレートぼけ、強すぎるHDR、過剰なシャープネス、二重の背景物、物理的に不自然な反射、顔や手の崩れ、余分な指、文字、透かし、ロゴ",
-  en:"anime, illustration, CGI, 3D render, AI-looking skin, beauty filter, plastic or porcelain skin, over-smoothed skin, perfect facial symmetry, doll-like face, exaggerated eyes, professional fashion model, celebrity, high-fashion editorial styling, glamour pose, studio beauty lighting, excessive portrait-mode blur, strong HDR, oversharpening, duplicated background objects, physically implausible reflections, distorted face or hands, extra fingers, text, watermark, logo"
+  ja:"アニメ、イラスト、CG、3Dレンダリング、AI風の肌、ビューティーフィルター、プラスチック肌、陶器肌、過度な肌の平滑化、完璧すぎる左右対称、ドールのような顔、過度に大きい目、実在のセレブや実在人物、強すぎるハイファッションの演出、グラマーポーズ、スタジオのビューティーライティング、過度なポートレートぼけ、強すぎるHDR、過剰なシャープネス、二重の背景物、物理的に不自然な反射、顔や手の崩れ、余分な指、文字、透かし、ロゴ",
+  en:"anime, illustration, CGI, 3D render, AI-looking skin, beauty filter, plastic or porcelain skin, over-smoothed skin, perfect facial symmetry, doll-like face, exaggerated eyes, any real celebrity or real person, overly editorial high-fashion styling, glamour pose, studio beauty lighting, excessive portrait-mode blur, strong HDR, oversharpening, duplicated background objects, physically implausible reflections, distorted face or hands, extra fingers, text, watermark, logo"
 };
 const moments = {
   student: [
@@ -220,10 +230,10 @@ const ebisuScenes = [
   {ja:"【屋内・一人】コスメショップで、鏡の前に立ち、手の甲にのせたリップの色を自然光で確かめる", en:"[indoor, alone] at a cosmetics shop, standing before a mirror and checking a lipstick color swatched on the back of her hand in natural light"}
 ];
 const ebisuCaptures = [
-  {ja:"恵比寿の共有された公共空間で、近くにいる人が縦向きのiPhone 15で日常的な距離から撮った、胸元から腰あたりまでの一枚。本人はポーズを取っていない。正面ではない自然な斜め45度の角度で、顔の60%以上が髪や手で隠れず見える", en:"a vertical iPhone 15 chest-to-waist snapshot taken by a nearby person at a shared public place in Ebisu from an ordinary distance. She is not posing. Use a natural three-quarter 45-degree angle rather than full frontal, with more than 60 percent of her face unobscured by hair or hands"},
-  {ja:"人の流れの中で、近くにいる人が縦向きのiPhone 15で偶然撮った、上半身中心の一枚。横から少し前方へ回り込む自然な角度で、顔の60%以上が見える。構図は少し不完全だが、主役と背景はどちらも過度にぼかさない", en:"an upper-body vertical iPhone 15 photo incidentally taken by a nearby person in a shared public flow. Use a natural side-to-three-quarter angle from slightly ahead, with more than 60 percent of her face visible. The framing is slightly imperfect, but neither the subject nor background is overly blurred"},
-  {ja:"共有された公共空間で、近くにいる人が普通の立ち位置から縦向きのiPhone 15で撮った、胸元から腰あたりまでのスナップ。人物は画面の中央から少し外れ、斜め横顔だが顔の60%以上が認識できる", en:"a vertical iPhone 15 chest-to-waist snapshot taken by a nearby person from a normal position in a shared public place. She is slightly off-center, shown in an angled side view with more than 60 percent of her face visible"},
-  {ja:"近くにいる人が縦向きのiPhone 15で、日常の上半身を自然な距離で切り取った写真。正面ポーズではなく、自然な横向きから斜めの視線。顔の60%以上が隠れず見える、非侵襲的な公共空間のスナップ", en:"a vertical iPhone 15 photo of her upper body in an everyday shared public setting, taken from a natural distance by a nearby person. Not a straight-on pose: a natural side-to-three-quarter view, with more than 60 percent of her face unobscured. A non-intrusive public-space snapshot"}
+  {ja:"恵比寿の共有された公共空間で、少し離れた通常の立ち位置から縦向きのiPhone 15を2倍クロップで使って撮った、胸元から腰あたりまでの一枚。本人はポーズを取っていない。正面ではない自然な斜め45度の角度で、顔の60%以上が髪や手で隠れず見える", en:"a vertical iPhone 15 chest-to-waist snapshot taken from a respectful ordinary public distance with the 2x crop. She is not posing. Use a natural three-quarter 45-degree angle rather than full frontal, with more than 60 percent of her face unobscured by hair or hands"},
+  {ja:"人の流れの中で、少し離れた場所からiPhone 15の2倍クロップで撮った、上半身中心の一枚。横から少し前方へ回り込む自然な角度で、顔の60%以上が見える。構図は少し不完全だが、主役と背景はどちらも過度にぼかさない", en:"an upper-body vertical iPhone 15 photo taken from a modest public distance using the 2x crop in a shared public flow. Use a natural side-to-three-quarter angle from slightly ahead, with more than 60 percent of her face visible. The framing is slightly imperfect, but neither the subject nor background is overly blurred"},
+  {ja:"共有された公共空間で、少し離れた普通の立ち位置からiPhone 15の2倍クロップで撮った、胸元から腰あたりまでのスナップ。人物は画面の中央から少し外れ、斜め横顔だが顔の60%以上が認識できる", en:"a vertical iPhone 15 chest-to-waist snapshot taken from a modest normal position in a shared public place using the 2x crop. She is slightly off-center, shown in an angled side view with more than 60 percent of her face visible"},
+  {ja:"少し離れた場所からiPhone 15の2倍クロップで、日常の上半身を切り取った写真。正面ポーズではなく、自然な横向きから斜めの視線。顔の60%以上が隠れず見える、非侵襲的な公共空間のスナップ", en:"a vertical iPhone 15 photo of her upper body from a modest public distance using the 2x crop. Not a straight-on pose: a natural side-to-three-quarter view, with more than 60 percent of her face unobscured. A non-intrusive public-space snapshot"}
 ];
 const temporalScenes = [
   {ja:"2026年2月17日（火）8時12分、恵比寿エリア。晴れ、気温6°C、乾いた冷たい北風。上質なウールのショートコート、深めのVネックの細いメリノニット、透け感のある薄いインナー、ミディ丈スカート、レザーローファー", en:"Tuesday, February 17, 2026, 8:12 AM, in the Ebisu area. Clear skies, 6°C, dry cold north wind. Wearing a premium wool short coat, fine merino knit with a deeper V neckline, a subtle sheer inner layer, midi skirt, and leather loafers"},
@@ -242,13 +252,15 @@ function makePrompt() {
   const scene = pick(ebisuScenes);
   const capture = pick(ebisuCaptures);
   const temporal = pick(temporalScenes);
+  const fashion = pick(fashionDirections);
   const faceJa = `架空の${age}歳の成人日本人女性。${x.face.ja}。${adultFaceCore.ja}。${appearance.ja}。${everydayAttractiveness.ja}。${x.eyes.ja}、${x.brows.ja}。${x.noseMouth.ja}。${x.skin.ja}。実在人物を想起させない、自然な左右差のある顔。カメラには気づかず、前方や自分の用事へ自然に視線を向けている`;
   const faceEn = `A fictional ${age}-year-old adult Japanese woman. ${x.face.en}. ${adultFaceCore.en}. ${appearance.en}. ${everydayAttractiveness.en}. ${x.eyes.en}, ${x.brows.en}. ${x.noseMouth.en}. ${x.skin.en}. A naturally asymmetric, non-identifiable face. She has not noticed the camera and is naturally looking ahead or at what she is doing`;
   const demeanorJa = x.expression.ja;
   const demeanorEn = x.expression.en;
   return {
-    ja: `恵比寿の共有された公共空間で、近くにいる人が撮ったフォトリアルな日常のスマホ写真。撮影設定: ${temporal.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。${ebisuStyle.ja}。${demeanorJa}。場面: ${scene.ja}。${upperBodyFocus.ja}。${capture.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
-    en: `Photorealistic everyday phone photo casually taken by a nearby person in a shared public setting in Ebisu. Time, place, weather, and seasonal clothing: ${temporal.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. ${ebisuStyle.en}. ${demeanorEn}. Scene: ${scene.en}. ${upperBodyFocus.en}. ${capture.en}. ${backgroundCrowd.en}. ${phoneRealism.en}.\n\nNegative prompt: ${negativePrompt.en}`
+    ja: `恵比寿の共有された公共空間で、少し離れた通常の立ち位置から撮ったフォトリアルな日常のスマホ写真。撮影設定: ${temporal.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。服装系統: ${fashion.ja}。${ebisuStyle.ja}。${demeanorJa}。場面: ${scene.ja}。${upperBodyFocus.ja}。${capture.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
+    en: `Photorealistic everyday phone photo taken from a respectful ordinary public distance in a shared public setting in Ebisu. Time, place, weather, and seasonal clothing: ${temporal.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. Fashion direction: ${fashion.en}. ${ebisuStyle.en}. ${demeanorEn}. Scene: ${scene.en}. ${upperBodyFocus.en}. ${capture.en}. ${backgroundCrowd.en}. ${phoneRealism.en}.\n\nNegative prompt: ${negativePrompt.en}`,
+    summaryJa: `架空の${age}歳の成人日本人女性／${profile.ja}。${temporal.ja}。<br>服装: ${fashion.ja}。<br>場面: ${scene.ja.replace(/【[^】]+】/, '')}。<br>表情: ${demeanorJa}。少し離れた自然な公共距離から、iPhone 15の2倍クロップで上半身を捉える設定です。`
   };
 }
 function copyText(text, button) {
@@ -271,7 +283,7 @@ async function sharePage() {
     alert('このパソコン上のファイルは、そのままiPhoneへ共有できません。Google DriveでこのHTMLの共有リンクを作成してから、iPhoneのSafariでそのリンクを開いてください。');
     return;
   }
-  const shareData = { title: document.title, text: '恵比寿の日常写真プロンプト生成器', url: location.href };
+  const shareData = { title: document.title, text: '今日恵比寿ですれ違った素敵な女性｜画像プロンプトメーカー', url: location.href };
   try {
     if (navigator.share) await navigator.share(shareData);
     else copyText(location.href, button);
@@ -279,10 +291,14 @@ async function sharePage() {
     if (error.name !== 'AbortError') copyText(location.href, button);
   }
 }
-function generate() { const out = document.querySelector('#results'), count = +document.querySelector('#count').value; const prompts = Array.from({length:count},()=>makePrompt()); out.innerHTML = prompts.map((p,i)=>`<article><h2>案 ${i+1} — 日本語</h2><pre class="prompt-ja">${p.ja}</pre><div class="copy-row"><button class="secondary copy-one" data-lang="ja">この日本語版をコピー</button></div><h2>Option ${i+1} — English</h2><pre class="prompt-en">${p.en}</pre><div class="copy-row"><button class="secondary copy-one" data-lang="en">Copy this English version</button></div><p class="meta">同一設定の日本語版・英語版です。言語別に、そのまま画像生成ツールに貼り付けられます。</p></article>`).join(''); document.querySelectorAll('.copy-one').forEach(button => button.addEventListener('click', () => copyText(button.closest('article').querySelector(button.dataset.lang === 'ja' ? '.prompt-ja' : '.prompt-en').textContent, button))); }
+let currentPrompt;
+function generate() {
+  const out = document.querySelector('#results');
+  currentPrompt = makePrompt();
+  out.innerHTML = `<article><h2>今回の日本語概要</h2><p class="summary">${currentPrompt.summaryJa}</p><div class="copy-row"><button class="secondary copy-one" data-lang="en">画像生成用の英語プロンプトをコピー</button><button class="secondary copy-one" data-lang="ja">日本語プロンプトをコピー</button></div><p class="meta">詳細なプロンプト本文は画面に表示せず、ボタンからそのままコピーできます。</p></article>`;
+  document.querySelectorAll('.copy-one').forEach(button => button.addEventListener('click', () => copyText(currentPrompt[button.dataset.lang], button)));
+}
 document.querySelector('#generate').addEventListener('click', generate);
-document.querySelector('#copy-ja').addEventListener('click', () => copyText([...document.querySelectorAll('.prompt-ja')].map(x=>x.textContent).join('\n\n---\n\n'), document.querySelector('#copy-ja')));
-document.querySelector('#copy-en').addEventListener('click', () => copyText([...document.querySelectorAll('.prompt-en')].map(x=>x.textContent).join('\n\n---\n\n'), document.querySelector('#copy-en')));
 document.querySelector('#share-page').addEventListener('click', sharePage);
 generate();
 </script>
