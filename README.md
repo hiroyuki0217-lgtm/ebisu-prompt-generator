@@ -1,0 +1,1 @@
+# ebisu-prompt-generator
