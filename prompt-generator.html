@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f7efe9" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>今日、恵比寿ですれ違った可愛い人 プロンプト生成器</title>
+  <style>
+    :root { color-scheme: light; --ink:#2e2a2a; --muted:#716b6b; --paper:#fffdfb; --wash:#f7efe9; --accent:#9b6571; --line:#e8dcd6; }
+    * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; } body { margin:0; color:var(--ink); background:var(--wash); font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif; }
+    main { max-width:1040px; margin:0 auto; padding:42px max(20px, env(safe-area-inset-right)) max(56px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left)); } h1 { font-size:clamp(24px,4vw,38px); margin:0 0 10px; letter-spacing:.03em; } .lead { color:var(--muted); margin:0 0 28px; line-height:1.7; }
+    .panel { background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:22px; box-shadow:0 8px 30px #7f5d5210; } .controls { display:flex; flex-wrap:wrap; gap:12px; align-items:end; }
+    label { display:grid; gap:6px; color:var(--muted); font-size:13px; font-weight:600; } select, button { min-height:44px; border-radius:10px; padding:10px 12px; font:inherit; } select { min-width:175px; border:1px solid var(--line); background:white; color:var(--ink); } button { touch-action:manipulation; cursor:pointer; border:0; background:var(--accent); color:white; font-weight:700; } button:hover { filter:brightness(.95); } button.secondary { background:white; color:var(--accent); border:1px solid var(--accent); }
+    #results { display:grid; gap:16px; margin-top:24px; } article { background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:22px; scroll-margin-top:16px; } h2 { font-size:15px; margin:0 0 10px; color:var(--accent); } pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font:14px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace; } .copy-row { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 22px; } .copy-row button { min-height:40px; padding:7px 10px; font-size:12px; } .meta { margin:12px 0 0; font-size:12px; color:var(--muted); }
+    .notes { margin:26px 0 0; color:var(--muted); font-size:13px; line-height:1.7; } .mobile-tip { margin:16px 0 0; padding:14px 16px; background:#fff8f4; border:1px solid var(--line); border-radius:14px; color:var(--muted); font-size:13px; line-height:1.65; } .mobile-tip strong { color:var(--ink); } code { color:#69444c; }
+    @media (max-width:600px) {
+      main { padding-top:24px; padding-bottom:max(32px, env(safe-area-inset-bottom)); }
+      h1 { font-size:25px; line-height:1.35; }
+      .lead { margin-bottom:20px; font-size:14px; }
+      .panel, article { border-radius:14px; padding:16px; }
+      .controls { display:grid; grid-template-columns:1fr 1fr; align-items:stretch; gap:10px; }
+      .controls label { grid-column:1 / -1; }
+      .controls select, .controls button { width:100%; min-width:0; }
+      #generate { grid-column:1 / -1; }
+      #results { margin-top:16px; gap:12px; }
+      h2 { font-size:14px; }
+      pre { font-size:12px; line-height:1.68; }
+      .copy-row { margin-bottom:18px; }
+      .copy-row button { width:100%; }
+      .meta, .notes, .mobile-tip { font-size:12px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>今日、恵比寿ですれ違った可愛い人 プロンプト生成器</h1>
+  <p class="lead">恵比寿で働く架空の成人女性を、通勤・昼休み・帰宅途中のさりげない一瞬として組み合わせます。人物はすべて実在人物とは無関係の22〜29歳の成人女性で、受付、外資系、IT、広報、接客などの仕事設定を毎回変えます。</p>
+  <section class="panel" aria-label="生成設定">
+    <div class="controls">
+      <label>出力数
+        <select id="count"><option>1</option><option>3</option><option>5</option><option>10</option></select>
+      </label>
+      <button id="generate">ランダム生成</button>
+      <button class="secondary" id="copy-ja">日本語をすべてコピー</button>
+      <button class="secondary" id="copy-en">英語をすべてコピー</button>
+      <button class="secondary" id="share-page">この生成器を共有</button>
+    </div>
+  </section>
+  <div id="results" aria-live="polite"></div>
+  <p class="mobile-tip"><strong>iPhoneで使うには:</strong> このHTMLをGoogle Driveで共有し、iPhoneのSafariで共有リンクを開いてください。Safariの共有メニューから「ホーム画面に追加」を選ぶと、アプリのようにすぐ開けます。下の共有ボタンは、公開・共有済みのURLで開いたときに使えます。</p>
+  <p class="notes">設計メモ: 仕事設定・服装・動作・背景・構図を毎回ランダムに組み合わせます。すべて、恵比寿の公共空間で通行人が縦向きのiPhone 15で日常的な距離から撮った、ポーズを取っていない架空の成人女性の一枚です。盗撮や隠し撮りの表現、実在人物の再現は含めません。</p>
+</main>
+<script>
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const data = {
+  face: ["an adult oval face with natural cheek definition", "a softly structured adult face with a relaxed jawline", "an adult face with balanced proportions and subtle natural asymmetry"],
+  eyes: ["gently downturned, subtly almond-shaped eyes with natural double eyelids", "slightly downturned eyes with near-monolid natural eyelids", "calm, softly downturned eyes and understated eyelashes", "soft, rounded eyes with subtle inner double eyelids", "slightly elongated eyes with softly tapered outer corners", "gentle almond-shaped eyes with a natural crease", "calm monolid eyes with a soft lower eyelid", "small-to-medium, softly downturned eyes with a quiet gaze", "slightly wide-set, gentle eyes with understated lashes", "softly hooded eyes with a natural, short crease", "rounded eyes with a faint, natural under-eye fullness", "subtle cat-eye shape softened by downturned outer corners", "clear, medium-sized eyes with a mild inner double eyelid", "slender eyes with a gentle downward gaze", "slightly rounded monolid eyes with a calm expression", "soft double eyelids that taper naturally toward the inner corners", "slightly droopy eyes with delicate lower lashes", "gently almond-shaped eyes with a subtle dark-brown limbal ring", "calm eyes with a faintly visible eyelid crease", "softly lifted inner corners and relaxed outer corners", "medium-sized downturned eyes with natural lower-lid definition", "near-monolid eyes with a subtle, soft shadow along the lash line", "gentle eyes with a very light champagne-beige lower-lid highlight", "slightly elongated eyes with barely-there brown liner", "soft rounded eyes with naturally separated lashes", "a modest double eyelid and a quietly warm gaze", "slightly hooded, downturned eyes with soft neutral shadow", "clear monolid eyes with a naturally smooth eyelid", "soft almond eyes with a minimal taupe lash-line definition", "gently downturned eyes with subtle, natural tear-bag definition"],
+  brows: ["soft straight eyebrows with a gentle arch", "slightly full, softly parallel eyebrows"],
+  noseMouth: ["a small rounded nose, a modest nose bridge, and softly full lips", "a petite nose and a small, natural mouth with a fuller lower lip"],
+  skin: ["natural, light makeup with soft healthy color", "barely-there makeup and subtle, natural complexion"],
+  hair: ["straight black bob with blunt bangs", "dark chestnut medium hair with soft inward curls and sheer bangs", "dark brown semi-long hair with a loose wave and side-swept bangs", "long black hair, lightly layered, worn down with no bangs", "dark chestnut hair in a simple half-up style with wispy bangs", "a dark, sleek tassel bob with airy see-through bangs", "a face-framing layered bob in natural black", "a shoulder-length lob with subtle inward ends and thin bangs", "a soft hush cut with long face-framing layers", "a dark wolf-layer cut with a restrained, natural texture", "a neat chin-length bob with a gentle inward curl", "a medium C-curl style with a light face-framing layer", "a long dark S-wave with a soft, natural finish", "a shoulder-length straight cut with a delicate side part", "a low ponytail with wispy bangs and loose face-framing strands", "a simple half-up ponytail with light curtain bangs", "a loose side braid in dark brown hair", "two low, relaxed braids with soft center-parted bangs", "a low, slightly loose bun with fine strands around the face", "a sleek low ponytail with a soft center part", "long straight black hair with a clean center part", "dark brown medium hair with a natural deep side part", "a blunt black mini bob with an understated fringe", "a short layered bob with rounded ends", "a softly waved shoulder-length lob with thin bangs", "a medium-length inward-curl cut with a small side fringe", "a medium wolf cut with gentle, wearable layers", "long dark hair with restrained hime-cut face-framing pieces", "a dark, loose natural perm with light bangs", "a long layered cut with soft curtain bangs"],
+  expression: ["a reserved small smile", "a shy, slightly bashful smile", "a calm near-neutral expression", "a thoughtful downward glance"],
+  pose: ["sitting slightly sideways, one hand loosely moving a paper cup while the other rests on her knee", "turning a page with one hand, with one shoulder slightly relaxed", "having just adjusted the strap of her tote bag, with her ankles naturally offset", "resting one hand near a ceramic mug while the other lightly touches the edge of the chair", "settling into the chair with a small ordinary shift in posture, rather than a posed stance"],
+  noFace: ["the back of her head is visible and her face is fully out of frame", "her face is turned away and partly obscured by loose hair", "only a quiet side profile is visible, with her gaze directed downward", "her face is obscured by the shadow from a window curtain", "the camera observes from behind at shoulder height, with no identifiable face visible"],
+  film: ["a subtle Kodak Portra 400-inspired neutral-warm color palette", "a restrained Fujifilm Superia-inspired everyday color palette", "a neutral contemporary digital color palette with subtle natural grain"],
+  palette: ["cream, beige, and soft gray", "navy, off-white, and muted brown", "dusty blue, white, and charcoal"],
+  outfit: ["a pale-blue fitted cardigan over a plain white top, light-wash straight-leg jeans, and simple ballet flats", "a cream knit polo, straight dark-blue jeans, and neutral sneakers", "a light-gray fitted cardigan over a white ribbed top, relaxed dark-wash jeans, and black ballet flats", "an off-white short-sleeve knit, a clean denim midi skirt, and simple loafers", "a lightweight navy cardigan over a white T-shirt, straight ecru trousers, and canvas shoes", "a pale-blue boxy shirt over a plain white top, straight dark-blue jeans, and simple white sneakers", "a short charcoal tailored jacket over a white T-shirt, medium-wash straight jeans, and neutral sneakers", "a fine-gauge cream cardigan over a white top, a dark denim midi skirt, and low black loafers"],
+  studentOutfit: ["a pale-blue fitted cardigan over a plain white top, light-wash straight-leg jeans, and simple ballet flats", "a cream knit polo, straight dark-blue jeans, and neutral sneakers", "a light-gray fitted cardigan over a white ribbed top, relaxed dark-wash jeans, and black ballet flats", "an off-white short-sleeve knit, a clean denim midi skirt, and simple loafers", "a lightweight navy cardigan over a white T-shirt, straight ecru trousers, and canvas shoes", "a pale-blue boxy shirt over a plain white top, straight dark-blue jeans, and simple white sneakers", "a short charcoal tailored jacket over a white T-shirt, medium-wash straight jeans, and neutral sneakers", "a fine-gauge cream cardigan over a white top, a dark denim midi skirt, and low black loafers"],
+  accessory: ["simple thin-framed glasses", "a small plain ribbon hair clip", "a minimal wristwatch", "a canvas tote bag"],
+  time: ["soft morning daylight", "quiet afternoon natural light", "warm late-afternoon window light", "gentle indirect lamplight in the evening"],
+  season: ["early spring", "a quiet rainy day", "a mild autumn afternoon", "a clear winter day"],
+  student: ["a modest contemporary apartment near campus, beside a small wooden desk", "a quiet university library table with only a notebook and a mug", "a lived-in student room with a partly open laptop and a few slightly misaligned books", "a calm café corner near campus with a small wooden table"],
+  worker: ["a modest contemporary one-room apartment, beside a small wooden desk", "a quiet neighborhood café corner with a small wooden table", "a lived-in home desk with a partly open laptop, a ceramic mug, and a few slightly misaligned books", "a calm apartment living area beside a rain-streaked window"],
+};
+const ja = {
+  face:["自然な頬の立体感がある大人らしい卵型の顔立ち","力の抜けたあごのラインを持つ、やわらかく整った大人の顔立ち","バランスの取れた大人の顔立ちと、控えめな自然な左右差"],
+  eyes:["垂れ目気味で少し切れ長の自然な奥二重","一重に近い奥二重の、穏やかな垂れ目","控えめなまつ毛の、やわらかく垂れた目元","奥二重で、やや丸みのあるやさしい目","目尻がゆるく細まる、少し切れ長の目","自然な二重幅のある穏やかなアーモンド形の目","下まぶたがやわらかい、落ち着いた一重の目","中くらいの大きさで、静かな視線の垂れ目","やや離れ目寄りで、控えめなまつ毛のやさしい目","二重幅が狭い、自然なまぶたの目","ごく自然な涙袋のある、丸みを帯びた目","目尻だけがやや切れ長で、全体はやわらかな垂れ目","控えめな奥二重の、澄んだ中くらいの目","伏し目がちに見える、細めで穏やかな目","丸みのある一重で、落ち着いた印象の目","目頭に向けて自然に細まる、やさしい二重の目","繊細な下まつ毛が見える、少し垂れた目","ダークブラウンの瞳が際立つ、穏やかなアーモンド形の目","まぶたのラインがうっすら見える、静かな目元","目頭はすっきり、目尻はゆるく下がった目","下まぶたの陰影が自然な、中くらいの垂れ目","まつ毛の生え際にやわらかな陰影のある、一重に近い目","シャンパンベージュを薄くのせた、自然な下まぶたの目","極薄のブラウンラインで整えた、少し切れ長の目","自然に束感のあるまつ毛と、丸みのある目","控えめな二重幅で、あたたかく静かな視線の目","ニュートラルな薄いアイシャドウの、垂れ目気味の奥二重","なめらかなまぶたが印象的な、澄んだ一重の目","トープ色のごく薄い生え際の陰影がある、やわらかなアーモンド形の目","自然な涙袋の陰影がある、やさしく垂れた目"],
+  brows:["緩やかな眉山のふんわり平行眉","少し太めでやわらかな平行眉"],
+  noseMouth:["小さめの団子鼻、控えめな鼻筋、ふっくらした唇","小ぶりな鼻と、下唇がややふっくらした自然な口元"],
+  skin:["薄いナチュラルメイクと自然な血色","すっぴん風の控えめなメイクと柔らかな肌感"],
+  hair:["ぱっつん前髪の黒髪ストレートボブ","シースルー前髪の暗め栗色ミディアム、内巻き","斜め前髪のダークブラウン・ゆるふわセミロング","前髪なしの黒髪ロング、軽いレイヤー","薄い前髪とハーフアップの暗め栗色ヘア","エアリーなシースルー前髪の、暗髪タッセルボブ","顔まわりにレイヤーを入れたナチュラルな黒髪ボブ","薄い前髪と控えめな内巻きの肩上ロブ","長めの顔まわりレイヤーを入れた、やわらかなハッシュカット","自然な質感に抑えた暗髪ウルフレイヤー","毛先をゆるく内巻きにした、あごラインの整ったボブ","軽い顔まわりレイヤーを入れたミディアムのCカール","自然な仕上がりのダークカラー・ロングSウェーブ","繊細なサイド分けの、肩までのストレートヘア","薄い前髪と顔まわりの後れ毛がある低めポニーテール","軽いカーテンバングのシンプルなハーフアップポニー","ダークブラウンの髪をゆるく編んだサイド三つ編み","センター分けの薄い前髪を添えた、ゆるい低めツイン三つ編み","顔まわりに細い後れ毛を残した、少しゆるめの低いお団子","やわらかなセンター分けの、すっきりしたローポニーテール","センター分けの黒髪ストレートロング","ナチュラルな深めサイド分けのダークブラウン・ミディアム","控えめな前髪を添えた、黒髪のぱつっとミニボブ","丸みのある毛先に仕上げたショートレイヤーボブ","薄い前髪の、肩丈でゆるく波打つロブ","短めのサイド前髪と内巻きのミディアムヘア","日常になじむ穏やかなレイヤーのミディアムウルフ","控えめな姫カットの顔まわりを添えたダークロング","軽い前髪のある、暗髪のゆるいナチュラルパーマ","やわらかなカーテンバングを添えたロングレイヤーカット"],
+  expression:["控えめな微笑み","少しはにかんだ笑顔","落ち着いた無表情気味の表情","考えごとをするような伏し目"],
+  pose:["少し横向きに座り、片手で紙コップをゆるく動かし、もう片方は膝に置く","片手でページをめくり、片方の肩だけを少しゆるめる","トートバッグのストラップを直した直後で、足首を自然に少しずらす","片手を陶器のマグカップのそばに置き、もう片方は椅子の端に軽く触れる","ポーズを取らず、座り姿をほんの少しだけ崩して腰を落ち着ける"],
+  noFace:["後頭部だけを写し、顔は完全にフレーム外にする","顔をそむけ、ゆるい髪で一部を隠す","伏し目の静かな横顔だけを写す","窓のカーテンが作る影で顔を隠す","肩の高さから後ろ姿を観察するように写し、識別できる顔を出さない"],
+  film:["Kodak Portra 400を思わせる、ニュートラルで少し温かい色調","Fujifilm Superiaを思わせる、抑えめで日常的な色調","ごく薄い自然な粒子感を伴う、ニュートラルな現代デジタルの色調"],
+  palette:["クリーム・ベージュ・淡いグレー","ネイビー・オフホワイト・くすみブラウン","ダスティブルー・白・チャコール"],
+  outfit:["淡いブルーのコンパクトカーディガン、無地の白トップス、ライトウォッシュのストレートデニム、シンプルなバレエシューズ","クリーム色のニットポロ、濃いブルーのストレートデニム、ニュートラルカラーのスニーカー","ライトグレーのコンパクトカーディガン、白いリブトップス、ゆるやかな濃色デニム、黒いバレエシューズ","オフホワイトの半袖ニット、すっきりしたデニムミディスカート、シンプルなローファー","軽いネイビーカーディガン、白Tシャツ、ストレートのエクリュパンツ、キャンバスシューズ","淡いブルーのボクシーシャツ、無地の白トップス、濃いブルーのストレートデニム、シンプルな白スニーカー","短めのチャコールテーラードジャケット、白Tシャツ、ミディアムウォッシュのストレートデニム、ニュートラルカラーのスニーカー","ハイゲージのクリームカーディガン、白トップス、濃いデニムのミディスカート、低い黒ローファー"],
+  studentOutfit:["淡いブルーのコンパクトカーディガン、無地の白トップス、ライトウォッシュのストレートデニム、シンプルなバレエシューズ","クリーム色のニットポロ、濃いブルーのストレートデニム、ニュートラルカラーのスニーカー","ライトグレーのコンパクトカーディガン、白いリブトップス、ゆるやかな濃色デニム、黒いバレエシューズ","オフホワイトの半袖ニット、すっきりしたデニムミディスカート、シンプルなローファー","軽いネイビーカーディガン、白Tシャツ、ストレートのエクリュパンツ、キャンバスシューズ","淡いブルーのボクシーシャツ、無地の白トップス、濃いブルーのストレートデニム、シンプルな白スニーカー","短めのチャコールテーラードジャケット、白Tシャツ、ミディアムウォッシュのストレートデニム、ニュートラルカラーのスニーカー","ハイゲージのクリームカーディガン、白トップス、濃いデニムのミディスカート、低い黒ローファー"],
+  accessory:["細いフレームのシンプルな眼鏡","小さな無地のリボンヘアクリップ","ミニマルな腕時計","キャンバス地のトートバッグ"],
+  time:["やわらかな朝の自然光","静かな午後の自然光","窓から差すあたたかな夕方の光","夜の穏やかな間接照明"],
+  season:["早春","静かな雨の日","穏やかな秋の午後","澄んだ冬の日"],
+  student:["小さな木の机のそばにある、キャンパス近くの質素な現代的ワンルーム","ノートとマグカップだけを置いた静かな大学図書館のテーブル","少し開いたノートPCと、少しずれた数冊の本がある生活感のある学生の部屋","小さな木のテーブルがあるキャンパス近くの落ち着いたカフェの隅"],
+  worker:["小さな木の机のそばにある、質素で現代的な一人暮らしのワンルーム","小さな木のテーブルがある静かな近所のカフェの隅","少し開いたノートPC、陶器のマグカップ、少しずれた数冊の本がある生活感のある自宅の机まわり","雨粒のついた窓のそばにある、落ち着いたアパートの居間"],
+};
+const adultFaceCore = {
+  ja:"年齢相応の大人らしい骨格と、作り込みすぎない自然な表情。実在人物を想起させない",
+  en:"adult, age-appropriate facial structure and an unforced everyday expression; non-identifiable and not based on a real person"
+};
+const everydayAttractiveness = {
+  ja:"今日、恵比寿でたまたますれ違ったら少し印象に残る、一般人として自然に可愛い架空の成人女性。仕事に合った清潔感のある身だしなみで、プロモデルのような演出ではない",
+  en:"a fictional adult woman who is naturally attractive in the understated, memorable way of someone one might happen to pass in Ebisu today; professionally groomed for her work without looking like a fashion model or celebrity"
+};
+const ebisuStyle = {
+  ja:"上質な国内外コンテンポラリーブランドの服を、ロゴを見せず自然に着こなす恵比寿らしい洗練されたオフィスカジュアル。日時・気温・天候に合わせた現実的なレイヤードを選び、肌見せは季節に応じて首元・肩まわり・腕を中心に、仕事着として品よくやや多めに取り入れる",
+  en:"refined Ebisu office-casual styling in well-made contemporary Japanese and international brands, naturally worn without visible logos. Choose realistic layers for the stated date, temperature, and weather, with a tastefully increased but work-appropriate amount of skin visible at the neckline, shoulders, or arms when seasonally plausible"
+};
+const upperBodyFocus = {
+  ja:"全身ではなく、胸元から腰あたりまでを中心にした上半身の自然なスナップ。服の重なり、シアー素材の質感、髪の動き、バッグを持つ手元など、日常の細部が目に留まり、あとで見返したくなる視覚的に印象的な一枚。性的な演出や誇張はしない",
+  en:"a natural upper-body candid framed mainly from the chest to around the waist, rather than a full-body image. Make the layering of clothing, texture of sheer fabric, movement of hair, and hands holding a bag visually engaging and memorable in everyday detail, without sexualized posing or exaggeration"
+};
+const backgroundCrowd = {
+  ja:"背景には恵比寿を歩く通行人を数人自然に入れる。街並み・服装・主役は全体にほどよく見え、主役と背景のどちらも過度にぼかさず、強い背景ぼけや極端なコントラストは使わない。ただし通行人の顔だけは距離によって細部が判別できず、弱くぼかされるかごく薄くモザイク状に見え、個人を特定できない",
+  en:"include several natural passersby in the Ebisu background. Keep the street, clothing, and main subject moderately legible overall; neither the subject nor background is overly blurred, with no strong background blur or extreme contrast. Only the passersby’s facial details are indistinct because of distance, softly blurred or very lightly pixelated so that nobody is identifiable"
+};
+const phoneRealism = {
+  ja:"iPhone 15のメインカメラ相当（26mm相当・f/1.6）で撮った、未加工に近い現実的なスマホ写真。撮影条件に合わせ、晴天下は1/250秒・ISO 100前後、曇天は1/120秒・ISO 200前後、夕方は1/60秒・ISO 400〜640程度の自然なシャッター速度と感度。ひとつの自然な光源方向に整合する露出・影・反射、現実的なダイナミックレンジ、控えめなスマホJPEGの輪郭処理と小センサー由来のわずかなノイズ。撮影距離で見える範囲だけに、肌の色むら・毛穴・うぶ毛・小さなほくろや薄いそばかすを自然に写す。個々の後れ毛、衣服の自然なしわ、接地部の影、手・家具・背景の正しい縮尺と物理的な接触を保つ。映画的な色調補正、不自然なポートレートぼけ、極端な明瞭度は加えない",
+  en:"a plausible, near-unedited iPhone 15 main-camera photograph (26mm equivalent, f/1.6). Use natural smartphone exposure settings appropriate to the stated light: about 1/250 s at ISO 100 in strong sun, 1/120 s at ISO 200 under bright overcast, or 1/60 s at ISO 400–640 at dusk. Exposure, shadows, and reflections are consistent with one available-light direction; realistic dynamic range; restrained smartphone-JPEG edge processing and slight small-sensor noise. Show natural tonal variation, pores, fine vellus hair, small moles, or faint freckles only where they would be visible at this distance. Preserve individual flyaway hairs, believable clothing wrinkles, contact shadows, and physically plausible scale and contact among hands, furniture, and background. No cinematic color grade, unnatural portrait-mode blur, or extreme clarity"
+};
+const negativePrompt = {
+  ja:"アニメ、イラスト、CG、3Dレンダリング、AI風の肌、ビューティーフィルター、プラスチック肌、陶器肌、過度な肌の平滑化、完璧すぎる左右対称、ドールのような顔、過度に大きい目、プロモデル、セレブ、ハイファッションのエディトリアル、グラマーポーズ、スタジオのビューティーライティング、過度なポートレートぼけ、強すぎるHDR、過剰なシャープネス、二重の背景物、物理的に不自然な反射、顔や手の崩れ、余分な指、文字、透かし、ロゴ",
+  en:"anime, illustration, CGI, 3D render, AI-looking skin, beauty filter, plastic or porcelain skin, over-smoothed skin, perfect facial symmetry, doll-like face, exaggerated eyes, professional fashion model, celebrity, high-fashion editorial styling, glamour pose, studio beauty lighting, excessive portrait-mode blur, strong HDR, oversharpening, duplicated background objects, physically implausible reflections, distorted face or hands, extra fingers, text, watermark, logo"
+};
+const moments = {
+  student: [
+    {ja:"静かな大学図書館で、開いた本のページをゆっくりめくる", en:"slowly turning a page in an open book at a quiet university library"},
+    {ja:"キャンパス近くのカフェで、紙コップのふたを外しながら友達の話を聞く", en:"listening to a friend while taking the lid off a paper cup at a café near campus"},
+    {ja:"学生の部屋で、机の上のノートPCに手を伸ばす途中", en:"reaching toward a laptop on her desk in a student room"},
+    {ja:"キャンパスのベンチで、トートバッグから小さなノートを取り出す", en:"taking a small notebook from her tote bag on a campus bench"},
+    {ja:"講義のあと、廊下を早足で歩きながら友達に手を振る", en:"walking quickly down a corridor after class and waving to a friend"},
+    {ja:"駅へ急ぐ途中、肩にかけたバッグを直しながら小走りになる", en:"breaking into a light run toward the station while adjusting her shoulder bag"},
+    {ja:"雨上がりのキャンパスで、水たまりを軽く跳び越える瞬間", en:"lightly hopping over a puddle on campus after the rain"},
+    {ja:"階段を二段飛ばしで上がり、振り返って友達を待つ", en:"climbing stairs two at a time and turning back to wait for a friend"},
+    {ja:"自室でカーディガンを羽織りながら、出かける支度をする", en:"putting on a cardigan in her room while getting ready to go out"},
+    {ja:"カフェの椅子から立ち上がり、机の上のスマホを取る", en:"standing up from a café chair to pick up her phone from the table"}
+  ],
+  worker: [
+    {ja:"近所のカフェで、マグカップを両手で持ちながら窓の外を見る", en:"holding a ceramic mug with both hands while looking out a café window"},
+    {ja:"自宅の机で、少し開いたノートPCの横にメモを置く", en:"placing a note beside a partly open laptop at her home desk"},
+    {ja:"帰宅途中の住宅街で、イヤホンを片方だけ外して友達に返事をする", en:"taking one earbud out to reply to a friend on a residential street on the way home"},
+    {ja:"コンビニを出て、買い物袋を持ち替えながら少し笑う", en:"leaving a convenience store, shifting a small shopping bag, and smiling slightly"},
+    {ja:"雨が降り出して、バッグから折りたたみ傘を急いで取り出す", en:"quickly taking a folding umbrella from her bag as rain begins"},
+    {ja:"横断歩道を急ぎ足で渡りながら、後ろの友達に振り返る", en:"crossing a street briskly and looking back toward a friend behind her"},
+    {ja:"部屋の窓を開け、カーテンが揺れた瞬間に髪を押さえる", en:"opening a room window and holding her hair as the curtain moves in the breeze"},
+    {ja:"帰宅して靴を脱ぎかけ、玄関でトートバッグを床に置く", en:"arriving home, halfway out of her shoes, and setting her tote bag on the entryway floor"},
+    {ja:"カフェの席で、読みかけの文庫本を閉じて立ち上がる", en:"closing a paperback at a café table and beginning to stand up"},
+    {ja:"夕方の公園で、友達に追いつこうとして軽く駆け出す", en:"starting a light run in a park at dusk to catch up with a friend"}
+  ]
+};
+const captures = [
+  {ja:"友達が縦向きのiPhone 15で、胸から膝あたりまでを少し斜めに切り取った日常写真。少しだけ水平が傾き、自然な手持ちの揺れがある", en:"a vertical iPhone 15 everyday photo casually taken by a friend, framed slightly diagonally from chest to knees. The horizon is a little off and there is natural handheld movement"},
+  {ja:"友達が縦向きのiPhone 15で、顔と手を中心に近めから撮った一枚。構図は少し不完全で、背景の一部が偶然入る", en:"a vertical iPhone 15 photo casually taken by a friend from fairly close, centered on her face and hands. The framing is slightly imperfect and part of the background enters accidentally"},
+  {ja:"友達が縦向きのiPhone 15で、頭から靴までを少し距離を取って撮った全身スナップ。人物は画面の中央から少し外れている", en:"a vertical iPhone 15 full-body snapshot casually taken by a friend from a few steps away. Her full figure is slightly off-center"},
+  {ja:"友達が歩きながら縦向きのiPhone 15で撮った写真。動いている手や髪にごく軽いモーションブラーがある", en:"a vertical iPhone 15 photo taken by a friend while walking, with very slight motion blur in moving hands or hair"},
+  {ja:"友達が腰の高さから縦向きのiPhone 15で撮った一枚。完璧に整っていないフレーミングと、少し甘いピントがある", en:"a vertical iPhone 15 photo taken casually by a friend from waist height, with imperfect framing and slightly soft focus"},
+  {ja:"友達が縦向きのiPhone 15で素早く撮った日常写真。動きのある場面のため、背景や足元に自然な軽いブレがある", en:"a vertical iPhone 15 everyday photo quickly taken by a friend. Because the moment is active, the background or feet have natural slight motion blur"},
+  {ja:"友達がテーブル越しに縦向きのiPhone 15で撮った一枚。手前のカップや本が少しだけフレームに入る", en:"a vertical iPhone 15 photo taken by a friend across a table, with the edge of a cup or book entering the foreground"},
+  {ja:"友達が縦向きのiPhone 15で、偶然振り向いた瞬間を撮った写真。自然なスマホの色味、過度なポートレートぼけはない", en:"a vertical iPhone 15 photo taken by a friend in the instant she turns around, with natural phone-camera color and no excessive portrait-mode blur"}
+];
+const ebisuProfiles = [
+  {ja:"恵比寿のオフィスビルで働く企業受付", en:"a corporate receptionist working in an Ebisu office building", groomJa:"低めのシニヨンか整えたボブ、薄いベージュのアイメイク、清潔感のある血色リップ、細い腕時計", groomEn:"low chignon or neat bob, light beige eye makeup, healthy lip color, and a slim watch"},
+  {ja:"外資系消費財企業のマーケティング担当", en:"a marketing coordinator at an international consumer-goods company", groomJa:"自然なセンター分けのミディアムヘア、薄いブラウンメイク、ミニマルなゴールドピアス", groomEn:"natural center-parted medium hair, soft brown makeup, and minimal gold earrings"},
+  {ja:"ITスタートアップのプロダクトデザイナー", en:"a product designer at a tech startup", groomJa:"顔まわりレイヤーのあるロブ、ほぼ素肌に見えるメイク、小さなフープピアス、ノートPCスリーブ", groomEn:"face-framing layered lob, almost bare-skin makeup, small hoop earrings, and a laptop sleeve"},
+  {ja:"ライフスタイルブランドの広報担当", en:"a public-relations coordinator for a lifestyle brand", groomJa:"ゆるい低めポニーテール、薄いツヤ感のあるメイク、細いチェーンネックレス、質のよいレザートート", groomEn:"loose low ponytail, light luminous makeup, fine chain necklace, and a quality leather tote"},
+  {ja:"外資系ホテルのゲストリレーション担当", en:"a guest-relations professional at an international hotel", groomJa:"清潔にまとめたハーフアップ、控えめなローズメイク、上品な腕時計、IDカードケース", groomEn:"neatly styled half-up hair, restrained rose makeup, an elegant watch, and an ID-card case"},
+  {ja:"クリエイティブエージェンシーのアカウント担当", en:"an account coordinator at a creative agency", groomJa:"やわらかなウェーブのミディアムヘア、ニュートラルなメイク、細いフレームの眼鏡、メモ帳", groomEn:"softly waved medium hair, neutral makeup, thin-framed glasses, and a notebook"},
+  {ja:"恵比寿のウェルネス企業で働く事業企画担当", en:"a business-planning professional at an Ebisu wellness company", groomJa:"清潔な低めのお団子、薄いコーラルメイク、ミニマルなバッグ、シンプルなリング", groomEn:"clean low bun, light coral makeup, minimal bag, and a simple ring"},
+  {ja:"ラグジュアリーブランド日本法人のPRアシスタント", en:"a PR assistant at a luxury-brand Japan office", groomJa:"艶のあるストレートロブ、控えめな赤みブラウンのリップ、上質なレザーバッグ、小さなピアス", groomEn:"glossy straight lob, restrained rose-brown lip, quality leather bag, and small earrings"},
+  {ja:"グローバルSaaS企業のカスタマーサクセス担当", en:"a customer-success specialist at a global SaaS company", groomJa:"軽いカーテンバングのミディアムヘア、ナチュラルメイク、スマートウォッチ、細い眼鏡", groomEn:"medium hair with light curtain bangs, natural makeup, smartwatch, and slim glasses"},
+  {ja:"建築・インテリアデザイン会社のコーディネーター", en:"a coordinator at an architecture and interior-design firm", groomJa:"すっきりしたミニボブ、低彩度のメイク、細いシルバーアクセサリー、素材見本の入ったトート", groomEn:"clean mini bob, low-saturation makeup, fine silver accessories, and a tote carrying material samples"},
+  {ja:"外資系投資会社のエグゼクティブアシスタント", en:"an executive assistant at an international investment firm", groomJa:"サイド分けのローポニーテール、整った眉と薄いリップ、構築的なレザーバッグ、腕時計", groomEn:"side-parted low ponytail, groomed brows and light lip color, structured leather bag, and wristwatch"},
+  {ja:"コスメブランドのブランドマネージャー", en:"a brand manager at a cosmetics company", groomJa:"内巻きの肩上ボブ、ナチュラルなツヤ肌と薄いリップ、ミニマルなジュエリー、コスメポーチ", groomEn:"shoulder-length inward-curled bob, natural luminous skin and light lip color, minimal jewelry, and a cosmetic pouch"},
+  {ja:"フード＆ビバレッジ企業の商品企画担当", en:"a product-planning professional at a food-and-beverage company", groomJa:"軽い外ハネのミディアムヘア、自然な眉とコーラル系リップ、資料用タブレット、トートバッグ", groomEn:"medium hair with light outward ends, natural brows and coral lip color, a work tablet, and tote bag"},
+  {ja:"アートギャラリーの企画・運営担当", en:"a program coordinator at an art gallery", groomJa:"やわらかな前髪のあるボブ、控えめなアイメイク、黒い細フレーム眼鏡、展示資料のファイル", groomEn:"bob with soft bangs, understated eye makeup, black thin-framed glasses, and an exhibition file"},
+  {ja:"ウェルネス系スタジオのコミュニティマネージャー", en:"a community manager at a wellness studio", groomJa:"自然なハーフアップ、軽い日焼け止めのようなメイク、細いネックレス、再利用ボトル", groomEn:"natural half-up hair, sunscreen-light makeup, fine necklace, and reusable bottle"}
+];
+const ebisuMoments = [
+  {ja:"恵比寿駅からオフィスへ向かう途中、社員証をバッグにしまう", en:"walking from Ebisu Station toward her office and putting an ID card into her bag"},
+  {ja:"昼休みにテイクアウトのコーヒーを持ち、横断歩道の手前でスマホをしまう", en:"holding takeaway coffee during lunch break and putting away her phone before a crosswalk"},
+  {ja:"会議のあと、薄い資料ファイルを抱えてガーデンプレイス方面へ歩く", en:"walking toward the Garden Place area after a meeting with a slim document folder"},
+  {ja:"仕事帰りに小さなベーカリーの紙袋を持ち替えながら、駅へ急ぐ", en:"heading to the station after work while shifting a small bakery paper bag"},
+  {ja:"オフィス近くのカフェを出て、肩にかけたバッグを直す", en:"leaving a café near her office and adjusting the bag on her shoulder"},
+  {ja:"歩道の端で小さなメモをバッグへしまい、次の予定へ向かう", en:"putting a small note into her bag at the edge of the sidewalk while heading to her next appointment"},
+  {ja:"ビルのエントランスを出て、腕時計をちらりと確認する", en:"stepping out of an office entrance and briefly checking her watch"},
+  {ja:"JR恵比寿駅のホームで、到着案内を見ながら電車を静かに待つ", en:"quietly waiting for a train on the JR Ebisu Station platform while looking at the arrival board"},
+  {ja:"駅ナカのカフェでレジに並び、スマホの決済画面を見せて会計する", en:"standing at a station-café register and paying by showing a phone payment screen"},
+  {ja:"恵比寿のカフェで、ランチプレートを前にフォークを手に取り、ひと口食べる前に少し視線を落とす", en:"sitting at an Ebisu café with a lunch plate, lifting a fork and glancing down just before taking a bite"},
+  {ja:"駅のエスカレーターに立ち、片手で手すりを軽く持ちながら静かに上がる", en:"standing still on a station escalator, lightly holding the handrail while rising"},
+  {ja:"改札前でICカードをバッグから取り出し、足を止めて通勤ルートを確認する", en:"pausing near the ticket gate to take an IC card from her bag and check her commuting route"},
+  {ja:"テイクアウトのコーヒーを持って信号待ちをし、反対の手で髪を耳にかける", en:"waiting at a traffic light with takeaway coffee and tucking her hair behind one ear with the other hand"},
+  {ja:"オフィスビルのエレベーターホールで、到着するエレベーターを待ちながら資料を見直す", en:"standing in an office elevator lobby and reviewing a document while waiting for the elevator"},
+  {ja:"カフェの会計後、レシートを財布にしまいながら出口へゆっくり歩く", en:"walking slowly toward a café exit after paying, putting a receipt into her wallet"},
+  {ja:"恵比寿スカイウォークの手前で足を止め、スマホの地図を見て行き先を確認する", en:"stopping near the Ebisu Skywalk entrance to check a destination on her phone map"},
+  {ja:"オフィス近くのベーカリー前で、紙袋の中身を少し確かめてから歩き出す", en:"briefly checking the contents of a paper bag outside a bakery near her office before walking on"}
+];
+const adultAppearances = [
+  {ja:"平均的な成人の身長と自然な体格、まっすぐ立つが少し肩の力が抜けた姿勢", en:"average adult height and natural build, standing upright with slightly relaxed shoulders"},
+  {ja:"すっきりした成人らしい体格、歩くときに自然な重心移動が見える姿勢", en:"a lean adult build with a natural shift of weight while walking"},
+  {ja:"健康的で自然な成人の体格、服の上からも不自然でない肩や腕のライン", en:"a healthy, natural adult build with realistic shoulder and arm lines under clothing"},
+  {ja:"標準的な成人のプロポーション、座る・立つ動作で服に自然なしわが入る", en:"standard adult proportions, with natural clothing folds while sitting or standing"},
+  {ja:"少し華奢な成人の体格、無理のない姿勢と手元の自然な動き", en:"a slightly slender adult build with unforced posture and natural hand movement"}
+];
+const ebisuScenes = [
+  {ja:"【屋外・一人】恵比寿駅のホームで、到着案内を見ながら電車を静かに待つ", en:"[outdoor, alone] quietly waiting for a train on the Ebisu Station platform while looking at the arrival board"},
+  {ja:"【屋外・二人】同僚と並んでオフィスを出て、会議の資料について小声で話しながら歩く", en:"[outdoor, two people] leaving the office beside a colleague and quietly discussing a meeting document while walking"},
+  {ja:"【屋外・数名】ランチ後、同僚数名と横断歩道の手前で信号を待ち、紙コップを持って少し笑う", en:"[outdoor, small group] waiting at a crosswalk with several coworkers after lunch, holding a paper cup and smiling slightly"},
+  {ja:"【屋外・知らない人が周囲にいる】恵比寿スカイウォークの手前で地図を確認し、周囲の通行人をよけて立ち止まる", en:"[outdoor, strangers nearby] pausing near the Ebisu Skywalk entrance to check a map while allowing passersby to move around her"},
+  {ja:"【屋外・二人】友達と駅へ向かう途中、友達が話すのを聞きながらバッグのストラップを直す", en:"[outdoor, two friends] adjusting her bag strap while listening to a friend on the way to the station"},
+  {ja:"【屋外・一人】オフィスビルのエレベーターホールで、到着するエレベーターを待ちながら資料を見直す", en:"[outdoor/office entry, alone] reviewing a document in an office elevator lobby while waiting for the elevator"},
+  {ja:"【屋内・一人】駅ナカのカフェのレジで、スマホの決済画面を見せて会計する", en:"[indoor, alone] paying at a station-café register by showing a phone payment screen"},
+  {ja:"【屋内・店員と二人】アトレ恵比寿の服店で、店員から渡された薄手のジャケットを鏡の前で体に当て、サイズ感を確かめる", en:"[indoor, with a shop assistant] in an Atre Ebisu clothing store, holding a lightweight jacket against her body in front of a mirror to check the fit after receiving it from a shop assistant"},
+  {ja:"【屋内・店員と二人】セレクトショップで、ハンガーに掛かったトップスの素材を指先で確かめ、店員の説明を聞く", en:"[indoor, with a shop assistant] in a select shop, feeling the fabric of a top on a hanger while listening to the shop assistant"},
+  {ja:"【屋内・一人】カフェの窓側席でランチプレートを前に、フォークを手に取りひと口食べる前に少し視線を落とす", en:"[indoor, alone] at a window-side café table with a lunch plate, lifting a fork and glancing down just before taking a bite"},
+  {ja:"【屋内・二人】友達とカフェの小さなテーブルに座り、友達が話す間にコーヒーを両手で持つ", en:"[indoor, two friends] sitting at a small café table with a friend and holding coffee with both hands while listening"},
+  {ja:"【屋内・数名】仕事仲間数名とカフェのテーブルを囲み、相手の話を聞きながらノートに短くメモを取る", en:"[indoor, small group] seated around a café table with several work colleagues, listening and taking a short note"},
+  {ja:"【屋内・店員と二人】ベーカリーのレジで、店員に紙袋を受け取りながら電子決済を終える", en:"[indoor, with shop staff] finishing a contactless payment while receiving a paper bag from a bakery cashier"},
+  {ja:"【屋内・一人】カフェの窓越しに、仕事の合間で少し疲れた様子の彼女がコーヒーを置き、目を閉じて短く休む場面を広く自然に写す。覗き見ではなく、店内全体が見える公共的なフレーミング", en:"[indoor, alone] through a café window, show her in a wide, natural public framing as she sets down her coffee, closes her eyes briefly, and rests between tasks. The whole café context is visible; it is not voyeuristic or an intrusive close-up"},
+  {ja:"【屋内・知らない人が周囲にいる】駅のエスカレーターに立ち、片手で手すりを軽く持ちながら静かに上がる。周囲には距離を保った乗客がいる", en:"[indoor, strangers nearby] standing still on a station escalator, lightly holding the handrail while rising, with other passengers at a respectful distance"},
+  {ja:"【屋内・一人】コスメショップで、鏡の前に立ち、手の甲にのせたリップの色を自然光で確かめる", en:"[indoor, alone] at a cosmetics shop, standing before a mirror and checking a lipstick color swatched on the back of her hand in natural light"}
+];
+const ebisuCaptures = [
+  {ja:"恵比寿の共有された公共空間で、近くにいる人が縦向きのiPhone 15で日常的な距離から撮った、胸元から腰あたりまでの一枚。本人はポーズを取っていない。正面ではない自然な斜め45度の角度で、顔の60%以上が髪や手で隠れず見える", en:"a vertical iPhone 15 chest-to-waist snapshot taken by a nearby person at a shared public place in Ebisu from an ordinary distance. She is not posing. Use a natural three-quarter 45-degree angle rather than full frontal, with more than 60 percent of her face unobscured by hair or hands"},
+  {ja:"人の流れの中で、近くにいる人が縦向きのiPhone 15で偶然撮った、上半身中心の一枚。横から少し前方へ回り込む自然な角度で、顔の60%以上が見える。構図は少し不完全だが、主役と背景はどちらも過度にぼかさない", en:"an upper-body vertical iPhone 15 photo incidentally taken by a nearby person in a shared public flow. Use a natural side-to-three-quarter angle from slightly ahead, with more than 60 percent of her face visible. The framing is slightly imperfect, but neither the subject nor background is overly blurred"},
+  {ja:"共有された公共空間で、近くにいる人が普通の立ち位置から縦向きのiPhone 15で撮った、胸元から腰あたりまでのスナップ。人物は画面の中央から少し外れ、斜め横顔だが顔の60%以上が認識できる", en:"a vertical iPhone 15 chest-to-waist snapshot taken by a nearby person from a normal position in a shared public place. She is slightly off-center, shown in an angled side view with more than 60 percent of her face visible"},
+  {ja:"近くにいる人が縦向きのiPhone 15で、日常の上半身を自然な距離で切り取った写真。正面ポーズではなく、自然な横向きから斜めの視線。顔の60%以上が隠れず見える、非侵襲的な公共空間のスナップ", en:"a vertical iPhone 15 photo of her upper body in an everyday shared public setting, taken from a natural distance by a nearby person. Not a straight-on pose: a natural side-to-three-quarter view, with more than 60 percent of her face unobscured. A non-intrusive public-space snapshot"}
+];
+const temporalScenes = [
+  {ja:"2026年2月17日（火）8時12分、恵比寿エリア。晴れ、気温6°C、乾いた冷たい北風。上質なウールのショートコート、深めのVネックの細いメリノニット、透け感のある薄いインナー、ミディ丈スカート、レザーローファー", en:"Tuesday, February 17, 2026, 8:12 AM, in the Ebisu area. Clear skies, 6°C, dry cold north wind. Wearing a premium wool short coat, fine merino knit with a deeper V neckline, a subtle sheer inner layer, midi skirt, and leather loafers"},
+  {ja:"2026年4月11日（土）12時26分、恵比寿エリア。薄曇り、気温18°C、やわらかな南風。ノースリーブのリブニット、軽いシアーシャツ、テーラードジレ、落ち感のあるスラックス、フラットシューズ", en:"Saturday, April 11, 2026, 12:26 PM, in the Ebisu area. Bright overcast, 18°C, gentle south breeze. Wearing a sleeveless ribbed knit, lightweight sheer shirt, tailored vest, fluid slacks, and flat shoes"},
+  {ja:"2026年6月24日（水）18時18分、恵比寿エリア。雨上がりの曇天、気温24°C、湿度が高く路面が少し濡れている。リネン混のノースリーブトップ、透け感のあるオーバーシャツ、サテンのミディスカート、低いヒール", en:"Wednesday, June 24, 2026, 6:18 PM, in the Ebisu area. Cloudy after rain, 24°C, humid with slightly wet pavement. Wearing a linen-blend sleeveless top, translucent overshirt, satin midi skirt, and low heels"},
+  {ja:"2026年8月7日（金）12時41分、恵比寿エリア。強い晴れ、気温33°C、日陰との明暗差が大きい。上質なノースリーブのリネントップ、開いた首元、薄いシアーの羽織、軽いミディスカート、ミニマルなサンダル風ローファー", en:"Friday, August 7, 2026, 12:41 PM, in the Ebisu area. Strong sunshine, 33°C, high contrast between sun and shade. Wearing a premium sleeveless linen top with an open neckline, a very light sheer outer layer, a light midi skirt, and minimal sandal-style loafers"},
+  {ja:"2026年9月19日（土）8時34分、恵比寿エリア。晴れ、気温24°C、朝の乾いた空気。シアー素材の半袖ニット、キャミソールのレイヤード、細身のテーラードパンツ、ポインテッドトウのフラットシューズ", en:"Saturday, September 19, 2026, 8:34 AM, in the Ebisu area. Clear skies, 24°C, dry morning air. Wearing a sheer short-sleeve knit layered over a camisole, slim tailored trousers, and pointed-toe flats"},
+  {ja:"2026年10月30日（金）17時48分、恵比寿エリア。薄曇り、気温16°C、夕方の涼しい風。開いた首元のハイゲージニット、透け感のある長袖レイヤー、軽いトレンチコート、濃色デニム、ローファー", en:"Friday, October 30, 2026, 5:48 PM, in the Ebisu area. Bright overcast, 16°C, cool evening breeze. Wearing a fine-gauge knit with an open neckline, sheer long-sleeve layer, lightweight trench coat, dark denim, and loafers"},
+  {ja:"2026年12月12日（土）19時06分、恵比寿エリア。晴れ、気温8°C、澄んだ夜気。細いVネックのニットワンピース、シアーなハイネックインナー、ロングコート、ロングブーツ、上質なレザーバッグ", en:"Saturday, December 12, 2026, 7:06 PM, in the Ebisu area. Clear skies, 8°C, crisp night air. Wearing a fine V-neck knit dress, sheer high-neck inner layer, long coat, tall boots, and a quality leather bag"}
+];
+function makePrompt() {
+  const age = pick([22, 23, 24, 25, 26, 27, 28, 29]);
+  const x = Object.fromEntries(Object.entries(data).map(([key, values]) => { const i = Math.floor(Math.random() * values.length); return [key, { en: values[i], ja: ja[key][i] }]; }));
+  const profile = pick(ebisuProfiles);
+  const appearance = pick(adultAppearances);
+  const scene = pick(ebisuScenes);
+  const capture = pick(ebisuCaptures);
+  const temporal = pick(temporalScenes);
+  const faceJa = `架空の${age}歳の成人日本人女性。${x.face.ja}。${adultFaceCore.ja}。${appearance.ja}。${everydayAttractiveness.ja}。${x.eyes.ja}、${x.brows.ja}。${x.noseMouth.ja}。${x.skin.ja}。実在人物を想起させない、自然な左右差のある顔。カメラには気づかず、前方や自分の用事へ自然に視線を向けている`;
+  const faceEn = `A fictional ${age}-year-old adult Japanese woman. ${x.face.en}. ${adultFaceCore.en}. ${appearance.en}. ${everydayAttractiveness.en}. ${x.eyes.en}, ${x.brows.en}. ${x.noseMouth.en}. ${x.skin.en}. A naturally asymmetric, non-identifiable face. She has not noticed the camera and is naturally looking ahead or at what she is doing`;
+  const demeanorJa = x.expression.ja;
+  const demeanorEn = x.expression.en;
+  return {
+    ja: `恵比寿の共有された公共空間で、近くにいる人が撮ったフォトリアルな日常のスマホ写真。撮影設定: ${temporal.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。${ebisuStyle.ja}。${demeanorJa}。場面: ${scene.ja}。${upperBodyFocus.ja}。${capture.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
+    en: `Photorealistic everyday phone photo casually taken by a nearby person in a shared public setting in Ebisu. Time, place, weather, and seasonal clothing: ${temporal.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. ${ebisuStyle.en}. ${demeanorEn}. Scene: ${scene.en}. ${upperBodyFocus.en}. ${capture.en}. ${backgroundCrowd.en}. ${phoneRealism.en}.\n\nNegative prompt: ${negativePrompt.en}`
+  };
+}
+function copyText(text, button) {
+  const done = () => { const label = button.textContent; button.textContent = 'コピーしました'; setTimeout(() => button.textContent = label, 1400); };
+  if (navigator.clipboard?.writeText) navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+  else fallbackCopy(text, done);
+}
+function fallbackCopy(text, done) {
+  const area = document.createElement('textarea');
+  area.value = text;
+  area.setAttribute('readonly', '');
+  area.style.cssText = 'position:fixed;opacity:0;pointer-events:none;';
+  document.body.append(area);
+  area.select();
+  try { document.execCommand('copy'); done(); } finally { area.remove(); }
+}
+async function sharePage() {
+  const button = document.querySelector('#share-page');
+  if (location.protocol === 'file:') {
+    alert('このパソコン上のファイルは、そのままiPhoneへ共有できません。Google DriveでこのHTMLの共有リンクを作成してから、iPhoneのSafariでそのリンクを開いてください。');
+    return;
+  }
+  const shareData = { title: document.title, text: '恵比寿の日常写真プロンプト生成器', url: location.href };
+  try {
+    if (navigator.share) await navigator.share(shareData);
+    else copyText(location.href, button);
+  } catch (error) {
+    if (error.name !== 'AbortError') copyText(location.href, button);
+  }
+}
+function generate() { const out = document.querySelector('#results'), count = +document.querySelector('#count').value; const prompts = Array.from({length:count},()=>makePrompt()); out.innerHTML = prompts.map((p,i)=>`<article><h2>案 ${i+1} — 日本語</h2><pre class="prompt-ja">${p.ja}</pre><div class="copy-row"><button class="secondary copy-one" data-lang="ja">この日本語版をコピー</button></div><h2>Option ${i+1} — English</h2><pre class="prompt-en">${p.en}</pre><div class="copy-row"><button class="secondary copy-one" data-lang="en">Copy this English version</button></div><p class="meta">同一設定の日本語版・英語版です。言語別に、そのまま画像生成ツールに貼り付けられます。</p></article>`).join(''); document.querySelectorAll('.copy-one').forEach(button => button.addEventListener('click', () => copyText(button.closest('article').querySelector(button.dataset.lang === 'ja' ? '.prompt-ja' : '.prompt-en').textContent, button))); }
+document.querySelector('#generate').addEventListener('click', generate);
+document.querySelector('#copy-ja').addEventListener('click', () => copyText([...document.querySelectorAll('.prompt-ja')].map(x=>x.textContent).join('\n\n---\n\n'), document.querySelector('#copy-ja')));
+document.querySelector('#copy-en').addEventListener('click', () => copyText([...document.querySelectorAll('.prompt-en')].map(x=>x.textContent).join('\n\n---\n\n'), document.querySelector('#copy-en')));
+document.querySelector('#share-page').addEventListener('click', sharePage);
+generate();
+</script>
+</body>
+</html>
