@@ -86,8 +86,8 @@ const adultFaceCore = {
   en:"adult, age-appropriate facial structure and an unforced everyday expression; non-identifiable, not based on a real person, with natural asymmetry"
 };
 const everydayAttractiveness = {
-  ja:"この人物固有の骨格から生まれる、可憐で日常になじむ自然な魅力。既製のアイドル顔・小顔美人テンプレートへ平均化せず、成人らしい個性を残す",
-  en:"a graceful, naturally appealing everyday presence that comes from this individual's facial architecture; do not average her into a default idol, model, small-oval-face beauty template, and preserve adult individuality"
+  ja:"この人物固有の骨格から生まれる、モデル級に端正で印象的な美しさを持つ架空の成人女性。日常になじむ親しみやすさを残しつつ、既製のアイドル顔・小顔美人テンプレートへ平均化せず、成人らしい個性と顔立ちの差を保つ",
+  en:"a strikingly beautiful, model-caliber fictional adult woman whose appeal comes from this individual facial architecture; retain an approachable everyday presence, never average her into a default idol, small-oval-face beauty template, and preserve adult individuality and facial distinction"
 };
 const faceSeparation = {
   ja:"この顔構造プロファイルは最優先の固定条件。髪型、服、ほくろだけで差を作らず、顔の縦横比・中顔面・頬骨・下顎・目の配置・鼻の構造を指定どおり明確に描き分ける。他の生成の一般的な小さな卵型顔、大きな目、小さな鼻、短い中顔面、細いV字顎へ戻さない",
@@ -509,12 +509,12 @@ const storyLights = {
   ],
   noon:[
     {ja:"木漏れ日が肩とバッグに細かな明暗をつくり", en:"filtered daylight making delicate light and shade across her shoulder and bag"},
-    {ja:"窓からの拡散光が横顔を自然にやわらげ", en:"diffuse window light naturally softening her profile"},
+    {ja:"昼の拡散光が横顔を自然にやわらげ", en:"diffuse daytime light naturally softening her profile"},
     {ja:"夏の強い光と日陰の境目が街の空気をくっきり見せ", en:"the boundary between summer sun and shade making the street air feel clear"}
   ],
   evening:[
     {ja:"夕暮れの残光が彼女の横顔に穏やかな陰影をつくり", en:"remaining dusk light creating gentle definition across her profile"},
-    {ja:"灯り始めた店の光が濡れた路面に淡く映り", en:"newly lit shop lights reflecting softly in the wet pavement"},
+    {ja:"灯り始めた店の光が街角に淡く広がり", en:"newly lit shop lights spreading softly through the street corner"},
     {ja:"薄暮の青みが彼女の装いを静かに引き立て", en:"blue-hour tones quietly setting off her outfit"}
   ]
 };
@@ -542,7 +542,9 @@ function makeSeasonalStory() {
     lightEn: light.en,
     postJa: `${setting.openingJa}、${actionJa}。${light.ja}、${impression.ja}`,
     sceneJa: `【公共空間の日常】${actionJa}`,
-    sceneEn: `[shared public space] ${actionEn}`
+    sceneEn: `[shared public space] ${actionEn}`,
+    anchorJa: `日本語概要と完全に対応させる。${setting.openingJa}、${actionJa}。${light.ja}。この季節・時刻・場所・動作・光を画像の中心として必ず描く`,
+    anchorEn: `CAPTION FIDELITY — this must be the visible central moment: on ${setting.openingEn}, ${actionEn}. Use ${light.en}. Faithfully show this exact season, time of day, place, action, and light; do not substitute a different activity or location`
   };
 }
 function makePrompt() {
@@ -560,10 +562,12 @@ function makePrompt() {
   const demeanorEn = x.expression.en;
   const postJa = makePostText(story);
   return {
-    ja: `次の条件で画像を1枚作成してください。恵比寿を中心とする共有された公共空間で、十分な自然な距離から撮ったフォトリアルな日常のスマホ写真。日時・天気・季節の服装: ${story.promptJa}。${storyWorld.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。服装系統: ${fashion.ja}。${ebisuStyle.ja}。${demeanorJa}。場面: ${story.sceneJa}。光: ${story.lightJa}。${upperBodyFocus.ja}。${capture.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。${copyrightMark.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
-    en: `Create one image using this exact specification. Photorealistic everyday phone photo taken from a respectful ordinary public distance in a shared public setting centered on Ebisu. Time, place, weather, and seasonal clothing: ${story.promptEn}. ${storyWorld.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. Fashion direction: ${fashion.en}. ${ebisuStyle.en}. ${demeanorEn}. Scene: ${story.sceneEn}. Lighting: ${story.lightEn}. ${upperBodyFocus.en}. ${capture.en}. ${backgroundCrowd.en}. ${phoneRealism.en}. ${copyrightMark.en}.\n\nNegative prompt: ${negativePrompt.en}`,
+    ja: `次の条件で画像を1枚作成してください。${story.anchorJa}。恵比寿を中心とする共有された公共空間で、十分な自然な距離から撮ったフォトリアルな日常のスマホ写真。日時・天気・季節の服装: ${story.promptJa}。${storyWorld.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。服装系統: ${fashion.ja}。${ebisuStyle.ja}。${demeanorJa}。${upperBodyFocus.ja}。${capture.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。${copyrightMark.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
+    en: `Create one image using this exact specification. ${story.anchorEn}. Photorealistic everyday phone photo taken from a respectful ordinary public distance in a shared public setting centered on Ebisu. Time, place, weather, and seasonal clothing: ${story.promptEn}. ${storyWorld.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. Fashion direction: ${fashion.en}. ${ebisuStyle.en}. ${demeanorEn}. ${upperBodyFocus.en}. ${capture.en}. ${backgroundCrowd.en}. ${phoneRealism.en}. ${copyrightMark.en}.\n\nNegative prompt: ${negativePrompt.en}`,
     postJa,
     storyAction: story.actionJa,
+    storyActionEn: story.actionEn,
+    storyAnchorEn: story.anchorEn,
     temporalContext: story.promptJa,
     storyMood: `${story.lightJa}、${story.postJa.split('。')[1]}`,
     temporalPeriod: story.period,
