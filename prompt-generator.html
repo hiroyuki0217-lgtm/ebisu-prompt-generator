@@ -509,6 +509,24 @@ const workActionScenesByRole = [
     {ja:"スタジオの入口で帰る会員に手を振る", en:"at a studio entrance, waving to a departing member", actionJa:"相手の笑い声につられて明るく笑い、次の来客へ向けて歩き出していた", actionEn:"laughing brightly in response and walking toward the next arrival"}
   ]
 ];
+// 座る・待つ場面は頻度を高くし、日常の余白を増やす。配列の順序は ebisuProfiles と対応する。
+const stillWorkScenesByRole = [
+  [{ja:"受付カウンターの端で次の来客を待つ", en:"at the edge of a reception counter, waiting for the next visitor", actionJa:"背筋を整えたまま、到着予定の表示へ静かに目を向けていた", actionEn:"maintaining a composed posture while quietly looking toward the arrival display", motion:"wait"}],
+  [{ja:"カフェの窓側席に座り、次の打ち合わせ相手を待つ", en:"seated by a café window, waiting for the next meeting partner", actionJa:"企画書を膝に置き、飲み物の氷が溶けるのを眺めていた", actionEn:"resting a campaign deck on her lap and watching the ice melt in her drink", motion:"sit"}],
+  [{ja:"共有ラウンジのソファに座り、画面の読み込みを待つ", en:"seated on a shared-lounge sofa, waiting for a screen to load", actionJa:"ノートPCを膝にのせ、片足をゆっくり組み替えていた", actionEn:"holding a laptop on her lap and slowly changing the cross of her legs", motion:"crossLeg"}],
+  [{ja:"ショールームの待合ベンチに腰を下ろし、撮影スタッフを待つ", en:"seated on a showroom waiting bench, waiting for the photo crew", actionJa:"レザートートを足元へ置き、窓の光へ顔を少し向けていた", actionEn:"placing her leather tote by her feet and turning her face slightly toward the window light", motion:"sit"}],
+  [{ja:"ホテルロビーの椅子に座り、到着予定の宿泊客を待つ", en:"seated in a hotel-lobby chair, waiting for an expected guest", actionJa:"案内カードを両手で持ち、入口の方へ落ち着いて視線を向けていた", actionEn:"holding a guest-information card in both hands and calmly looking toward the entrance", motion:"wait"}],
+  [{ja:"カフェの奥の席でクライアントを待つ", en:"seated at a quiet café table, waiting for a client", actionJa:"メモ帳を閉じ、眼鏡を少し直してから時間を確かめていた", actionEn:"closing her notebook, adjusting her glasses slightly, and checking the time", motion:"sit"}],
+  [{ja:"ウェルネス企業のラウンジで会議室が空くのを待つ", en:"in a wellness-company lounge, waiting for a meeting room to open", actionJa:"バッグを膝に置き、静かに座って次の呼び出しを待っていた", actionEn:"sitting quietly with her bag on her lap and waiting for the next call", motion:"wait"}],
+  [{ja:"ショールームの窓際で資料確認の順番を待つ", en:"by a showroom window, waiting for her turn to review materials", actionJa:"細い脚を自然にそろえ、写真資料の端を指先で押さえていた", actionEn:"keeping her slender legs naturally together and holding the edge of the reference photos with her fingertips", motion:"sit"}],
+  [{ja:"駅近くのベンチに座り、次のオンライン面談の開始を待つ", en:"seated on a bench near the station, waiting for the next online meeting to begin", actionJa:"片耳のイヤフォンを直し、スマートウォッチへ目を落としていた", actionEn:"adjusting one earbud and lowering her gaze to her smartwatch", motion:"wait"}],
+  [{ja:"インテリアショップの低いベンチに座り、素材見本の準備を待つ", en:"seated on a low bench in an interior shop, waiting for material samples to be prepared", actionJa:"足首をそろえ、トートから小さなメモを取り出していた", actionEn:"keeping her ankles together and taking a small note from her tote", motion:"sit"}],
+  [{ja:"オフィスのエレベーターホールで車が来るのを待つ", en:"in an office elevator lobby, waiting for the elevator to arrive", actionJa:"資料を胸元にそろえ、片足へゆるく重心を預けていた", actionEn:"aligning documents against her chest and resting her weight lightly on one foot", motion:"wait"}],
+  [{ja:"明るい化粧台のスツールに座り、試作品の確認を待つ", en:"seated on a stool at a bright vanity, waiting for a prototype check", actionJa:"足をそっと組み、鏡の中のリップの艶を確かめていた", actionEn:"crossing her legs softly and checking the gloss of her lip color in the mirror", motion:"crossLeg"}],
+  [{ja:"テストキッチン脇の丸椅子に座り、次の試作を待つ", en:"seated on a round stool beside a test kitchen, waiting for the next prototype", actionJa:"タブレットを膝に置き、グラスの水滴をゆっくり眺めていた", actionEn:"resting her tablet on her lap and slowly watching condensation on a glass", motion:"sit"}],
+  [{ja:"ギャラリーの白い壁際にあるベンチで、来場者を待つ", en:"on a bench beside a gallery's white wall, waiting for visitors", actionJa:"ファイルを膝にのせ、静かに足を組み替えていた", actionEn:"holding a file on her lap and quietly changing the cross of her legs", motion:"crossLeg"}],
+  [{ja:"スタジオの受付横の椅子に座り、次のクラスの参加者を待つ", en:"seated beside a studio reception desk, waiting for the next class participants", actionJa:"再利用ボトルを両手で包み、入口の方をやわらかく見ていた", actionEn:"cupping her reusable bottle in both hands and looking softly toward the entrance", motion:"wait"}]
+];
 const ebisuMoments = [
   {ja:"恵比寿駅からオフィスへ向かう途中、社員証をバッグにしまう", en:"walking from Ebisu Station toward her office and putting an ID card into her bag"},
   {ja:"昼休みにテイクアウトのコーヒーを持ち、横断歩道の手前でスマホをしまう", en:"holding takeaway coffee during lunch break and putting away her phone before a crosswalk"},
@@ -529,11 +547,11 @@ const ebisuMoments = [
   {ja:"オフィス近くのベーカリー前で、紙袋の中身を少し確かめてから歩き出す", en:"briefly checking the contents of a paper bag outside a bakery near her office before walking on"}
 ];
 const adultAppearances = [
-  {ja:"華奢でしなやかな成人らしい体格、まっすぐ立つが少し肩の力が抜けた姿勢", en:"a slender, graceful adult build, standing upright with slightly relaxed shoulders"},
-  {ja:"細身で軽やかな成人らしい体格、歩くときに自然な重心移動が見える姿勢", en:"a slim, light adult build with a natural shift of weight while walking"},
-  {ja:"華奢で健康的な成人らしい体格、服の上からも自然に見える肩や腕のライン", en:"a slender yet healthy adult build with believable shoulder and arm lines under clothing"},
-  {ja:"可憐で細身の成人プロポーション、座る・立つ動作で服に自然なしわが入る", en:"a delicate, slim adult proportion with natural clothing folds while sitting or standing"},
-  {ja:"華奢な成人の体格、無理のない姿勢と手元の自然な動き", en:"a slender adult build with unforced posture and natural hand movement"}
+  {ja:"全体との比率で小顔に見える、華奢でしなやかな成人モデル体型。まっすぐ立つが少し肩の力が抜けた姿勢", en:"a petite-head, slender, graceful adult model-like build in overall proportion, standing upright with slightly relaxed shoulders"},
+  {ja:"全体との比率で小顔に見える、細身で軽やかな成人モデル体型。歩くときに自然な重心移動が見える姿勢", en:"a petite-head, slim, light adult model-like build in overall proportion, with a natural shift of weight while walking"},
+  {ja:"全体との比率で小顔に見える、華奢で健康的な成人モデル体型。服の上からも自然に見える肩や腕のライン", en:"a petite-head, slender yet healthy adult model-like build in overall proportion, with believable shoulder and arm lines under clothing"},
+  {ja:"全体との比率で小顔に見える、可憐で細身の成人モデル体型。座る・立つ動作で服に自然なしわが入る", en:"a petite-head, delicate slim adult model-like proportion in overall scale, with natural clothing folds while sitting or standing"},
+  {ja:"全体との比率で小顔に見える、華奢な成人モデル体型。無理のない姿勢と手元の自然な動き", en:"a petite-head, slender adult model-like build in overall proportion, with unforced posture and natural hand movement"}
 ];
 const ebisuScenes = [
   {ja:"【屋外・一人】恵比寿駅のホームで、到着案内を見ながら電車を静かに待つ", storyJa:"駅のホームで到着案内を眺め、電車を静かに待っていた", novelJa:"彼女は駅のホームで到着案内を眺めていた。次の電車を待っているようだった", proseJa:"駅のホームで到着案内を眺める彼女は、次の電車を待つあいだも不思議なほど落ち着いて見えた", en:"[outdoor, alone] quietly waiting for a train on the Ebisu Station platform while looking at the arrival board"},
@@ -679,6 +697,13 @@ const bodyMotionVariants = {
     {ja:"バッグを腕に掛けたまま、両膝をそろえてしゃがみ込み、", en:"crouching with both knees together while keeping her bag on her arm and"},
     {ja:"落ちたものへ素早く手を伸ばし、髪が前へ流れながら、", en:"reaching quickly toward the fallen item as her hair moved forward and"},
     {ja:"片手を軽く床につき、なめらかにしゃがみ込んで、", en:"briefly touching one hand to the floor and lowering herself smoothly while"}
+  ],
+  wait:[
+    {ja:"椅子の端に浅く腰をかけ、入口の方へ一度だけ視線を送りながら、", en:"sitting lightly at the edge of the chair and sending one brief glance toward the entrance while"},
+    {ja:"バッグを膝に置き、呼ばれる気配を待つように静かに姿勢を保ちながら、", en:"keeping her bag on her lap and holding a quiet posture as if awaiting her name while"},
+    {ja:"片足へ重心をゆるく預け、時計へ短く目を落としながら、", en:"resting her weight lightly on one foot and briefly lowering her gaze to the time while"},
+    {ja:"座ったまま背筋をすっと伸ばし、周囲の気配を自然に受け止めながら、", en:"straightening her back while seated and naturally taking in the activity around her while"},
+    {ja:"足元をそろえ、手元の資料を静かに抱え直しながら、", en:"bringing her feet together and quietly readjusting the materials in her hands while"}
   ]
 };
 function makeSeasonalStory(profile) {
@@ -686,7 +711,8 @@ function makeSeasonalStory(profile) {
   const profileIndex = ebisuProfiles.indexOf(profile);
   const baseScenes = workScenesByRole[profileIndex];
   const actionScenes = workActionScenesByRole[profileIndex];
-  const activity = pick([...baseScenes, ...actionScenes, ...actionScenes]);
+  const stillScenes = stillWorkScenesByRole[profileIndex];
+  const activity = pick([...baseScenes, ...actionScenes, ...actionScenes, ...stillScenes, ...stillScenes, ...stillScenes]);
   const light = pick(storyLights[setting.period]);
   const impression = pick(storyImpressions);
   const motion = activity.motion ? pick(bodyMotionVariants[activity.motion]) : pick(dynamicMotions);
