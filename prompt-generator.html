@@ -335,14 +335,10 @@ function takePostInitial() {
   if (!postInitialQueue.length) postInitialQueue = [...postInitials].sort(() => Math.random() - 0.5);
   return postInitialQueue.pop();
 }
-function makePostText(scene, atmosphere) {
+function makePostText(scene, temporal, storyMood) {
   const fixedTag = ' #今日見かけた気になる彼女';
   const opening = takePostInitial();
-  const options = [
-    `${opening}${scene.proseJa}。${pick(atmosphere.storyJa)}。`,
-    `${opening}${scene.proseJa}。${pick(sceneEndings)}。`
-  ].filter(post => `${post}${fixedTag}`.length <= 140);
-  const body = options.length ? pick(options) : `${opening}${scene.proseJa}。${pick(atmosphere.storyJa)}。`;
+  const body = `${opening}${temporal.storyJa}${scene.proseJa}。${storyMood}。`;
   return `${body}${fixedTag}`;
 }
 const moments = {
@@ -442,6 +438,12 @@ const ebisuScenes = [
   {ja:"【屋内・知らない人が周囲にいる】駅のエスカレーターに立ち、片手で手すりを軽く持ちながら静かに上がる。周囲には距離を保った乗客がいる", storyJa:"エスカレーターで手すりに触れ、静かに上がっていた", novelJa:"彼女はエスカレーターで手すりに触れていた。静かに上がっていった", proseJa:"エスカレーターで手すりに触れる彼女は、流れる人波とは別の時間にいるようだった", en:"[indoor, strangers nearby] standing still on a station escalator, lightly holding the handrail while rising, with other passengers at a respectful distance"},
   {ja:"【屋内・一人】コスメショップで、鏡の前に立ち、手の甲にのせたリップの色を自然光で確かめる", storyJa:"コスメショップの鏡の前で、リップの色を確かめていた", novelJa:"彼女はコスメショップの鏡を見ていた。手の甲にのせたリップの色を確かめていた", proseJa:"コスメショップの鏡をのぞく彼女は、手の甲にのせたリップの色を確かめていた", en:"[indoor, alone] at a cosmetics shop, standing before a mirror and checking a lipstick color swatched on the back of her hand in natural light"}
 ];
+const sceneTimePeriods = [
+  ['morning', 'evening', 'night'], ['evening'], ['noon'], ['morning', 'noon', 'evening'],
+  ['evening'], ['morning', 'evening'], ['noon', 'evening'], ['noon', 'evening'],
+  ['noon', 'evening'], ['noon'], ['noon', 'evening'], ['noon', 'evening'],
+  ['evening'], ['noon', 'evening'], ['morning', 'evening', 'night'], ['noon', 'evening']
+];
 const ebisuCaptures = [
   {ja:"共有された公共空間で、少し離れた通常の立ち位置から縦向きのiPhone 12で撮った胸元から腰あたりまでの一枚。本人はポーズを取っていない。正面ではない自然な斜め45度の角度で、顔と表情が無理なく読み取れる", en:"a vertical iPhone 12 chest-to-waist snapshot taken from a respectful ordinary public distance. She is not posing. Use a natural three-quarter 45-degree angle rather than full frontal, with her face and expression naturally readable"},
   {ja:"人の流れの中で、少し離れた場所からiPhone 12で撮った上半身中心の一枚。横から少し前方へ回り込む自然な角度で、顔が無理なく見える。構図は少し不完全だが、主役と背景はどちらも過度にぼかさない", en:"an upper-body vertical iPhone 12 photo taken from a modest public distance in a shared public flow. Use a natural side-to-three-quarter angle from slightly ahead, with her face naturally visible. The framing is slightly imperfect, but neither the subject nor background is overly blurred"},
@@ -449,34 +451,41 @@ const ebisuCaptures = [
   {ja:"少し離れた場所からiPhone 12で、日常の上半身を切り取った写真。正面ポーズではなく自然な横向きから斜めの視線で、顔と周囲の空気がほどよく伝わる非侵襲的な公共空間のスナップ", en:"a vertical iPhone 12 photo of her upper body from a modest public distance. Not a straight-on pose: a natural side-to-three-quarter view in a non-intrusive public-space snapshot, with both her face and surrounding atmosphere conveyed naturally"}
 ];
 const temporalScenes = [
-  {ja:"2026年2月17日（火）8時12分、恵比寿エリア。晴れ、気温6°C、乾いた冷たい北風。上質なウールのショートコート、深めのVネックの細いメリノニット、透け感のある薄いインナー、ミディ丈スカート、レザーローファー", en:"Tuesday, February 17, 2026, 8:12 AM, in the Ebisu area. Clear skies, 6°C, dry cold north wind. Wearing a premium wool short coat, fine merino knit with a deeper V neckline, a subtle sheer inner layer, midi skirt, and leather loafers"},
-  {ja:"2026年4月11日（土）12時26分、恵比寿エリア。薄曇り、気温18°C、やわらかな南風。ノースリーブのリブニット、軽いシアーシャツ、テーラードジレ、落ち感のあるスラックス、フラットシューズ", en:"Saturday, April 11, 2026, 12:26 PM, in the Ebisu area. Bright overcast, 18°C, gentle south breeze. Wearing a sleeveless ribbed knit, lightweight sheer shirt, tailored vest, fluid slacks, and flat shoes"},
-  {ja:"2026年6月24日（水）18時18分、恵比寿エリア。雨上がりの曇天、気温24°C、湿度が高く路面が少し濡れている。リネン混のノースリーブトップ、透け感のあるオーバーシャツ、サテンのミディスカート、低いヒール", en:"Wednesday, June 24, 2026, 6:18 PM, in the Ebisu area. Cloudy after rain, 24°C, humid with slightly wet pavement. Wearing a linen-blend sleeveless top, translucent overshirt, satin midi skirt, and low heels"},
-  {ja:"2026年8月7日（金）12時41分、恵比寿エリア。強い晴れ、気温33°C、日陰との明暗差が大きい。上質なノースリーブのリネントップ、開いた首元、薄いシアーの羽織、軽いミディスカート、ミニマルなサンダル風ローファー", en:"Friday, August 7, 2026, 12:41 PM, in the Ebisu area. Strong sunshine, 33°C, high contrast between sun and shade. Wearing a premium sleeveless linen top with an open neckline, a very light sheer outer layer, a light midi skirt, and minimal sandal-style loafers"},
-  {ja:"2026年9月19日（土）8時34分、恵比寿エリア。晴れ、気温24°C、朝の乾いた空気。シアー素材の半袖ニット、キャミソールのレイヤード、細身のテーラードパンツ、ポインテッドトウのフラットシューズ", en:"Saturday, September 19, 2026, 8:34 AM, in the Ebisu area. Clear skies, 24°C, dry morning air. Wearing a sheer short-sleeve knit layered over a camisole, slim tailored trousers, and pointed-toe flats"},
-  {ja:"2026年10月30日（金）17時48分、恵比寿エリア。薄曇り、気温16°C、夕方の涼しい風。開いた首元のハイゲージニット、透け感のある長袖レイヤー、軽いトレンチコート、濃色デニム、ローファー", en:"Friday, October 30, 2026, 5:48 PM, in the Ebisu area. Bright overcast, 16°C, cool evening breeze. Wearing a fine-gauge knit with an open neckline, sheer long-sleeve layer, lightweight trench coat, dark denim, and loafers"},
-  {ja:"2026年12月12日（土）19時06分、恵比寿エリア。晴れ、気温8°C、澄んだ夜気。細いVネックのニットワンピース、シアーなハイネックインナー、ロングコート、ロングブーツ、上質なレザーバッグ", en:"Saturday, December 12, 2026, 7:06 PM, in the Ebisu area. Clear skies, 8°C, crisp night air. Wearing a fine V-neck knit dress, sheer high-neck inner layer, long coat, tall boots, and a quality leather bag"}
+  {period:"morning", storyJa:"冷たい冬の朝に", ja:"2026年2月17日（火）8時12分、恵比寿エリア。晴れ、気温6°C、乾いた冷たい北風。上質なウールのショートコート、深めのVネックの細いメリノニット、透け感のある薄いインナー、ミディ丈スカート、レザーローファー", en:"Tuesday, February 17, 2026, 8:12 AM, in the Ebisu area. Clear skies, 6°C, dry cold north wind. Wearing a premium wool short coat, fine merino knit with a deeper V neckline, a subtle sheer inner layer, midi skirt, and leather loafers"},
+  {period:"noon", storyJa:"やわらかな春の昼に", ja:"2026年4月11日（土）12時26分、恵比寿エリア。薄曇り、気温18°C、やわらかな南風。ノースリーブのリブニット、軽いシアーシャツ、テーラードジレ、落ち感のあるスラックス、フラットシューズ", en:"Saturday, April 11, 2026, 12:26 PM, in the Ebisu area. Bright overcast, 18°C, gentle south breeze. Wearing a sleeveless ribbed knit, lightweight sheer shirt, tailored vest, fluid slacks, and flat shoes"},
+  {period:"evening", storyJa:"雨上がりの初夏の夕方に", ja:"2026年6月24日（水）18時18分、恵比寿エリア。雨上がりの曇天、気温24°C、湿度が高く路面が少し濡れている。リネン混のノースリーブトップ、透け感のあるオーバーシャツ、サテンのミディスカート、低いヒール", en:"Wednesday, June 24, 2026, 6:18 PM, in the Ebisu area. Cloudy after rain, 24°C, humid with slightly wet pavement. Wearing a linen-blend sleeveless top, translucent overshirt, satin midi skirt, and low heels"},
+  {period:"noon", storyJa:"強い日差しの真夏の昼に", ja:"2026年8月7日（金）12時41分、恵比寿エリア。強い晴れ、気温33°C、日陰との明暗差が大きい。上質なノースリーブのリネントップ、開いた首元、薄いシアーの羽織、軽いミディスカート、ミニマルなサンダル風ローファー", en:"Friday, August 7, 2026, 12:41 PM, in the Ebisu area. Strong sunshine, 33°C, high contrast between sun and shade. Wearing a premium sleeveless linen top with an open neckline, a very light sheer outer layer, a light midi skirt, and minimal sandal-style loafers"},
+  {period:"morning", storyJa:"乾いた初秋の朝に", ja:"2026年9月19日（土）8時34分、恵比寿エリア。晴れ、気温24°C、朝の乾いた空気。シアー素材の半袖ニット、キャミソールのレイヤード、細身のテーラードパンツ、ポインテッドトウのフラットシューズ", en:"Saturday, September 19, 2026, 8:34 AM, in the Ebisu area. Clear skies, 24°C, dry morning air. Wearing a sheer short-sleeve knit layered over a camisole, slim tailored trousers, and pointed-toe flats"},
+  {period:"evening", storyJa:"薄曇りの秋の夕方に", ja:"2026年10月30日（金）17時48分、恵比寿エリア。薄曇り、気温16°C、夕方の涼しい風。開いた首元のハイゲージニット、透け感のある長袖レイヤー、軽いトレンチコート、濃色デニム、ローファー", en:"Friday, October 30, 2026, 5:48 PM, in the Ebisu area. Bright overcast, 16°C, cool evening breeze. Wearing a fine-gauge knit with an open neckline, sheer long-sleeve layer, lightweight trench coat, dark denim, and loafers"},
+  {period:"night", storyJa:"澄んだ冬の夜に", ja:"2026年12月12日（土）19時06分、恵比寿エリア。晴れ、気温8°C、澄んだ夜気。細いVネックのニットワンピース、シアーなハイネックインナー、ロングコート、ロングブーツ、上質なレザーバッグ", en:"Saturday, December 12, 2026, 7:06 PM, in the Ebisu area. Clear skies, 8°C, crisp night air. Wearing a fine V-neck knit dress, sheer high-neck inner layer, long coat, tall boots, and a quality leather bag"}
 ];
 function makePrompt() {
   const age = pick([22, 23, 24, 25, 26, 27, 28, 29]);
   const x = Object.fromEntries(Object.entries(data).map(([key, values]) => { const i = Math.floor(Math.random() * values.length); return [key, { en: values[i], ja: ja[key][i] }]; }));
   const profile = pick(ebisuProfiles);
   const appearance = pick(adultAppearances);
-  const scene = pick(ebisuScenes);
+  const sceneIndex = Math.floor(Math.random() * ebisuScenes.length);
+  const scene = ebisuScenes[sceneIndex];
   const capture = pick(ebisuCaptures);
-  const temporal = pick(temporalScenes);
+  const temporal = pick(temporalScenes.filter(option => sceneTimePeriods[sceneIndex].includes(option.period)));
   const fashion = pick(fashionDirections);
   const faceProfile = takeFaceProfile();
+  const storyMood = pick(refinedAtmosphere.storyJa);
   const faceJa = `架空の${age}歳の成人日本人の彼女。顔構造プロファイル${faceProfile.id}: ${faceProfile.ja}。${faceSeparation.ja}。${adultFaceCore.ja}。${appearance.ja}。${everydayAttractiveness.ja}。髪型（顔の識別条件には使わない）: ${x.hair.ja}。${x.skin.ja}。${makeupDirection.ja}。${refinedAtmosphere.ja}。カメラには気づかず、前方や自分の用事へ自然に視線を向けている`;
   const faceEn = `A fictional ${age}-year-old adult Japanese woman. FACE ARCHITECTURE PROFILE ${faceProfile.id}: ${faceProfile.en}. ${faceSeparation.en}. ${adultFaceCore.en}. ${appearance.en}. ${everydayAttractiveness.en}. Hair only, not an identity cue: ${x.hair.en}. ${x.skin.en}. ${makeupDirection.en}. ${refinedAtmosphere.en}. She has not noticed the camera and is naturally looking ahead or at what she is doing`;
   const demeanorJa = x.expression.ja;
   const demeanorEn = x.expression.en;
-  const postJa = makePostText(scene, refinedAtmosphere);
+  const postJa = makePostText(scene, temporal, storyMood);
   return {
     ja: `次の条件で画像を1枚作成してください。恵比寿を中心とする共有された公共空間で、十分な自然な距離から撮ったフォトリアルな日常のスマホ写真。撮影設定: ${temporal.ja}。${storyWorld.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。服装系統: ${fashion.ja}。${ebisuStyle.ja}。${demeanorJa}。場面: ${scene.ja}。${upperBodyFocus.ja}。${capture.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。${copyrightMark.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
     en: `Create one image using this exact specification. Photorealistic everyday phone photo taken from a respectful ordinary public distance in a shared public setting centered on Ebisu. Time, place, weather, and seasonal clothing: ${temporal.en}. ${storyWorld.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. Fashion direction: ${fashion.en}. ${ebisuStyle.en}. ${demeanorEn}. Scene: ${scene.en}. ${upperBodyFocus.en}. ${capture.en}. ${backgroundCrowd.en}. ${phoneRealism.en}. ${copyrightMark.en}.\n\nNegative prompt: ${negativePrompt.en}`,
     postJa,
     storyAction: scene.proseJa,
+    temporalContext: temporal.storyJa,
+    storyMood,
+    sceneIndex,
+    temporalPeriod: temporal.period,
+    allowedPeriods: sceneTimePeriods[sceneIndex],
     faceProfileId: faceProfile.id
   };
 }
