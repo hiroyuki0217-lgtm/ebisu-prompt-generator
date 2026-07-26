@@ -13,14 +13,12 @@
     main { max-width:800px; margin:0 auto; padding:58px max(24px, env(safe-area-inset-right)) max(64px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); } h1 { text-align:center; font-size:clamp(27px,4vw,42px); font-weight:400; margin:0 0 10px; letter-spacing:.14em; } .product-name { text-align:center; margin:0 0 18px; color:var(--accent); font-size:13px; font-weight:400; letter-spacing:.2em; } .lead { text-align:center; color:var(--muted); margin:0 auto 24px; max-width:38em; line-height:2; }
     .panel { border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:17px 0; } .controls { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; align-items:end; }
     label { display:grid; gap:6px; color:var(--muted); font-size:13px; font-weight:600; } select, button { min-height:44px; border-radius:0; padding:10px 18px; font:inherit; letter-spacing:.08em; } select { min-width:175px; border:1px solid var(--line); background:white; color:var(--ink); } button { touch-action:manipulation; cursor:pointer; border:1px solid var(--accent); background:var(--accent); color:#fffdf7; font-weight:400; } button:hover { background:#433229; } button.secondary { background:transparent; color:var(--accent); border:1px solid var(--accent); }
-    .encounter { max-width:39em; margin:0 auto 28px; padding:18px 22px; border-left:2px solid var(--accent); background:#fffdf799; color:var(--muted); font-size:15px; line-height:2; } .encounter p { margin:0; } .encounter p + p { margin-top:4px; } .encounter em { color:var(--ink); font-style:normal; }
-    #results { display:grid; gap:16px; margin-top:26px; } article { border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:28px 0; scroll-margin-top:16px; } h2 { font-size:15px; font-weight:400; margin:0 0 13px; color:var(--accent); letter-spacing:.16em; } h2::before { content:"— "; } h2::after { content:" —"; } pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font:14px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace; } .post-summary { margin:0; font-size:17px; line-height:2.1; } .action-row, .share-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; } .action-row { margin-top:24px; } .share-row { margin-top:10px; } .action-row button, .share-row button { min-height:46px; padding:8px 10px; font-size:13px; } .meta { margin:16px 0 0; font-size:12px; color:var(--muted); }
-    .story { margin:0 0 28px; padding:0; color:var(--ink); font-size:16px; line-height:2.15; text-indent:1em; } .story::first-letter { font-size:1.35em; } .summary { margin:0; color:var(--ink); font-size:15px; line-height:2; } .notes { margin:28px 0 0; color:var(--muted); font-size:13px; line-height:1.9; } .mobile-tip { margin:0 auto 22px; padding:16px 0; border-top:1px dotted var(--line); border-bottom:1px dotted var(--line); color:var(--muted); font-size:13px; line-height:1.8; } .mobile-tip strong { color:var(--ink); font-weight:400; } .site-actions { margin-top:28px; padding-top:22px; border-top:1px solid var(--line); } .site-actions p { text-align:center; color:var(--muted); font-size:12px; margin:0 0 12px; } code { color:#69444c; }
+    #results { display:grid; gap:16px; margin-top:26px; } article { border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:28px 0; scroll-margin-top:16px; } h2 { font-size:15px; font-weight:400; margin:0 0 13px; color:var(--accent); letter-spacing:.16em; } h2::before { content:"— "; } h2::after { content:" —"; } pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font:14px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace; } .post-summary { margin:0; font-size:17px; line-height:2.1; } .post-summary strong { font-weight:600; } .action-row, .share-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; } .action-row { margin-top:24px; } .share-row { margin-top:10px; } .action-row button, .share-row button, .favorite-button { min-height:46px; padding:8px 10px; font-size:13px; } .favorite-button { width:100%; margin-top:10px; background:#fffdf755; color:var(--accent); border:1px solid var(--line); } .meta { margin:16px 0 0; font-size:12px; color:var(--muted); }
+    .story { margin:0 0 28px; padding:0; color:var(--ink); font-size:16px; line-height:2.15; text-indent:1em; } .story::first-letter { font-size:1.35em; } .summary { margin:0; color:var(--ink); font-size:15px; line-height:2; } .notes { margin:28px 0 0; color:var(--muted); font-size:13px; line-height:1.9; } .mobile-tip { margin:0 auto 22px; padding:16px 0; border-top:1px dotted var(--line); border-bottom:1px dotted var(--line); color:var(--muted); font-size:13px; line-height:1.8; } .mobile-tip strong { color:var(--ink); font-weight:400; } .site-actions { margin-top:28px; padding-top:22px; border-top:1px solid var(--line); } .site-actions p { text-align:center; color:var(--muted); font-size:12px; margin:0 0 12px; } .favorites-link { display:block; margin:18px auto 0; width:max-content; color:var(--accent); font-size:13px; text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:3px; } code { color:#69444c; }
     @media (max-width:600px) {
       main { padding-top:38px; padding-bottom:max(32px, env(safe-area-inset-bottom)); }
       h1 { font-size:26px; line-height:1.5; letter-spacing:.1em; }
       .lead { margin-bottom:18px; font-size:14px; }
-      .encounter { margin-bottom:18px; padding:15px 16px; font-size:14px; }
       .controls { display:grid; grid-template-columns:1fr 1fr; align-items:stretch; gap:10px; }
       .controls select, .controls button { width:100%; min-width:0; }
       #results { margin-top:16px; gap:12px; }
@@ -35,12 +33,11 @@
 <body>
 <main>
   <h1>街で見かけた気になる女性生成メーカー</h1>
-  <p class="lead">街で見かけた架空の女性の画像が作れます。</p>
+  <p class="lead">名前も知らない彼女。すれ違った一瞬の余韻を、架空の写真にします。</p>
   <p class="mobile-tip"><strong>使い方:</strong> 1.「別の日」を押す　2.「プロンプトコピー」を押す　3. ChatGPTまたはGeminiアプリを開き、貼り付けて送信します。</p>
-  <section class="encounter" aria-label="このサイトについて"><p><em>名前も知らない。けれど、ふと心に残った。</em></p><p>すれ違った一瞬の余韻を、架空の写真として描きます。</p></section>
   <div id="results" aria-live="polite"></div>
   <p class="notes">※ 登場する人物はすべて架空の成人女性です。画像作成サービスごとの仕様により、文字表記を含む細部は完全には再現されない場合があります。</p>
-  <footer class="site-actions"><p>このページを共有する</p><div class="share-row"><button class="secondary" id="share-app">アプリ共有</button><button class="secondary" id="share-post">SNS投稿</button></div></footer>
+  <footer class="site-actions"><p>このページを共有する</p><div class="share-row"><button class="secondary" id="share-app">アプリ共有</button><button class="secondary" id="share-post">SNS投稿</button></div><a class="favorites-link" href="favorites.html">お気に入り一覧を見る</a></footer>
 </main>
 <script>
 const pick = a => a[Math.floor(Math.random() * a.length)];
@@ -296,21 +293,27 @@ async function shareApp(button) {
   }
 }
 async function sharePost(button) {
-  const shareData = { title: document.title, text: currentPrompt.postJa, url: location.href };
+  copyText(currentPrompt.postJa, button);
+}
+const favoritesKey = 'ebisu-prompt-generator-favorites';
+function saveFavorite(button) {
   try {
-    if (navigator.share) await navigator.share(shareData);
-    else copyText(currentPrompt.postJa, button);
+    const favorites = JSON.parse(localStorage.getItem(favoritesKey) || '[]');
+    favorites.unshift({ id: `${Date.now()}-${Math.random().toString(16).slice(2)}`, date: new Intl.DateTimeFormat('ja-JP', { month:'long', day:'numeric' }).format(new Date()), text: currentPrompt.postJa });
+    localStorage.setItem(favoritesKey, JSON.stringify(favorites));
+    const label = button.textContent; button.textContent = 'お気に入りに追加しました'; setTimeout(() => button.textContent = label, 1400);
   } catch (error) {
-    if (error.name !== 'AbortError') copyText(currentPrompt.postJa, button);
+    button.textContent = '保存できませんでした'; setTimeout(() => button.textContent = 'お気に入りに追加', 1400);
   }
 }
 let currentPrompt;
 function generate() {
   const out = document.querySelector('#results');
   currentPrompt = makePrompt();
-  out.innerHTML = `<article><h2>今日こんな女性を見かけた</h2><p class="post-summary">${currentPrompt.postJa}</p><div class="action-row"><button class="secondary copy-one">プロンプトコピー</button><button class="secondary" id="reroll">別の日</button></div><p class="meta">コピー後、ChatGPTまたはGeminiに貼り付けて送信してください。</p></article>`;
+  out.innerHTML = `<article><h2>今日こんな女性を見かけた</h2><p class="post-summary"><strong>${currentPrompt.postJa}</strong></p><div class="action-row"><button class="secondary copy-one">プロンプトコピー</button><button class="secondary" id="reroll">別の日</button></div><button class="favorite-button" id="favorite">お気に入りに追加</button><p class="meta">コピー後、ChatGPTまたはGeminiに貼り付けて送信してください。</p></article>`;
   document.querySelector('.copy-one').addEventListener('click', button => copyText(currentPrompt.en, button.currentTarget));
   document.querySelector('#reroll').addEventListener('click', generate);
+  document.querySelector('#favorite').addEventListener('click', button => saveFavorite(button.currentTarget));
 }
 document.querySelector('#share-app').addEventListener('click', button => shareApp(button.currentTarget));
 document.querySelector('#share-post').addEventListener('click', button => sharePost(button.currentTarget));
