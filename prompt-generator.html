@@ -319,14 +319,6 @@ const postTemplates = [
   () => `${pick(postOpenings)}${pick(postClosings)}${pick(postTransitions)}${pick(postQuestions)}`,
   () => `${pick(postQuestions)}${pick(postOpenings)}${pick(postImpressions)}${pick(postClosings)}`
 ];
-const postInitials = [
-  'あの日、', 'いま思えば、', 'ふと、', '記憶をたどると、',
-  '通り過ぎたあとで、', '目を上げたとき、', '少しだけ立ち止まって、', '人の流れが途切れたとき、',
-  'あとになって、', '何気なく、', 'すれ違いざまに、', '気づけば、',
-  'あのとき、', '一度だけ、', '歩みを緩めたとき、', '街のざわめきのなかで、',
-  '視線を戻すと、', '振り返ると、', '思いがけず、', 'ほんの短いあいだ、',
-  '足音が遠ざかる前に、', 'まだ景色が動いているうちに、', 'しばらくしてから、', '日常の途中で、'
-];
 const sceneReflections = [
   '彼女の手元には迷いがなかった',
   '彼女の横顔は落ち着いて見えた',
@@ -349,17 +341,9 @@ const sceneEndings = [
   '彼女が去ったあとも景色は少しだけ違って見えた',
   'もう会わないかもしれないのに彼女の印象は消えなかった'
 ];
-let postInitialQueue = [];
-function takePostInitial() {
-  if (!postInitialQueue.length) postInitialQueue = [...postInitials].sort(() => Math.random() - 0.5);
-  return postInitialQueue.pop();
-}
-function makePostText(scene, temporal, storyMood, usesGeneralMood) {
+function makePostText(scene, temporal, storyMood) {
   const fixedTag = ' #今日見かけた気になる彼女';
-  const opening = takePostInitial();
-  const canonical = () => `${opening}${temporal.storyJa}、${scene.proseJa}。${storyMood}。`;
-  const sceneFirst = () => `${opening}${scene.proseJa}。${temporal.storyJa}、${storyMood}。`;
-  const body = usesGeneralMood ? pick([canonical, sceneFirst])() : canonical();
+  const body = `${temporal.storyJa}、${scene.proseJa}。${storyMood}。`;
   return `${body}${fixedTag}`;
 }
 const moments = {
@@ -497,7 +481,7 @@ function makePrompt() {
   const faceEn = `A fictional ${age}-year-old adult Japanese woman. FACE ARCHITECTURE PROFILE ${faceProfile.id}: ${faceProfile.en}. ${faceSeparation.en}. ${adultFaceCore.en}. ${appearance.en}. ${everydayAttractiveness.en}. Hair only, not an identity cue: ${x.hair.en}. ${x.skin.en}. ${makeupDirection.en}. ${refinedAtmosphere.en}. She has not noticed the camera and is naturally looking ahead or at what she is doing`;
   const demeanorJa = x.expression.ja;
   const demeanorEn = x.expression.en;
-  const postJa = makePostText(scene, temporal, storyMood, usesGeneralMood);
+  const postJa = makePostText(scene, temporal, storyMood);
   return {
     ja: `次の条件で画像を1枚作成してください。恵比寿を中心とする共有された公共空間で、十分な自然な距離から撮ったフォトリアルな日常のスマホ写真。撮影設定: ${temporal.ja}。${storyWorld.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。服装系統: ${fashion.ja}。${ebisuStyle.ja}。${demeanorJa}。場面: ${scene.ja}。${upperBodyFocus.ja}。${capture.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。${copyrightMark.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
     en: `Create one image using this exact specification. Photorealistic everyday phone photo taken from a respectful ordinary public distance in a shared public setting centered on Ebisu. Time, place, weather, and seasonal clothing: ${temporal.en}. ${storyWorld.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. Fashion direction: ${fashion.en}. ${ebisuStyle.en}. ${demeanorEn}. Scene: ${scene.en}. ${upperBodyFocus.en}. ${capture.en}. ${backgroundCrowd.en}. ${phoneRealism.en}. ${copyrightMark.en}.\n\nNegative prompt: ${negativePrompt.en}`,
