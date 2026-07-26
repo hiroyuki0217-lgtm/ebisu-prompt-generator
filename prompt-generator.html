@@ -158,6 +158,16 @@ const makeupDirection = {
   ja:"2026年らしい、ナチュラルだがきちんと整えたメイク。肌そのものに見える薄いベースに、Tゾーンだけを抑えた自然な艶と頬の高い位置のやわらかな光沢を加える。目元は繊細なニュートラルカラー、唇は透け感のあるローズまたはヌードカラーで、うるおいのある控えめなツヤ。厚塗り、強い輪郭補正、ビューティーフィルターは使わず、肌の質感は残す",
   en:"polished but natural contemporary Japanese makeup: a thin skin-like base, controlled natural sheen limited to the T-zone, and a soft glow on the high points of the cheeks. Use delicate neutral eye makeup and a translucent rose or nude lip with a hydrated, understated glossy finish. No heavy foundation, harsh contour, or beauty filter; preserve real skin texture"
 };
+const refinedAtmosphere = {
+  ja:"柔らかな窓からの横光または自然光で、顔と服のレイヤーに穏やかな明暗をつける。肌は薄いベースメイク越しにも自然な質感と明るい透明感を残す。健康的で軽やかな成人らしい体格と、日常になじみながら目を引く洗練された存在感。過度な演出やドラマチックすぎる明暗、作り物の大きな玉ボケにはしない",
+  en:"use soft lateral window light or available daylight to give the face and clothing layers gentle natural depth. Preserve skin-like texture and a bright natural translucency beneath the light makeup. She has a healthy, light adult presence and a refined, memorable appeal that still belongs in everyday life. Avoid exaggerated drama, theatrical chiaroscuro, or artificial oversized bokeh",
+  storyJa:[
+    'やわらかな光のなかで彼女の佇まいは静かに目を引いた',
+    '彼女の洗練された装いは日常の景色に自然になじんでいた',
+    '彼女の横顔には華やかさよりも落ち着いた品があった',
+    '軽やかな雰囲気がその場の空気を少しだけ変えていた'
+  ]
+};
 const negativePrompt = {
   ja:"アニメ、イラスト、CG、3Dレンダリング、AI風の肌、ビューティーフィルター、プラスチック肌、陶器肌、過度な肌の平滑化、完璧すぎる左右対称、ドールのような顔、過度に大きい目、同じ顔の再利用、一般的な小顔の卵型美人顔、短い中顔面、極端に小さい鼻、細いV字顎、実在のセレブや実在人物、強すぎるハイファッションの演出、グラマーポーズ、スタジオのビューティーライティング、過度なポートレートぼけ、強すぎるHDR、過剰なシャープネス、二重の背景物、物理的に不自然な反射、顔や手の崩れ、余分な指、指定以外の文字、ロゴ",
   en:"anime, illustration, CGI, 3D render, AI-looking skin, beauty filter, plastic or porcelain skin, over-smoothed skin, perfect facial symmetry, doll-like face, exaggerated eyes, reused face, same person as previous image, generic East Asian beauty face, small oval face, short midface, tiny nose, narrow V-line jaw, any real celebrity or real person, overly editorial high-fashion styling, glamour pose, studio beauty lighting, excessive portrait-mode blur, strong HDR, oversharpening, duplicated background objects, physically implausible reflections, distorted face or hands, extra fingers, unrelated text, logos"
@@ -321,14 +331,14 @@ function takePostInitial() {
   if (!postInitialQueue.length) postInitialQueue = [...postInitials].sort(() => Math.random() - 0.5);
   return postInitialQueue.pop();
 }
-function makePostText(scene) {
+function makePostText(scene, atmosphere) {
   const fixedTag = ' #今日見かけた気になる彼女';
   const opening = takePostInitial();
   const options = [
-    `${opening}${scene.proseJa}。${pick(sceneEndings)}。`,
-    `${opening}${scene.proseJa}。${pick(sceneReflections)}。`
+    `${opening}${scene.proseJa}。${pick(atmosphere.storyJa)}。`,
+    `${opening}${scene.proseJa}。${pick(sceneEndings)}。`
   ].filter(post => `${post}${fixedTag}`.length <= 140);
-  const body = options.length ? pick(options) : `${opening}${scene.proseJa}。${pick(sceneEndings)}。`;
+  const body = options.length ? pick(options) : `${opening}${scene.proseJa}。${pick(atmosphere.storyJa)}。`;
   return `${body}${fixedTag}`;
 }
 const moments = {
@@ -453,11 +463,11 @@ function makePrompt() {
   const temporal = pick(temporalScenes);
   const fashion = pick(fashionDirections);
   const faceProfile = takeFaceProfile();
-  const faceJa = `架空の${age}歳の成人日本人の彼女。顔構造プロファイル${faceProfile.id}: ${faceProfile.ja}。${faceSeparation.ja}。${adultFaceCore.ja}。${appearance.ja}。${everydayAttractiveness.ja}。髪型（顔の識別条件には使わない）: ${x.hair.ja}。${x.skin.ja}。${makeupDirection.ja}。カメラには気づかず、前方や自分の用事へ自然に視線を向けている`;
-  const faceEn = `A fictional ${age}-year-old adult Japanese woman. FACE ARCHITECTURE PROFILE ${faceProfile.id}: ${faceProfile.en}. ${faceSeparation.en}. ${adultFaceCore.en}. ${appearance.en}. ${everydayAttractiveness.en}. Hair only, not an identity cue: ${x.hair.en}. ${x.skin.en}. ${makeupDirection.en}. She has not noticed the camera and is naturally looking ahead or at what she is doing`;
+  const faceJa = `架空の${age}歳の成人日本人の彼女。顔構造プロファイル${faceProfile.id}: ${faceProfile.ja}。${faceSeparation.ja}。${adultFaceCore.ja}。${appearance.ja}。${everydayAttractiveness.ja}。髪型（顔の識別条件には使わない）: ${x.hair.ja}。${x.skin.ja}。${makeupDirection.ja}。${refinedAtmosphere.ja}。カメラには気づかず、前方や自分の用事へ自然に視線を向けている`;
+  const faceEn = `A fictional ${age}-year-old adult Japanese woman. FACE ARCHITECTURE PROFILE ${faceProfile.id}: ${faceProfile.en}. ${faceSeparation.en}. ${adultFaceCore.en}. ${appearance.en}. ${everydayAttractiveness.en}. Hair only, not an identity cue: ${x.hair.en}. ${x.skin.en}. ${makeupDirection.en}. ${refinedAtmosphere.en}. She has not noticed the camera and is naturally looking ahead or at what she is doing`;
   const demeanorJa = x.expression.ja;
   const demeanorEn = x.expression.en;
-  const postJa = makePostText(scene);
+  const postJa = makePostText(scene, refinedAtmosphere);
   return {
     ja: `次の条件で画像を1枚作成してください。恵比寿の共有された公共空間で、十分な自然な距離から撮ったフォトリアルな日常のスマホ写真。撮影設定: ${temporal.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。服装系統: ${fashion.ja}。${ebisuStyle.ja}。${demeanorJa}。場面: ${scene.ja}。${upperBodyFocus.ja}。${capture.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。${copyrightMark.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
     en: `Create one image using this exact specification. Photorealistic everyday phone photo taken from a respectful ordinary public distance in a shared public setting in Ebisu. Time, place, weather, and seasonal clothing: ${temporal.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. Fashion direction: ${fashion.en}. ${ebisuStyle.en}. ${demeanorEn}. Scene: ${scene.en}. ${upperBodyFocus.en}. ${capture.en}. ${backgroundCrowd.en}. ${phoneRealism.en}. ${copyrightMark.en}.\n\nNegative prompt: ${negativePrompt.en}`,
