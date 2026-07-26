@@ -397,6 +397,69 @@ const ebisuProfiles = [
   {ja:"アートギャラリーの企画・運営担当", en:"a program coordinator at an art gallery", groomJa:"やわらかな前髪のあるボブ、控えめなアイメイク、黒い細フレーム眼鏡、展示資料のファイル", groomEn:"bob with soft bangs, understated eye makeup, black thin-framed glasses, and an exhibition file"},
   {ja:"ウェルネス系スタジオのコミュニティマネージャー", en:"a community manager at a wellness studio", groomJa:"自然なハーフアップ、軽い日焼け止めのようなメイク、細いネックレス、再利用ボトル", groomEn:"natural half-up hair, sunscreen-light makeup, fine necklace, and reusable bottle"}
 ];
+// 職業ごとに、働いていることが画面だけで自然に伝わる日常の場面を対応させる。
+const workScenesByRole = [
+  [
+    {ja:"オフィスの明るいエントランスで来客用の案内カードをそろえる", en:"in a bright office entrance, arranging visitor information cards", actionJa:"カードを渡す前に、片手で受付台の端を整えていた", actionEn:"straightening the edge of the reception counter with one hand before handing over a card"},
+    {ja:"エレベーターホールで来客を見送り、次の案内を確認する", en:"in an elevator lobby after seeing off a visitor and checking the next arrival", actionJa:"IDカードケースをしまい、やわらかく会釈していた", actionEn:"putting away her ID-card case and giving a soft professional nod"}
+  ],
+  [
+    {ja:"カフェの窓際で新商品の小さなパッケージ見本を資料と見比べる", en:"at a window-side café table, comparing a small new-product package sample with her notes", actionJa:"見本をそっと置き、色の違いを確かめるように視線を落としていた", actionEn:"setting down the sample and lowering her gaze to compare subtle color differences"},
+    {ja:"会議のあと、薄い企画書を抱えてオフィス街を歩く", en:"walking through the office district after a meeting with a slim campaign deck", actionJa:"ページの端を押さえながら、次の打ち合わせへ足を進めていた", actionEn:"holding the edge of the pages as she headed toward the next meeting"}
+  ],
+  [
+    {ja:"コワーキングスペースの共有テーブルでノートPCの画面を確認する", en:"at a shared coworking table, checking a laptop screen", actionJa:"画面を閉じる前に、タッチパッドの上で指を一度止めていた", actionEn:"pausing one finger over the trackpad before closing the screen"},
+    {ja:"オフィスのガラス壁のそばでデザイン資料を同僚に見せる", en:"near a glass office wall, showing design material to a colleague", actionJa:"資料の一部を指し、相手の反応を待っていた", actionEn:"pointing to one part of the material and waiting for her colleague's response"}
+  ],
+  [
+    {ja:"ショールームの前で新しいカタログとレザートートを抱える", en:"outside a showroom, holding a new catalogue and leather tote", actionJa:"表紙をめくり、展示の順番を静かに見直していた", actionEn:"turning a cover page and quietly reviewing the exhibition order"},
+    {ja:"撮影の打ち合わせを終え、花を飾ったカフェの前を歩く", en:"walking past a flower-decorated café after a shoot-planning meeting", actionJa:"スマートフォンの予定表を見てから、髪を耳にかけていた", actionEn:"checking her phone calendar and then tucking her hair behind one ear"}
+  ],
+  [
+    {ja:"ホテルロビーの案内板の前で到着時刻を確認する", en:"in front of a hotel-lobby information board, checking an arrival time", actionJa:"小さなメモを見直し、落ち着いた足取りで歩き出していた", actionEn:"reviewing a small note and starting to walk with calm, measured steps"},
+    {ja:"エントランス近くで宿泊客の方角を示す", en:"near a hotel entrance, indicating a direction to a guest", actionJa:"手のひらを軽く添えた丁寧な仕草で案内していた", actionEn:"guiding with a gentle, polished gesture of her open hand"}
+  ],
+  [
+    {ja:"カフェの小さなテーブルでクライアント用のメモを見返す", en:"at a small café table, reviewing notes for a client", actionJa:"眼鏡を少し上げ、要点に短く印をつけていた", actionEn:"pushing her glasses up slightly and marking a key point"},
+    {ja:"オフィスビルの前で打ち合わせ相手を待つ", en:"outside an office building, waiting for a meeting partner", actionJa:"メモ帳を閉じ、届いた連絡に小さくうなずいていた", actionEn:"closing her notebook and giving a small nod at an incoming message"}
+  ],
+  [
+    {ja:"ウェルネス企業の共有ラウンジで会議前の資料を開く", en:"in a wellness-company shared lounge, opening materials before a meeting", actionJa:"リングに触れながら、ページを一枚だけめくっていた", actionEn:"touching her ring while turning a single page"},
+    {ja:"植物のあるオフィス前で再利用ボトルをバッグにしまう", en:"outside a plant-filled office, putting a reusable bottle into her bag", actionJa:"次の予定へ向け、肩の力を抜くように息をついていた", actionEn:"taking a small breath as if releasing her shoulders before the next appointment"}
+  ],
+  [
+    {ja:"ブランドのプレスルームで衣装リストを確認する", en:"in a brand press room, checking a wardrobe list", actionJa:"細いペンで一行に印をつけ、資料をレザーバッグへしまっていた", actionEn:"marking one line with a fine pen and slipping the list into her leather bag"},
+    {ja:"ショールームの窓辺で製品の資料写真を確かめる", en:"by a showroom window, checking product reference photographs", actionJa:"画面に光が映らない角度へ、スマートフォンを少し傾けていた", actionEn:"tilting her phone slightly to avoid the window reflection on the screen"}
+  ],
+  [
+    {ja:"共有ラウンジで顧客とのオンライン面談を終える", en:"in a shared lounge after finishing an online customer meeting", actionJa:"イヤホンをしまい、次の対応をメモしていた", actionEn:"putting away her earbuds and noting the next follow-up"},
+    {ja:"駅へ向かう途中、スマートウォッチの通知を確認する", en:"on the way to the station, checking a notification on her smartwatch", actionJa:"短く返信を済ませてから、バッグを肩へ掛け直していた", actionEn:"sending a short reply before readjusting her bag on her shoulder"}
+  ],
+  [
+    {ja:"素材見本の入ったトートを持ち、建築事務所のロビーを横切る", en:"crossing an architecture-office lobby with a tote of material samples", actionJa:"布地の端を指で確かめながら、展示壁の色を見上げていた", actionEn:"feeling the edge of a fabric sample while looking up at the color of a display wall"},
+    {ja:"インテリアショップで仕上げ見本を窓の光にかざす", en:"in an interior shop, holding a finish sample up to the window light", actionJa:"表面の質感を確かめ、ゆっくり資料へ戻していた", actionEn:"checking the surface texture before returning it slowly to her materials"}
+  ],
+  [
+    {ja:"静かなオフィスラウンジで予定表と会議室の案内を見比べる", en:"in a quiet office lounge, comparing a calendar with meeting-room directions", actionJa:"腕時計を確認してから、構築的なバッグの持ち手を整えていた", actionEn:"checking her watch and then straightening the handle of her structured bag"},
+    {ja:"エレベーターが開く前、役員用の資料を胸元でそろえる", en:"before an elevator opens, aligning executive materials against her chest", actionJa:"一度だけ深呼吸し、落ち着いて中へ進んでいた", actionEn:"taking one quiet breath and stepping inside with composure"}
+  ],
+  [
+    {ja:"コスメブランドの会議前に、試作品のリップ色を資料と見比べる", en:"before a cosmetics-brand meeting, comparing a prototype lip color with her materials", actionJa:"手の甲の色を自然光にかざし、微かな違いを見ていた", actionEn:"holding the swatch on the back of her hand to natural light to assess a subtle difference"},
+    {ja:"明るい化粧台の前でポーチから小さな試作品を取り出す", en:"at a bright vanity, taking a small prototype from her pouch", actionJa:"キャップを閉じ、鏡越しに発色を一度だけ確認していた", actionEn:"closing the cap and checking the color once in the mirror"}
+  ],
+  [
+    {ja:"テストキッチンの外で商品ラベルの資料を確認する", en:"outside a test kitchen, checking product-label materials", actionJa:"タブレットを持ち替え、香りを確かめるように少し笑っていた", actionEn:"shifting her tablet and smiling slightly as if considering an aroma"},
+    {ja:"カフェで新しいドリンクのメモを取る", en:"in a café, making notes on a new drink", actionJa:"グラスの水滴を見ながら、短い言葉を書き留めていた", actionEn:"writing a few words while observing condensation on the glass"}
+  ],
+  [
+    {ja:"ギャラリーの白い壁の前で展示資料の順番を確認する", en:"in front of a gallery's white wall, checking the order of exhibition materials", actionJa:"ファイルを開き、作品の配置を目で追っていた", actionEn:"opening a file and visually tracing the placement of the works"},
+    {ja:"搬入を終えたギャラリーの入口で同僚に短く合図する", en:"at a gallery entrance after an installation, giving a brief signal to a colleague", actionJa:"細いフレームの眼鏡に触れ、ほっとしたように微笑んでいた", actionEn:"touching her thin-framed glasses and smiling with quiet relief"}
+  ],
+  [
+    {ja:"スタジオのラウンジで次のクラスの参加者リストを確認する", en:"in a studio lounge, checking the participant list for the next class", actionJa:"再利用ボトルを持ち直し、入口の方へやわらかく視線を向けていた", actionEn:"readjusting her reusable bottle and turning a gentle look toward the entrance"},
+    {ja:"植物のあるスタジオ前で会員を見送り、ドアをそっと閉める", en:"outside a plant-filled studio, seeing off a member and closing the door gently", actionJa:"次の人を迎える前の短い静けさのなかで、髪を整えていた", actionEn:"neatening her hair in the short quiet before welcoming the next person"}
+  ]
+];
 const ebisuMoments = [
   {ja:"恵比寿駅からオフィスへ向かう途中、社員証をバッグにしまう", en:"walking from Ebisu Station toward her office and putting an ID card into her bag"},
   {ja:"昼休みにテイクアウトのコーヒーを持ち、横断歩道の手前でスマホをしまう", en:"holding takeaway coffee during lunch break and putting away her phone before a crosswalk"},
@@ -525,26 +588,29 @@ const storyImpressions = [
   {ja:"その一瞬に、今日らしい静かな余韻が残っていた", en:"leaving a quiet afterglow that belonged to that particular day"},
   {ja:"彼女の自然な表情が、景色の輪郭を少しだけ変えていた", en:"letting her natural expression change the outline of the scene just slightly"}
 ];
-function makeSeasonalStory() {
+function makeSeasonalStory(profile) {
   const setting = pick(seasonalStorySettings);
-  const activity = pick(storyActivities[setting.period]);
+  const profileIndex = ebisuProfiles.indexOf(profile);
+  const activity = pick(workScenesByRole[profileIndex]);
   const light = pick(storyLights[setting.period]);
   const impression = pick(storyImpressions);
   const actionJa = `${activity.ja}彼女は、${activity.actionJa}`;
+  const postActionJa = `${activity.ja}最中に、${activity.actionJa}`;
   const actionEn = `${activity.en}, ${activity.actionEn}`;
   return {
     period: setting.period,
     promptJa: setting.promptJa,
     promptEn: setting.promptEn,
     actionJa,
+    postActionJa,
     actionEn,
     lightJa: light.ja,
     lightEn: light.en,
-    postJa: `${setting.openingJa}、${actionJa}。${light.ja}、${impression.ja}`,
+    postJa: `${setting.openingJa}、${profile.ja}として働く彼女は、${postActionJa}。${light.ja}、${impression.ja}`,
     sceneJa: `【公共空間の日常】${actionJa}`,
     sceneEn: `[shared public space] ${actionEn}`,
-    anchorJa: `日本語概要と完全に対応させる。${setting.openingJa}、${actionJa}。${light.ja}。この季節・時刻・場所・動作・光を画像の中心として必ず描く`,
-    anchorEn: `CAPTION FIDELITY — this must be the visible central moment: on ${setting.openingEn}, ${actionEn}. Use ${light.en}. Faithfully show this exact season, time of day, place, action, and light; do not substitute a different activity or location`
+    anchorJa: `日本語概要と完全に対応させる。${setting.openingJa}、${profile.ja}として働く彼女が、${actionJa}。${light.ja}。この季節・時刻・職業・場所・動作・光を画像の中心として必ず描く。現実の物理と光に基づいた、少し夢のような余韻を持つフォトリアル写真にする`,
+    anchorEn: `CAPTION FIDELITY — this must be the visible central moment: on ${setting.openingEn}, a fictional adult woman working as ${profile.en}, ${actionEn}. Use ${light.en}. Faithfully show this exact season, time of day, profession, place, action, and light; do not substitute a different job, activity, or location. Make it photorealistic with a subtly dreamlike afterglow created only by physically plausible light, never fantasy effects`
   };
 }
 function makePrompt() {
@@ -552,7 +618,7 @@ function makePrompt() {
   const x = Object.fromEntries(Object.entries(data).map(([key, values]) => { const i = Math.floor(Math.random() * values.length); return [key, { en: values[i], ja: ja[key][i] }]; }));
   const profile = pick(ebisuProfiles);
   const appearance = pick(adultAppearances);
-  const story = makeSeasonalStory();
+  const story = makeSeasonalStory(profile);
   const capture = pick(ebisuCaptures);
   const fashion = pick(fashionDirections);
   const faceProfile = takeFaceProfile();
@@ -565,9 +631,11 @@ function makePrompt() {
     ja: `次の条件で画像を1枚作成してください。${story.anchorJa}。恵比寿を中心とする共有された公共空間で、十分な自然な距離から撮ったフォトリアルな日常のスマホ写真。日時・天気・季節の服装: ${story.promptJa}。${storyWorld.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。服装系統: ${fashion.ja}。${ebisuStyle.ja}。${demeanorJa}。${upperBodyFocus.ja}。${capture.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。${copyrightMark.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
     en: `Create one image using this exact specification. ${story.anchorEn}. Photorealistic everyday phone photo taken from a respectful ordinary public distance in a shared public setting centered on Ebisu. Time, place, weather, and seasonal clothing: ${story.promptEn}. ${storyWorld.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. Fashion direction: ${fashion.en}. ${ebisuStyle.en}. ${demeanorEn}. ${upperBodyFocus.en}. ${capture.en}. ${backgroundCrowd.en}. ${phoneRealism.en}. ${copyrightMark.en}.\n\nNegative prompt: ${negativePrompt.en}`,
     postJa,
-    storyAction: story.actionJa,
+    storyAction: story.postActionJa,
     storyActionEn: story.actionEn,
     storyAnchorEn: story.anchorEn,
+    occupation: profile.ja,
+    occupationEn: profile.en,
     temporalContext: story.promptJa,
     storyMood: `${story.lightJa}、${story.postJa.split('。')[1]}`,
     temporalPeriod: story.period,
