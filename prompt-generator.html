@@ -341,10 +341,8 @@ const sceneEndings = [
   '彼女が去ったあとも景色は少しだけ違って見えた',
   'もう会わないかもしれないのに彼女の印象は消えなかった'
 ];
-function makePostText(scene, temporal, storyMood) {
-  const fixedTag = ' #今日見かけた気になる彼女';
-  const body = `${temporal.storyJa}、${scene.proseJa}。${storyMood}。`;
-  return `${body}${fixedTag}`;
+function makePostText(story) {
+  return `${story.postJa} #今日見かけた気になる彼女`;
 }
 const moments = {
   student: [
@@ -464,34 +462,112 @@ const temporalScenes = [
   {period:"evening", storyJa:"薄曇りの秋の夕方に", ja:"2026年10月30日（金）17時48分、恵比寿エリア。薄曇り、気温16°C、夕方の涼しい風。開いた首元のハイゲージニット、透け感のある長袖レイヤー、軽いトレンチコート、濃色デニム、ローファー", en:"Friday, October 30, 2026, 5:48 PM, in the Ebisu area. Bright overcast, 16°C, cool evening breeze. Wearing a fine-gauge knit with an open neckline, sheer long-sleeve layer, lightweight trench coat, dark denim, and loafers"},
   {period:"night", storyJa:"澄んだ冬の夜に", ja:"2026年12月12日（土）19時06分、恵比寿エリア。晴れ、気温8°C、澄んだ夜気。細いVネックのニットワンピース、シアーなハイネックインナー、ロングコート、ロングブーツ、上質なレザーバッグ", en:"Saturday, December 12, 2026, 7:06 PM, in the Ebisu area. Clear skies, 8°C, crisp night air. Wearing a fine V-neck knit dress, sheer high-neck inner layer, long coat, tall boots, and a quality leather bag"}
 ];
+// 添付の180本ストーリー集の「季節・移動・仕草・光」の設計を、日ごとに違う場面へ展開するための素材。
+// 日本語の投稿文と英語プロンプトは必ず同じ story オブジェクトから組み立てる。
+const seasonalStorySettings = [
+  {period:"morning", openingJa:"凍えるような一月の朝", promptJa:"2026年1月の平日8時すぎ、恵比寿・中目黒・代官山の通勤圏。薄曇り、気温5°C、乾いた北風。ウールコート、薄手のニット、ロングスカートまたはテーラードパンツ、ローファー", openingEn:"a freezing January morning", promptEn:"a weekday just after 8 AM in January 2026 in the Ebisu, Nakameguro, and Daikanyama commuting area. Bright overcast, 5°C, dry north wind. Wearing a wool coat, fine knit, long skirt or tailored trousers, and loafers"},
+  {period:"morning", openingJa:"冷え込む二月の朝", promptJa:"2026年2月の平日8時台、恵比寿・中目黒・代官山の通勤圏。晴れ、気温6°C、澄んだ冷気。ショートコート、メリノニット、ミディ丈スカート、レザーローファー", openingEn:"a crisp February morning", promptEn:"a weekday in the 8 AM hour in February 2026 in the Ebisu, Nakameguro, and Daikanyama commuting area. Clear, 6°C, crisp cold air. Wearing a short coat, merino knit, midi skirt, and leather loafers"},
+  {period:"morning", openingJa:"やわらかな三月の朝", promptJa:"2026年3月の平日8時台、恵比寿・中目黒・代官山の通勤圏。薄日、気温11°C、穏やかな風。軽いトレンチ、リブニット、すっきりしたパンツ、フラットシューズ", openingEn:"a soft March morning", promptEn:"a weekday in the 8 AM hour in March 2026 in the Ebisu, Nakameguro, and Daikanyama commuting area. Thin sunshine, 11°C, gentle breeze. Wearing a light trench, ribbed knit, clean trousers, and flats"},
+  {period:"morning", openingJa:"新緑の四月の朝", promptJa:"2026年4月の平日8時台、恵比寿・中目黒・代官山の通勤圏。晴れ、気温17°C、やわらかな南風。シアーシャツ、薄いカーディガン、ミディスカート、低いヒール", openingEn:"a fresh-green April morning", promptEn:"a weekday in the 8 AM hour in April 2026 in the Ebisu, Nakameguro, and Daikanyama commuting area. Clear, 17°C, gentle south breeze. Wearing a sheer shirt, light cardigan, midi skirt, and low heels"},
+  {period:"noon", openingJa:"若葉の五月の昼下がり", promptJa:"2026年5月の平日12時台、恵比寿・中目黒・代官山の昼休み圏。晴れ、気温22°C、乾いた風。半袖ニット、薄い羽織、落ち感のあるスラックス、フラットシューズ", openingEn:"a leafy May early afternoon", promptEn:"a weekday in the noon hour in May 2026 around Ebisu, Nakameguro, and Daikanyama. Clear, 22°C, dry breeze. Wearing a short-sleeve knit, light layer, fluid slacks, and flats"},
+  {period:"noon", openingJa:"雨上がりの六月の昼下がり", promptJa:"2026年6月の平日12時台、恵比寿・中目黒・代官山の昼休み圏。雨上がりの曇天、気温24°C、湿度が高く路面が少し濡れている。リネン混トップ、透け感のある羽織、サテンのミディスカート、低いヒール", openingEn:"an early-summer June afternoon after rain", promptEn:"a weekday in the noon hour in June 2026 around Ebisu, Nakameguro, and Daikanyama. Cloudy after rain, 24°C, humid with slightly wet pavement. Wearing a linen-blend top, translucent layer, satin midi skirt, and low heels"},
+  {period:"noon", openingJa:"強い日差しの七月の昼", promptJa:"2026年7月の平日12時台、恵比寿・中目黒・代官山の昼休み圏。強い晴れ、気温32°C、日陰との明暗差が大きい。上質なノースリーブニット、薄いシアーの羽織、軽いスカートまたはパンツ、サンダル風ローファー", openingEn:"a bright July noon", promptEn:"a weekday in the noon hour in July 2026 around Ebisu, Nakameguro, and Daikanyama. Strong sunshine, 32°C, deep contrast between sun and shade. Wearing a premium sleeveless knit, a very light sheer layer, a light skirt or trousers, and sandal-style loafers"},
+  {period:"noon", openingJa:"入道雲の残る八月の昼下がり", promptJa:"2026年8月の平日12時台、恵比寿・中目黒・代官山の昼休み圏。晴れ、気温33°C、蒸し暑い空気。リネンのノースリーブトップ、薄いオーバーシャツ、ミディスカート、ミニマルなサンダル", openingEn:"an August early afternoon beneath summer clouds", promptEn:"a weekday in the noon hour in August 2026 around Ebisu, Nakameguro, and Daikanyama. Clear, 33°C, humid air. Wearing a sleeveless linen top, very light overshirt, midi skirt, and minimal sandals"},
+  {period:"evening", openingJa:"秋風の吹き始めた九月の夕方", promptJa:"2026年9月の平日17時半ごろ、恵比寿・中目黒・代官山の退勤圏。晴れ、気温24°C、乾いた夕風。シアー素材の半袖ニット、キャミソールのレイヤー、細身のパンツ、ポインテッドトウのフラット", openingEn:"a September evening with the first autumn breeze", promptEn:"around 5:30 PM on a weekday in September 2026 in the Ebisu, Nakameguro, and Daikanyama after-work area. Clear, 24°C, dry evening breeze. Wearing a sheer short-sleeve knit over a camisole, slim trousers, and pointed flats"},
+  {period:"evening", openingJa:"金木犀の香る十月の夕方", promptJa:"2026年10月の平日17時半ごろ、恵比寿・中目黒・代官山の退勤圏。薄曇り、気温17°C、涼しい風。ハイゲージニット、軽いトレンチ、濃色デニムまたはミディスカート、ローファー", openingEn:"an October evening scented with osmanthus", promptEn:"around 5:30 PM on a weekday in October 2026 in the Ebisu, Nakameguro, and Daikanyama after-work area. Bright overcast, 17°C, cool breeze. Wearing a fine-gauge knit, light trench, dark denim or midi skirt, and loafers"},
+  {period:"evening", openingJa:"乾いた風の十一月の夕方", promptJa:"2026年11月の平日17時すぎ、恵比寿・中目黒・代官山の退勤圏。晴れ、気温13°C、乾いた風。ウール混カーディガン、薄いストール、ナロースカートまたはワイドパンツ、レザーバッグ", openingEn:"a dry-wind November evening", promptEn:"just after 5 PM on a weekday in November 2026 in the Ebisu, Nakameguro, and Daikanyama after-work area. Clear, 13°C, dry wind. Wearing a wool-blend cardigan, fine stole, narrow skirt or wide trousers, and a leather bag"},
+  {period:"evening", openingJa:"イルミネーションが灯る十二月の夕方", promptJa:"2026年12月の平日18時すぎ、恵比寿・中目黒・代官山の退勤圏。晴れ、気温8°C、澄んだ夜気。ロングコート、細いニット、シアーなインナー、ロングブーツまたはローファー", openingEn:"a December evening as the illuminations come on", promptEn:"just after 6 PM on a weekday in December 2026 in the Ebisu, Nakameguro, and Daikanyama after-work area. Clear, 8°C, crisp evening air. Wearing a long coat, fine knit, sheer inner layer, and tall boots or loafers"}
+];
+const storyActivities = {
+  morning:[
+    {ja:"恵比寿駅からオフィスへ急ぐ", en:"hurrying from Ebisu Station toward her office", actionJa:"風に乱れた前髪を指先でそっと整えていた", actionEn:"gently smoothing wind-tossed bangs with her fingertips"},
+    {ja:"中目黒の駅へ向かう", en:"heading toward Nakameguro Station", actionJa:"肩にかけたバッグを持ち替え、歩幅を少し速めていた", actionEn:"shifting her shoulder bag and quickening her pace slightly"},
+    {ja:"代官山の坂道を同僚と歩く", en:"walking up a Daikanyama slope with a colleague", actionJa:"相手の話を聞きながら、袖口のボタンに軽く触れていた", actionEn:"lightly touching a cuff button while listening to her colleague"},
+    {ja:"改札へ向かう人の流れに混じる", en:"joining the public flow toward the ticket gates", actionJa:"ICカードを取り出してから、時計を一度だけ確かめていた", actionEn:"taking out her transit card and checking her watch once"},
+    {ja:"オフィスビルの前を通り過ぎる", en:"passing the front of an office building", actionJa:"コートの襟元を整え、背筋を静かに伸ばしていた", actionEn:"settling her coat collar and quietly straightening her posture"}
+  ],
+  noon:[
+    {ja:"中目黒の川沿いを同僚とランチへ向かう", en:"walking beside the Nakameguro canal with a colleague toward lunch", actionJa:"小さく笑いながら、手にした紙コップを持ち替えていた", actionEn:"shifting a paper cup while smiling softly"},
+    {ja:"恵比寿のカフェへ一人で歩く", en:"walking alone toward an Ebisu café", actionJa:"スマートフォンをしまい、髪を耳にかけていた", actionEn:"putting away her phone and tucking her hair behind one ear"},
+    {ja:"代官山の店先で足を止める", en:"pausing outside a Daikanyama shop", actionJa:"ショーウィンドウを見てから、バッグのストラップを直していた", actionEn:"looking at a shop window before adjusting her bag strap"},
+    {ja:"駅ナカのカフェで会計を済ませる", en:"finishing a payment at a station café", actionJa:"レシートを財布にしまい、次の予定を確かめていた", actionEn:"putting a receipt in her wallet and checking her next appointment"},
+    {ja:"木陰のベンチに短く腰を下ろす", en:"sitting briefly on a bench in the shade", actionJa:"飲み物のふたを外し、ひと息ついてから空を見上げていた", actionEn:"removing the lid from her drink, taking a breath, then looking up"}
+  ],
+  evening:[
+    {ja:"恵比寿から友達との食事へ向かう", en:"heading from Ebisu to meet friends for dinner", actionJa:"届いたメッセージを見て、口元をわずかにゆるめていた", actionEn:"reading a message and letting a small smile reach her mouth"},
+    {ja:"中目黒の駅へ帰る足で向かう", en:"making her way toward Nakameguro Station after work", actionJa:"薄い資料をバッグにしまい、歩調をゆるめていた", actionEn:"putting a slim document into her bag and easing her pace"},
+    {ja:"代官山で同僚と別れたあと、一人で歩く", en:"walking alone in Daikanyama after parting from a colleague", actionJa:"風に揺れる髪を押さえ、紙袋を抱え直していた", actionEn:"holding back wind-stirred hair and readjusting a paper bag"},
+    {ja:"駅のホームで次の電車を待つ", en:"waiting for the next train on a station platform", actionJa:"到着案内を見上げてから、イヤホンを片方だけ外していた", actionEn:"looking up at the arrival board and removing one earbud"},
+    {ja:"オフィスのエレベーターホールを出る", en:"leaving an office elevator lobby", actionJa:"細いネックレスに一度触れてから、夕方の街へ歩き出していた", actionEn:"touching a fine necklace once before walking into the evening street"}
+  ]
+};
+const storyLights = {
+  morning:[
+    {ja:"低い朝の光が彼女の髪の輪郭をやわらかくなぞり", en:"low morning light softly tracing the outline of her hair"},
+    {ja:"曇り空の均一な光が服のレイヤーを静かに浮かび上がらせ", en:"even overcast light quietly revealing the layers of her clothing"},
+    {ja:"雲間から差す淡い光が足元の影を短くして", en:"pale light through the clouds shortening the shadows at her feet"}
+  ],
+  noon:[
+    {ja:"木漏れ日が肩とバッグに細かな明暗をつくり", en:"filtered daylight making delicate light and shade across her shoulder and bag"},
+    {ja:"窓からの拡散光が横顔を自然にやわらげ", en:"diffuse window light naturally softening her profile"},
+    {ja:"夏の強い光と日陰の境目が街の空気をくっきり見せ", en:"the boundary between summer sun and shade making the street air feel clear"}
+  ],
+  evening:[
+    {ja:"夕暮れの残光が彼女の横顔に穏やかな陰影をつくり", en:"remaining dusk light creating gentle definition across her profile"},
+    {ja:"灯り始めた店の光が濡れた路面に淡く映り", en:"newly lit shop lights reflecting softly in the wet pavement"},
+    {ja:"薄暮の青みが彼女の装いを静かに引き立て", en:"blue-hour tones quietly setting off her outfit"}
+  ]
+};
+const storyImpressions = [
+  {ja:"何気ない仕草なのに、その場の空気まで少し整って見えた", en:"making even the ordinary moment feel a little more composed"},
+  {ja:"忙しい街のなかでも、彼女の歩幅だけがやわらかく見えた", en:"making her pace seem gentle even within the busy street"},
+  {ja:"作り込まない装いが、かえって印象に残った", en:"leaving an impression through styling that felt unforced rather than contrived"},
+  {ja:"その一瞬に、今日らしい静かな余韻が残っていた", en:"leaving a quiet afterglow that belonged to that particular day"},
+  {ja:"彼女の自然な表情が、景色の輪郭を少しだけ変えていた", en:"letting her natural expression change the outline of the scene just slightly"}
+];
+function makeSeasonalStory() {
+  const setting = pick(seasonalStorySettings);
+  const activity = pick(storyActivities[setting.period]);
+  const light = pick(storyLights[setting.period]);
+  const impression = pick(storyImpressions);
+  const actionJa = `${activity.ja}彼女は、${activity.actionJa}`;
+  const actionEn = `${activity.en}, ${activity.actionEn}`;
+  return {
+    period: setting.period,
+    promptJa: setting.promptJa,
+    promptEn: setting.promptEn,
+    actionJa,
+    actionEn,
+    lightJa: light.ja,
+    lightEn: light.en,
+    postJa: `${setting.openingJa}、${actionJa}。${light.ja}、${impression.ja}`,
+    sceneJa: `【公共空間の日常】${actionJa}`,
+    sceneEn: `[shared public space] ${actionEn}`
+  };
+}
 function makePrompt() {
   const age = pick([22, 23, 24, 25, 26, 27, 28, 29]);
   const x = Object.fromEntries(Object.entries(data).map(([key, values]) => { const i = Math.floor(Math.random() * values.length); return [key, { en: values[i], ja: ja[key][i] }]; }));
   const profile = pick(ebisuProfiles);
   const appearance = pick(adultAppearances);
-  const sceneIndex = Math.floor(Math.random() * ebisuScenes.length);
-  const scene = ebisuScenes[sceneIndex];
+  const story = makeSeasonalStory();
   const capture = pick(ebisuCaptures);
-  const temporal = pick(temporalScenes.filter(option => sceneTimePeriods[sceneIndex].includes(option.period)));
   const fashion = pick(fashionDirections);
   const faceProfile = takeFaceProfile();
-  const usesGeneralMood = Math.random() < 0.55;
-  const storyMood = pick(usesGeneralMood ? refinedAtmosphere.storyJa : periodStoryMoods[temporal.period]);
   const faceJa = `架空の${age}歳の成人日本人の彼女。顔構造プロファイル${faceProfile.id}: ${faceProfile.ja}。${faceSeparation.ja}。${adultFaceCore.ja}。${appearance.ja}。${everydayAttractiveness.ja}。髪型（顔の識別条件には使わない）: ${x.hair.ja}。${x.skin.ja}。${makeupDirection.ja}。${refinedAtmosphere.ja}。カメラには気づかず、前方や自分の用事へ自然に視線を向けている`;
   const faceEn = `A fictional ${age}-year-old adult Japanese woman. FACE ARCHITECTURE PROFILE ${faceProfile.id}: ${faceProfile.en}. ${faceSeparation.en}. ${adultFaceCore.en}. ${appearance.en}. ${everydayAttractiveness.en}. Hair only, not an identity cue: ${x.hair.en}. ${x.skin.en}. ${makeupDirection.en}. ${refinedAtmosphere.en}. She has not noticed the camera and is naturally looking ahead or at what she is doing`;
   const demeanorJa = x.expression.ja;
   const demeanorEn = x.expression.en;
-  const postJa = makePostText(scene, temporal, storyMood);
+  const postJa = makePostText(story);
   return {
-    ja: `次の条件で画像を1枚作成してください。恵比寿を中心とする共有された公共空間で、十分な自然な距離から撮ったフォトリアルな日常のスマホ写真。撮影設定: ${temporal.ja}。${storyWorld.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。服装系統: ${fashion.ja}。${ebisuStyle.ja}。${demeanorJa}。場面: ${scene.ja}。${upperBodyFocus.ja}。${capture.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。${copyrightMark.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
-    en: `Create one image using this exact specification. Photorealistic everyday phone photo taken from a respectful ordinary public distance in a shared public setting centered on Ebisu. Time, place, weather, and seasonal clothing: ${temporal.en}. ${storyWorld.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. Fashion direction: ${fashion.en}. ${ebisuStyle.en}. ${demeanorEn}. Scene: ${scene.en}. ${upperBodyFocus.en}. ${capture.en}. ${backgroundCrowd.en}. ${phoneRealism.en}. ${copyrightMark.en}.\n\nNegative prompt: ${negativePrompt.en}`,
+    ja: `次の条件で画像を1枚作成してください。恵比寿を中心とする共有された公共空間で、十分な自然な距離から撮ったフォトリアルな日常のスマホ写真。日時・天気・季節の服装: ${story.promptJa}。${storyWorld.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。服装系統: ${fashion.ja}。${ebisuStyle.ja}。${demeanorJa}。場面: ${story.sceneJa}。光: ${story.lightJa}。${upperBodyFocus.ja}。${capture.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。${copyrightMark.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
+    en: `Create one image using this exact specification. Photorealistic everyday phone photo taken from a respectful ordinary public distance in a shared public setting centered on Ebisu. Time, place, weather, and seasonal clothing: ${story.promptEn}. ${storyWorld.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. Fashion direction: ${fashion.en}. ${ebisuStyle.en}. ${demeanorEn}. Scene: ${story.sceneEn}. Lighting: ${story.lightEn}. ${upperBodyFocus.en}. ${capture.en}. ${backgroundCrowd.en}. ${phoneRealism.en}. ${copyrightMark.en}.\n\nNegative prompt: ${negativePrompt.en}`,
     postJa,
-    storyAction: scene.proseJa,
-    temporalContext: temporal.storyJa,
-    storyMood,
-    sceneIndex,
-    temporalPeriod: temporal.period,
-    allowedPeriods: sceneTimePeriods[sceneIndex],
+    storyAction: story.actionJa,
+    temporalContext: story.promptJa,
+    storyMood: `${story.lightJa}、${story.postJa.split('。')[1]}`,
+    temporalPeriod: story.period,
+    allowedPeriods: [story.period],
     faceProfileId: faceProfile.id
   };
 }
