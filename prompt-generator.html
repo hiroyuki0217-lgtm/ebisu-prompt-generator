@@ -583,6 +583,12 @@ const ebisuCaptures = [
   {ja:"共有された公共空間で、少し離れた普通の立ち位置から1990年代後半の小型デジカメで撮った胸元から腰あたりまでのスナップ。人物は画面の中央から少し外れ、斜め横顔だが表情が自然に読み取れる", en:"a vertical late-1990s compact-digital-camera chest-to-waist snapshot taken from a modest normal position in a shared public place. She is slightly off-center, shown in an angled side view with a naturally readable expression"},
   {ja:"少し離れた場所から1990年代後半の小型デジカメで、日常の上半身を切り取った写真。正面ポーズではなく自然な横向きから斜めの視線で、顔と周囲の空気がほどよく伝わる非侵襲的な公共空間のスナップ", en:"a vertical late-1990s compact-digital-camera photo of her upper body from a modest public distance. Not a straight-on pose: a natural side-to-three-quarter view in a non-intrusive public-space snapshot, with both her face and surrounding atmosphere conveyed naturally"}
 ];
+const imperfectFramings = [
+  {ja:"バッグか片方の肩が画面端でわずかに見切れる、少し急いで切り取ったような構図。顔・目・主な動作は必ず残す", en:"a slightly hurried framing with the edge of a bag or one shoulder subtly clipped by the frame; always keep her face, eyes, and primary action visible"},
+  {ja:"前景の柱や植栽が片側へ大きく入り、手元または服の端が少し切れる不完全な構図。顔は切らない", en:"an imperfect composition where a foreground column or planting enters strongly from one side and a hand or clothing edge is slightly cropped; never crop her face"},
+  {ja:"人物を中央に置きすぎず、画面下でバッグや腕の一部が見切れる、偶然性のある構図。動作の意味は分かるようにする", en:"an accidental-feeling composition that does not center her too perfectly with part of her bag or arm slightly cropped at the lower edge; keep the meaning of her action clear"},
+  {ja:"頭上の余白を少なくし、前景物と人物の間に少し窮屈さが残る日常的な縦構図。目元と表情は読み取れる", en:"an everyday vertical framing with limited headroom and a little visual crowding between foreground objects and the subject; keep her eyes and expression readable"}
+];
 const temporalScenes = [
   {period:"morning", storyJa:"冷たい冬の朝に", ja:"2026年2月17日（火）8時12分、恵比寿エリア。晴れ、気温6°C、乾いた冷たい北風。上質なウールのショートコート、深めのVネックの細いメリノニット、透け感のある薄いインナー、ミディ丈スカート、レザーローファー", en:"Tuesday, February 17, 2026, 8:12 AM, in the Ebisu area. Clear skies, 6°C, dry cold north wind. Wearing a premium wool short coat, fine merino knit with a deeper V neckline, a subtle sheer inner layer, midi skirt, and leather loafers"},
   {period:"noon", storyJa:"やわらかな春の昼に", ja:"2026年4月11日（土）12時26分、恵比寿エリア。薄曇り、気温18°C、やわらかな南風。ノースリーブのリブニット、軽いシアーシャツ、テーラードジレ、落ち感のあるスラックス、フラットシューズ", en:"Saturday, April 11, 2026, 12:26 PM, in the Ebisu area. Bright overcast, 18°C, gentle south breeze. Wearing a sleeveless ribbed knit, lightweight sheer shirt, tailored vest, fluid slacks, and flat shoes"},
@@ -745,6 +751,7 @@ function makePrompt() {
   const appearance = pick(adultAppearances);
   const story = makeSeasonalStory(profile);
   const capture = pick(ebisuCaptures);
+  const framing = pick([...imperfectFramings, ...imperfectFramings, ...imperfectFramings, {ja:"顔と主な動作を中心に自然に収める、過度に整いすぎない構図", en:"a natural framing centered on her face and primary action without looking overly composed"}]);
   const fashion = pick(fashionDirections);
   const faceProfile = takeFaceProfile();
   const faceJa = `架空の${age}歳の成人日本人の彼女。顔構造プロファイル${faceProfile.id}: ${faceProfile.ja}。${faceSeparation.ja}。${adultFaceCore.ja}。${appearance.ja}。${everydayAttractiveness.ja}。髪型（顔の識別条件には使わない）: ${x.hair.ja}。${x.skin.ja}。${makeupDirection.ja}。${refinedAtmosphere.ja}。カメラには気づかず、前方や自分の用事へ自然に視線を向けている`;
@@ -753,13 +760,14 @@ function makePrompt() {
   const demeanorEn = x.expression.en;
   const postJa = makePostText(story);
   return {
-    ja: `次の条件で画像を1枚作成してください。${story.anchorJa}。恵比寿を中心とする共有された公共空間で、十分な自然な距離から撮った、1990年代後半の小型デジカメ風フォトリアル写真。日時・天気・季節の服装: ${story.promptJa}。${storyWorld.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。服装系統: ${fashion.ja}。${ebisuStyle.ja}。${demeanorJa}。${upperBodyFocus.ja}。${capture.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。${copyrightMark.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
-    en: `Create one image using this exact specification. ${story.anchorEn}. Photorealistic everyday late-1990s compact-digital-camera image taken from a respectful ordinary public distance in a shared public setting centered on Ebisu. Time, place, weather, and seasonal clothing: ${story.promptEn}. ${storyWorld.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. Fashion direction: ${fashion.en}. ${ebisuStyle.en}. ${demeanorEn}. ${upperBodyFocus.en}. ${capture.en}. ${backgroundCrowd.en}. ${phoneRealism.en}. ${copyrightMark.en}.\n\nNegative prompt: ${negativePrompt.en}`,
+    ja: `次の条件で画像を1枚作成してください。${story.anchorJa}。恵比寿を中心とする共有された公共空間で、十分な自然な距離から撮った、1990年代後半の小型デジカメ風フォトリアル写真。日時・天気・季節の服装: ${story.promptJa}。${storyWorld.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。服装系統: ${fashion.ja}。${ebisuStyle.ja}。${demeanorJa}。${upperBodyFocus.ja}。${capture.ja}。構図: ${framing.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。${copyrightMark.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
+    en: `Create one image using this exact specification. ${story.anchorEn}. Photorealistic everyday late-1990s compact-digital-camera image taken from a respectful ordinary public distance in a shared public setting centered on Ebisu. Time, place, weather, and seasonal clothing: ${story.promptEn}. ${storyWorld.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. Fashion direction: ${fashion.en}. ${ebisuStyle.en}. ${demeanorEn}. ${upperBodyFocus.en}. ${capture.en}. Framing: ${framing.en}. ${backgroundCrowd.en}. ${phoneRealism.en}. ${copyrightMark.en}.\n\nNegative prompt: ${negativePrompt.en}`,
     postJa,
     storyAction: story.postActionJa,
     storyActionEn: story.actionEn,
     storyAnchorEn: story.anchorEn,
     movementType: story.movementType,
+    framingEn: framing.en,
     occupation: profile.ja,
     occupationEn: profile.en,
     temporalContext: story.promptJa,
