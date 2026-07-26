@@ -13,7 +13,7 @@
     main { max-width:800px; margin:0 auto; padding:58px max(24px, env(safe-area-inset-right)) max(64px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); } h1 { text-align:center; font-size:clamp(27px,4vw,42px); font-weight:400; margin:0 0 10px; letter-spacing:.14em; } .product-name { text-align:center; margin:0 0 18px; color:var(--accent); font-size:13px; font-weight:400; letter-spacing:.2em; } .lead { text-align:center; color:var(--muted); margin:0 auto 24px; max-width:38em; line-height:2; }
     .panel { border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:17px 0; } .controls { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; align-items:end; }
     label { display:grid; gap:6px; color:var(--muted); font-size:13px; font-weight:600; } select, button { min-height:44px; border-radius:0; padding:10px 18px; font:inherit; letter-spacing:.08em; } select { min-width:175px; border:1px solid var(--line); background:white; color:var(--ink); } button { touch-action:manipulation; cursor:pointer; border:1px solid var(--accent); background:var(--accent); color:#fffdf7; font-weight:400; } button:hover { background:#433229; } button.secondary { background:transparent; color:var(--accent); border:1px solid var(--accent); }
-    #results { display:grid; gap:16px; margin-top:26px; } article { border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:28px 0; scroll-margin-top:16px; } h2 { font-size:15px; font-weight:400; margin:0 0 13px; color:var(--accent); letter-spacing:.16em; } h2::before { content:"— "; } h2::after { content:" —"; } pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font:14px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace; } .post-summary { margin:0; font-size:17px; line-height:2.1; } .post-summary strong { font-weight:600; } .action-row, .share-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; } .action-row { margin-top:24px; } .share-row { margin-top:10px; } .action-row button, .share-row button, .favorite-button { min-height:46px; padding:8px 10px; font-size:13px; } .favorite-button { width:100%; margin-top:10px; background:#fffdf755; color:var(--accent); border:1px solid var(--line); } .meta { margin:16px 0 0; font-size:12px; color:var(--muted); }
+    #results { display:grid; gap:16px; margin-top:26px; } article { border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:28px 0; scroll-margin-top:16px; } h2 { font-size:15px; font-weight:700; margin:0 0 13px; color:var(--accent); letter-spacing:.16em; } h2::before { content:"— "; } h2::after { content:" —"; } pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font:14px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace; } .post-summary { margin:0; font-size:17px; line-height:2.1; } .post-summary strong { font-weight:600; } .action-row, .share-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; } .action-row { margin-top:24px; } .share-row { margin-top:10px; } .action-row button, .share-row button, .favorite-button { min-height:46px; padding:8px 10px; font-size:13px; } .favorite-button { width:100%; margin-top:10px; background:#fffdf755; color:var(--accent); border:1px solid var(--line); } .meta { margin:16px 0 0; font-size:12px; color:var(--muted); }
     .story { margin:0 0 28px; padding:0; color:var(--ink); font-size:16px; line-height:2.15; text-indent:1em; } .story::first-letter { font-size:1.35em; } .summary { margin:0; color:var(--ink); font-size:15px; line-height:2; } .notes { margin:28px 0 0; color:var(--muted); font-size:13px; line-height:1.9; } .mobile-tip { margin:0 auto 22px; padding:16px 0; border-top:1px dotted var(--line); border-bottom:1px dotted var(--line); color:var(--muted); font-size:13px; line-height:1.8; } .mobile-tip strong { color:var(--ink); font-weight:400; } .site-actions { margin-top:28px; padding-top:22px; border-top:1px solid var(--line); } .site-actions p { text-align:center; color:var(--muted); font-size:12px; margin:0 0 12px; } .favorites-link { display:block; margin:18px auto 0; width:max-content; color:var(--accent); font-size:13px; text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:3px; } code { color:#69444c; }
     @media (max-width:600px) {
       main { padding-top:38px; padding-bottom:max(32px, env(safe-area-inset-bottom)); }
@@ -36,7 +36,7 @@
   <p class="lead">名前も知らない彼女。すれ違った一瞬の余韻を、架空の写真にします。</p>
   <p class="mobile-tip"><strong>使い方:</strong> 1.「別の日」を押す　2.「プロンプトコピー」を押す　3. ChatGPTまたはGeminiアプリを開き、貼り付けて送信します。</p>
   <div id="results" aria-live="polite"></div>
-  <p class="notes">※ 登場する人物はすべて架空の成人女性です。画像作成サービスごとの仕様により、文字表記を含む細部は完全には再現されない場合があります。</p>
+  <p class="notes">※ 登場する彼女はすべて架空の成人です。画像作成サービスごとの仕様により、文字表記を含む細部は完全には再現されない場合があります。</p>
   <footer class="site-actions"><p>このページを共有する</p><div class="share-row"><button class="secondary" id="share-app">アプリ共有</button><button class="secondary" id="share-post">SNS投稿</button></div><a class="favorites-link" href="favorites.html">お気に入り一覧を見る</a></footer>
 </main>
 <script>
@@ -86,7 +86,7 @@ const adultFaceCore = {
   en:"adult, age-appropriate facial structure and an unforced everyday expression; non-identifiable and not based on a real person"
 };
 const everydayAttractiveness = {
-  ja:"女優・アイドル・モデルのように整った、印象的で容姿端麗な架空の成人女性。ただし実在人物を想起させない非識別的な顔立ちで、日常になじむ自然で親しみやすい可愛さを持つ",
+  ja:"女優・アイドル・モデルのように整った、印象的で容姿端麗な架空の成人の彼女。ただし実在人物を想起させない非識別的な顔立ちで、日常になじむ自然で親しみやすい可愛さを持つ",
   en:"a strikingly beautiful fictional adult woman with the polished, memorable appeal associated with an actress, idol, or model, while remaining non-identifiable and not based on any real person; naturally approachable and believable in everyday life"
 };
 const ebisuStyle = {
@@ -124,8 +124,8 @@ const negativePrompt = {
   en:"anime, illustration, CGI, 3D render, AI-looking skin, beauty filter, plastic or porcelain skin, over-smoothed skin, perfect facial symmetry, doll-like face, exaggerated eyes, any real celebrity or real person, overly editorial high-fashion styling, glamour pose, studio beauty lighting, excessive portrait-mode blur, strong HDR, oversharpening, duplicated background objects, physically implausible reflections, distorted face or hands, extra fingers, unrelated text, logos"
 };
 const copyrightMark = {
-  ja:"画像の右下に、明朝体で小さく控えめな著作権表記「© 見かけた気になる女性」を入れる。ほかの文字やロゴは入れない",
-  en:"Place a small, unobtrusive Japanese Mincho-style copyright mark reading “© 見かけた気になる女性” in the bottom-right corner. Do not add any other text or logos"
+  ja:"画像の右下に、明朝体で小さく控えめな著作権表記「© 見かけた気になる彼女」を入れる。ほかの文字やロゴは入れない",
+  en:"Place a small, unobtrusive Japanese Mincho-style copyright mark reading “© 見かけた気になる彼女” in the bottom-right corner. Do not add any other text or logos"
 };
 const postOpenings = [
   "花屋の前で、淡い色の一輪を目で追う横顔があった。",
@@ -216,7 +216,7 @@ const postTemplates = [
   () => `${pick(postQuestions)}${pick(postFramings)}${pick(postImpressions)}${pick(postClosings)}`
 ];
 function makePostText() {
-  const fixedTag = ' #今日見かけた気になる女性';
+  const fixedTag = ' #今日見かけた気になる彼女';
   let postBody = '';
   for (let attempt = 0; attempt < 40; attempt += 1) {
     const candidate = pick(postTemplates)();
@@ -350,7 +350,7 @@ function makePrompt() {
   const capture = pick(ebisuCaptures);
   const temporal = pick(temporalScenes);
   const fashion = pick(fashionDirections);
-  const faceJa = `架空の${age}歳の成人日本人女性。${x.face.ja}。${adultFaceCore.ja}。${appearance.ja}。${everydayAttractiveness.ja}。${x.eyes.ja}、${x.brows.ja}。${x.noseMouth.ja}。${x.skin.ja}。実在人物を想起させない、自然な左右差のある顔。カメラには気づかず、前方や自分の用事へ自然に視線を向けている`;
+  const faceJa = `架空の${age}歳の成人日本人の彼女。${x.face.ja}。${adultFaceCore.ja}。${appearance.ja}。${everydayAttractiveness.ja}。${x.eyes.ja}、${x.brows.ja}。${x.noseMouth.ja}。${x.skin.ja}。実在人物を想起させない、自然な左右差のある顔。カメラには気づかず、前方や自分の用事へ自然に視線を向けている`;
   const faceEn = `A fictional ${age}-year-old adult Japanese woman. ${x.face.en}. ${adultFaceCore.en}. ${appearance.en}. ${everydayAttractiveness.en}. ${x.eyes.en}, ${x.brows.en}. ${x.noseMouth.en}. ${x.skin.en}. A naturally asymmetric, non-identifiable face. She has not noticed the camera and is naturally looking ahead or at what she is doing`;
   const demeanorJa = x.expression.ja;
   const demeanorEn = x.expression.en;
@@ -376,7 +376,7 @@ function fallbackCopy(text, done) {
   try { document.execCommand('copy'); done(); } finally { area.remove(); }
 }
 async function shareApp(button) {
-  const shareData = { title: document.title, text: '街で見かけた架空の女性の画像が作れます。', url: location.href };
+  const shareData = { title: document.title, text: '街で見かけた架空の彼女の画像が作れます。', url: location.href };
   try {
     if (navigator.share) await navigator.share(shareData);
     else copyText(location.href, button);
@@ -402,7 +402,7 @@ let currentPrompt;
 function generate() {
   const out = document.querySelector('#results');
   currentPrompt = makePrompt();
-  out.innerHTML = `<article><h2>今日こんな女性を見かけた</h2><p class="post-summary"><strong>${currentPrompt.postJa}</strong></p><div class="action-row"><button class="secondary copy-one">プロンプトコピー</button><button class="secondary" id="reroll">別の日</button></div><button class="favorite-button" id="favorite">お気に入りに追加</button><p class="meta">コピー後、ChatGPTまたはGeminiに貼り付けて送信してください。</p></article>`;
+  out.innerHTML = `<article><h2>今日こんな彼女を見かけた</h2><p class="post-summary"><strong>${currentPrompt.postJa}</strong></p><div class="action-row"><button class="secondary copy-one">プロンプトコピー</button><button class="secondary" id="reroll">別の日</button></div><button class="favorite-button" id="favorite">お気に入りに追加</button><p class="meta">コピー後、ChatGPTまたはGeminiに貼り付けて送信してください。</p></article>`;
   document.querySelector('.copy-one').addEventListener('click', button => copyText(currentPrompt.en, button.currentTarget));
   document.querySelector('#reroll').addEventListener('click', generate);
   document.querySelector('#favorite').addEventListener('click', button => saveFavorite(button.currentTarget));
