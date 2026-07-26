@@ -420,7 +420,7 @@ const favoritesKey = 'ebisu-prompt-generator-favorites';
 function saveFavorite(button) {
   try {
     const favorites = JSON.parse(localStorage.getItem(favoritesKey) || '[]');
-    favorites.unshift({ id: `${Date.now()}-${Math.random().toString(16).slice(2)}`, date: new Intl.DateTimeFormat('ja-JP', { month:'long', day:'numeric' }).format(new Date()), text: currentPrompt.postJa });
+    favorites.unshift({ id: `${Date.now()}-${Math.random().toString(16).slice(2)}`, date: new Intl.DateTimeFormat('ja-JP', { month:'long', day:'numeric' }).format(new Date()), text: currentPrompt.postJa, prompt: currentPrompt.en });
     localStorage.setItem(favoritesKey, JSON.stringify(favorites));
     const label = button.textContent; button.textContent = 'お気に入りに追加しました'; setTimeout(() => button.textContent = label, 1400);
   } catch (error) {

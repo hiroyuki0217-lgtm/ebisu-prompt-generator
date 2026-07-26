@@ -9,7 +9,7 @@
     :root { color-scheme:light; --ink:#29231f; --muted:#6e6257; --wash:#e9e1d3; --accent:#594439; --line:#baae9f; }
     * { box-sizing:border-box; } body { margin:0; color:var(--ink); background:radial-gradient(#ffffff55 1px,transparent 1px),linear-gradient(145deg,#eee5d7,#e2d5c4); background-size:5px 5px,100% 100%; font-family:"Yu Mincho","YuMincho","Hiragino Mincho ProN","Hiragino Mincho Pro",serif; }
     main { max-width:800px; margin:0 auto; padding:58px max(24px, env(safe-area-inset-right)) max(64px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); } h1 { text-align:center; font-size:clamp(26px,4vw,38px); font-weight:400; letter-spacing:.14em; margin:0 0 12px; } .lead { text-align:center; color:var(--muted); margin:0 0 34px; font-size:14px; line-height:1.9; } .back { display:block; width:max-content; margin:0 0 22px; color:var(--accent); text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:3px; font-size:13px; }
-    #list { border-top:1px solid var(--line); } article { padding:24px 0; border-bottom:1px solid var(--line); } time { display:block; color:var(--accent); letter-spacing:.12em; font-size:13px; margin-bottom:10px; } p { margin:0; line-height:2; font-size:16px; font-weight:600; } .empty { padding:34px 0; color:var(--muted); line-height:2; font-size:15px; } button { margin-top:14px; min-height:36px; border:1px solid var(--line); background:transparent; color:var(--muted); font:12px "Yu Mincho","YuMincho",serif; letter-spacing:.08em; cursor:pointer; }
+    #list { border-top:1px solid var(--line); } article { padding:24px 0; border-bottom:1px solid var(--line); } time { display:block; color:var(--accent); letter-spacing:.12em; font-size:13px; margin-bottom:10px; } p { margin:0; line-height:2; font-size:16px; font-weight:600; } .empty { padding:34px 0; color:var(--muted); line-height:2; font-size:15px; } .button-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; } button { min-height:36px; border:1px solid var(--line); background:transparent; color:var(--muted); font:12px "Yu Mincho","YuMincho",serif; letter-spacing:.08em; cursor:pointer; padding:6px 12px; } .copy { border-color:var(--accent); color:var(--accent); } .notice { margin:24px 0 0; color:var(--muted); font-size:12px; font-weight:400; line-height:1.9; }
     @media (max-width:600px) { main { padding-top:38px; } h1 { font-size:25px; } p { font-size:15px; } }
   </style>
 </head>
@@ -17,8 +17,9 @@
 <main>
   <a class="back" href="index.html">← 画像をつくるページへ</a>
   <h1>お気に入り一覧</h1>
-  <p class="lead">保存した「今日こんな彼女を見かけた」の文章です。英語の画像作成指示は表示しません。</p>
+  <p class="lead">保存した「今日こんな彼女を見かけた」の記録です。</p>
   <section id="list" aria-live="polite"></section>
+  <p class="notice">※ 保存時の条件をコピーできます。画像作成サービスの設定や生成時の揺らぎにより、同じ条件でも同一の画像になるとは限りません。</p>
 </main>
 <script>
 const favoritesKey = 'ebisu-prompt-generator-favorites';
@@ -27,15 +28,37 @@ const escapeHtml = text => text.replace(/[&<>'"]/g, char => ({ '&':'&amp;', '<':
 function readFavorites() {
   try { return JSON.parse(localStorage.getItem(favoritesKey) || '[]'); } catch (error) { return []; }
 }
+function copyText(text, button) {
+  const done = () => { const label = button.textContent; button.textContent = 'コピーしました'; setTimeout(() => button.textContent = label, 1400); };
+  if (navigator.clipboard?.writeText) navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+  else fallbackCopy(text, done);
+}
+function fallbackCopy(text, done) {
+  const area = document.createElement('textarea');
+  area.value = text;
+  area.setAttribute('readonly', '');
+  area.style.cssText = 'position:fixed;opacity:0;pointer-events:none;';
+  document.body.append(area);
+  area.select();
+  try { document.execCommand('copy'); done(); } finally { area.remove(); }
+}
+function showMessage(button, message) {
+  const label = button.textContent; button.textContent = message; setTimeout(() => button.textContent = label, 1800);
+}
 function render() {
   const favorites = readFavorites();
   if (!favorites.length) {
     list.innerHTML = '<p class="empty">まだ保存はありません。<br>気になった一瞬を見つけたら、お気に入りに追加してください。</p>';
     return;
   }
-  list.innerHTML = favorites.map(item => `<article><time>${escapeHtml(item.date || '')}</time><p>${escapeHtml(item.text || '')}</p><button type="button" data-id="${escapeHtml(item.id || '')}">この記録を削除</button></article>`).join('');
-  document.querySelectorAll('[data-id]').forEach(button => button.addEventListener('click', () => {
-    const updated = readFavorites().filter(item => item.id !== button.dataset.id);
+  list.innerHTML = favorites.map(item => `<article><time>${escapeHtml(item.date || '')}</time><p>${escapeHtml(item.text || '')}</p><div class="button-row"><button class="copy" type="button" data-copy-id="${escapeHtml(item.id || '')}">プロンプトコピー</button><button type="button" data-delete-id="${escapeHtml(item.id || '')}">この記録を削除</button></div></article>`).join('');
+  document.querySelectorAll('[data-copy-id]').forEach(button => button.addEventListener('click', () => {
+    const item = readFavorites().find(favorite => favorite.id === button.dataset.copyId);
+    if (!item?.prompt) { showMessage(button, '以前の記録にはありません'); return; }
+    copyText(item.prompt, button);
+  }));
+  document.querySelectorAll('[data-delete-id]').forEach(button => button.addEventListener('click', () => {
+    const updated = readFavorites().filter(item => item.id !== button.dataset.deleteId);
     localStorage.setItem(favoritesKey, JSON.stringify(updated));
     render();
   }));
