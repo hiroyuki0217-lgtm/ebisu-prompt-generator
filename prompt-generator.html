@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#f7efe9" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <title>街で見かけた気になる女性生成メーカー</title>
+  <title>すれ違った彼女</title>
   <style>
     :root { color-scheme:light; --ink:#29231f; --muted:#6e6257; --paper:#fffdf7; --wash:#e9e1d3; --accent:#594439; --line:#baae9f; }
     * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; } body { margin:0; color:var(--ink); background:radial-gradient(#ffffff55 1px,transparent 1px),linear-gradient(145deg,#eee5d7,#e2d5c4); background-size:5px 5px,100% 100%; font-family:"Yu Mincho","YuMincho","Hiragino Mincho ProN","Hiragino Mincho Pro",serif; }
@@ -32,7 +32,7 @@
 </head>
 <body>
 <main>
-  <h1>街で見かけた気になる女性生成メーカー</h1>
+  <h1>すれ違った彼女</h1>
   <p class="lead">名前も知らない彼女。すれ違った一瞬の余韻を、架空の写真にします。</p>
   <p class="mobile-tip"><strong>使い方:</strong> 1.「別の日」を押す　2.「プロンプトコピー」を押す　3. ChatGPTまたはGeminiアプリを開き、貼り付けて送信します。</p>
   <div id="results" aria-live="polite"></div>
@@ -127,16 +127,53 @@ const copyrightMark = {
   ja:"画像の右下に、明朝体で小さく控えめな著作権表記「© 見かけた気になる女性」を入れる。ほかの文字やロゴは入れない",
   en:"Place a small, unobtrusive Japanese Mincho-style copyright mark reading “© 見かけた気になる女性” in the bottom-right corner. Do not add any other text or logos"
 };
-const postLines = [
-  "朝の光の中、ふと立ち止まった彼女は何を考えていたのだろうか。横顔の静けさが魅力的だった。",
-  "カフェの窓際でページをめくる彼女は、少し休憩中だったのだろうか。その何気ない仕草が魅力的だった。",
-  "急ぎ足の彼女は、どこへ向かっていたのだろうか。自然に整った装いが魅力的だった。",
-  "仕事の合間だったのだろうか。肩の力がふっと抜けた一瞬が、なぜか魅力的だった。",
-  "雨上がりの街を歩く彼女は、誰かとの約束へ向かう途中だったのだろうか。軽い足取りが魅力的だった。",
-  "信号待ちの短い時間、彼女は何を待っていたのだろうか。品のある佇まいが魅力的だった。",
-  "何気ない仕草の彼女は、どんな日を過ごしていたのだろうか。ふと振り返りたくなる魅力があった。"
+const postOpenings = [
+  "人の流れの向こうに、ふと目を引く人がいた。",
+  "午後の光のなか、静かに足を止める姿が見えた。",
+  "交差点を渡るほんの数秒、時間だけがゆっくりになった気がした。",
+  "忙しい街の片隅で、その人だけ空気がやわらかく見えた。",
+  "窓に映る光のそばを通り過ぎる姿に、なぜか目が留まった。",
+  "何気ない人波のなかで、すっと印象に残る横顔があった。",
+  "足早に行き交う人たちの間で、ふと季節の色をまとった人が見えた。",
+  "手元を見つめる短い仕草に、その人の一日が少しだけ覗いた気がした。",
+  "いつもの景色のはずなのに、その瞬間だけ少し違って見えた。",
+  "誰かを待っているのか、次の予定へ向かうのか、そんな後ろ姿があった。"
 ];
-const postTags = ["#街角スナップ", "#今日の一枚", "#オフィスカジュアル", "#日常の一コマ", "#東京の日常"];
+const postImpressions = [
+  "風に揺れた髪と、迷いのない歩き方が印象に残った。",
+  "無理のない装いに、その人らしい品が静かに滲んでいた。",
+  "肩の力が抜けた佇まいが、かえって目を離せなくした。",
+  "さりげなく整えられた色合わせが、街の光によく似合っていた。",
+  "一瞬だけ見えた笑みが、今日の景色を少し明るくした。",
+  "本を持つ手元まで自然で、急いでいるのにどこか落ち着いて見えた。",
+  "控えめなアクセサリーと柔らかな表情が、上品な余韻を残した。",
+  "コーヒーを持つ指先まで、日常の一場面としてきれいだった。",
+  "軽い足取りと揺れる服のすそが、季節の空気を連れているようだった。",
+  "ふと伏せたまなざしに、言葉にしにくい魅力があった。"
+];
+const postQuestions = [
+  "このあと誰に会い、どんな一日を過ごすのだろうか。",
+  "いま頭の中では、どんな予定を思い浮かべていたのだろうか。",
+  "誰かとの約束へ向かう途中だったのだろうか。",
+  "仕事の合間に、少しだけ自分の時間を取り戻していたのだろうか。",
+  "何を聴き、何を考えながら歩いていたのだろうか。",
+  "この街のどこで、次の物語が始まるのだろうか。",
+  "大切な人からの連絡を待っていたのだろうか。",
+  "今日という日を、どんな気持ちで過ごしているのだろうか。",
+  "ふと立ち止まった理由は、誰にもわからないままだろうか。"
+];
+const postClosings = [
+  "一瞬だけなのに、なぜか魅力的だった。",
+  "振り返らずにはいられない余韻があった。",
+  "名前も知らないのに、しばらく記憶に残りそうだった。",
+  "その場面だけ、静かな映画のワンシーンのようだった。",
+  "すれ違ったあとも、なぜか景色の色が少し変わった気がした。",
+  "何気ない日常が、ほんの少し特別に見えた。",
+  "またどこかで見かけても、きっと気づいてしまうだろう。",
+  "言葉にできないまま、その魅力だけが残った。",
+  "知らない人のはずなのに、短い物語を読んだような気がした。"
+];
+const postTags = ["#街角スナップ", "#今日の一枚", "#オフィスカジュアル", "#日常の一コマ", "#東京の日常", "#すれ違いの余韻", "#街で見かけた人", "#何気ない瞬間"];
 const moments = {
   student: [
     {ja:"静かな大学図書館で、開いた本のページをゆっくりめくる", en:"slowly turning a page in an open book at a quiet university library"},
@@ -262,7 +299,10 @@ function makePrompt() {
   const faceEn = `A fictional ${age}-year-old adult Japanese woman. ${x.face.en}. ${adultFaceCore.en}. ${appearance.en}. ${everydayAttractiveness.en}. ${x.eyes.en}, ${x.brows.en}. ${x.noseMouth.en}. ${x.skin.en}. A naturally asymmetric, non-identifiable face. She has not noticed the camera and is naturally looking ahead or at what she is doing`;
   const demeanorJa = x.expression.ja;
   const demeanorEn = x.expression.en;
-  const postJa = `${pick(postLines)} #今日見かけた気になる女性 ${pick(postTags)}`;
+  const postBody = `${pick(postOpenings)}${pick(postImpressions)}${pick(postQuestions)}${pick(postClosings)}`;
+  const fixedTag = ' #今日見かけた気になる女性';
+  const postWithOptionalTag = `${postBody}${fixedTag} ${pick(postTags)}`;
+  const postJa = postWithOptionalTag.length < 140 ? postWithOptionalTag : `${postBody}${fixedTag}`;
   return {
     ja: `次の条件で画像を1枚作成してください。恵比寿の共有された公共空間で、十分な自然な距離から撮ったフォトリアルな日常のスマホ写真。撮影設定: ${temporal.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。服装系統: ${fashion.ja}。${ebisuStyle.ja}。${demeanorJa}。場面: ${scene.ja}。${upperBodyFocus.ja}。${capture.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。${copyrightMark.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
     en: `Create one image using this exact specification. Photorealistic everyday phone photo taken from a respectful ordinary public distance in a shared public setting in Ebisu. Time, place, weather, and seasonal clothing: ${temporal.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. Fashion direction: ${fashion.en}. ${ebisuStyle.en}. ${demeanorEn}. Scene: ${scene.en}. ${upperBodyFocus.en}. ${capture.en}. ${backgroundCrowd.en}. ${phoneRealism.en}. ${copyrightMark.en}.\n\nNegative prompt: ${negativePrompt.en}`,
