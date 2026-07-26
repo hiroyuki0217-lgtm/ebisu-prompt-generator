@@ -6,14 +6,14 @@
   <meta name="theme-color" content="#f7efe9" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <title>恵比寿で見かけた気になる女性</title>
+  <title>街で見かけた気になる女性生成メーカー</title>
   <style>
     :root { color-scheme:light; --ink:#29231f; --muted:#6e6257; --paper:#fffdf7; --wash:#e9e1d3; --accent:#594439; --line:#baae9f; }
     * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; } body { margin:0; color:var(--ink); background:radial-gradient(#ffffff55 1px,transparent 1px),var(--wash); background-size:5px 5px; font-family:"Yu Mincho","YuMincho","Hiragino Mincho ProN","Hiragino Mincho Pro",serif; }
     main { max-width:800px; margin:0 auto; padding:58px max(24px, env(safe-area-inset-right)) max(64px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); } h1 { text-align:center; font-size:clamp(27px,4vw,42px); font-weight:400; margin:0 0 10px; letter-spacing:.14em; } .product-name { text-align:center; margin:0 0 18px; color:var(--accent); font-size:13px; font-weight:400; letter-spacing:.2em; } .lead { text-align:center; color:var(--muted); margin:0 auto 34px; max-width:38em; line-height:2; }
     .panel { border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:17px 0; } .controls { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; align-items:end; }
     label { display:grid; gap:6px; color:var(--muted); font-size:13px; font-weight:600; } select, button { min-height:44px; border-radius:0; padding:10px 18px; font:inherit; letter-spacing:.08em; } select { min-width:175px; border:1px solid var(--line); background:white; color:var(--ink); } button { touch-action:manipulation; cursor:pointer; border:1px solid var(--accent); background:var(--accent); color:#fffdf7; font-weight:400; } button:hover { background:#433229; } button.secondary { background:transparent; color:var(--accent); border:1px solid var(--accent); }
-    #results { display:grid; gap:16px; margin-top:34px; } article { border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:28px 0; scroll-margin-top:16px; } h2 { font-size:15px; font-weight:400; margin:0 0 13px; color:var(--accent); letter-spacing:.16em; } h2::before { content:"— "; } h2::after { content:" —"; } pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font:14px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace; } .copy-row { display:flex; flex-wrap:wrap; gap:8px; margin:22px 0 16px; } .copy-row button { min-height:44px; padding:7px 16px; font-size:13px; } .meta { margin:12px 0 0; font-size:12px; color:var(--muted); }
+    #results { display:grid; gap:16px; margin-top:34px; } article { border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:28px 0; scroll-margin-top:16px; } h2 { font-size:15px; font-weight:400; margin:0 0 13px; color:var(--accent); letter-spacing:.16em; } h2::before { content:"— "; } h2::after { content:" —"; } pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font:14px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace; } .post-summary { margin:0; font-size:16px; line-height:2; } .action-row, .share-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; } .action-row { margin-top:24px; } .share-row { margin-top:10px; } .action-row button, .share-row button { min-height:46px; padding:8px 10px; font-size:13px; } .meta { margin:16px 0 0; font-size:12px; color:var(--muted); }
     .story { margin:0 0 28px; padding:0; color:var(--ink); font-size:16px; line-height:2.15; text-indent:1em; } .story::first-letter { font-size:1.35em; } .summary { margin:0; color:var(--ink); font-size:15px; line-height:2; } .notes { margin:32px 0 0; color:var(--muted); font-size:13px; line-height:1.9; } .mobile-tip { margin:22px 0 0; padding:16px 0; border-top:1px dotted var(--line); border-bottom:1px dotted var(--line); color:var(--muted); font-size:13px; line-height:1.8; } .mobile-tip strong { color:var(--ink); font-weight:400; } code { color:#69444c; }
     @media (max-width:600px) {
       main { padding-top:38px; padding-bottom:max(32px, env(safe-area-inset-bottom)); }
@@ -21,32 +21,22 @@
       .lead { margin-bottom:20px; font-size:14px; }
       .controls { display:grid; grid-template-columns:1fr 1fr; align-items:stretch; gap:10px; }
       .controls select, .controls button { width:100%; min-width:0; }
-      #generate { grid-column:1 / -1; }
-      #share-page { grid-column:1 / -1; }
       #results { margin-top:16px; gap:12px; }
       h2 { font-size:14px; }
       article { padding:22px 0; }
       .story, .summary { font-size:14px; line-height:2; }
-      .copy-row { margin-bottom:18px; }
-      .copy-row button { width:100%; }
+      .action-row, .share-row { gap:8px; }
       .meta, .notes, .mobile-tip { font-size:12px; }
     }
   </style>
 </head>
 <body>
 <main>
-  <h1>恵比寿で見かけた気になる女性</h1>
-  <p class="product-name">サイト概要</p>
-  <p class="lead">恵比寿の日常にいそうな、架空の成人女性のワンシーンを作ります。</p>
-  <section class="panel" aria-label="作成設定">
-    <div class="controls">
-      <button id="generate">ランダム生成</button>
-      <button class="secondary" id="share-page">このサイトを共有</button>
-    </div>
-  </section>
+  <h1>街で見かけた気になる女性生成メーカー</h1>
+  <p class="lead">街で見かけた架空の女性の画像が作れます。</p>
   <div id="results" aria-live="polite"></div>
-  <p class="mobile-tip"><strong>使い方:</strong> 1.「ランダム生成」を押す　2.「イメージ作成プロンプトをコピー」を押す　3. ChatGPTまたはGeminiアプリを開き、貼り付けて送信します。</p>
-  <p class="notes">人物はすべて架空の成人女性です。共有された公共空間で、周囲に配慮した自然な写真表現として設計しています。</p>
+  <p class="mobile-tip"><strong>使い方:</strong> 1.「ランダム再生→別の日」を押す　2.「プロンプトコピー」を押す　3. ChatGPTまたはGeminiアプリを開き、貼り付けて送信します。</p>
+  <p class="notes">※ 登場する人物はすべて架空の成人女性です。画像作成サービスごとの仕様により、文字表記を含む細部は完全には再現されない場合があります。</p>
 </main>
 <script>
 const pick = a => a[Math.floor(Math.random() * a.length)];
@@ -129,9 +119,23 @@ const phoneRealism = {
   en:"a plausible, near-unedited iPhone 15 image taken from a comfortably respectful public distance using the main camera's 2x crop (52mm-equivalent field of view, f/1.6 appearance). It has gentle real-world telephoto compression from shooting a little farther away. A soft, incidental foreground edge—such as a tree branch, railing, or café frame—may appear lightly out of focus, while remaining a non-intrusive shared-public-space photograph. Use natural smartphone exposure settings appropriate to the stated light: about 1/250 s at ISO 100 in strong sun, 1/120 s at ISO 200 under bright overcast, or 1/60 s at ISO 400–640 at dusk. Exposure, shadows, and reflections are consistent with one available-light direction; realistic dynamic range; restrained smartphone-JPEG edge processing and slight small-sensor noise. Show natural tonal variation, pores, fine vellus hair, small moles, or faint freckles only where they would be visible at this distance. Preserve individual flyaway hairs, believable clothing wrinkles, contact shadows, and physically plausible scale and contact among hands, furniture, and background. Use beautiful natural light; no cinematic color grade, unnatural portrait-mode blur, or extreme clarity"
 };
 const negativePrompt = {
-  ja:"アニメ、イラスト、CG、3Dレンダリング、AI風の肌、ビューティーフィルター、プラスチック肌、陶器肌、過度な肌の平滑化、完璧すぎる左右対称、ドールのような顔、過度に大きい目、実在のセレブや実在人物、強すぎるハイファッションの演出、グラマーポーズ、スタジオのビューティーライティング、過度なポートレートぼけ、強すぎるHDR、過剰なシャープネス、二重の背景物、物理的に不自然な反射、顔や手の崩れ、余分な指、文字、透かし、ロゴ",
-  en:"anime, illustration, CGI, 3D render, AI-looking skin, beauty filter, plastic or porcelain skin, over-smoothed skin, perfect facial symmetry, doll-like face, exaggerated eyes, any real celebrity or real person, overly editorial high-fashion styling, glamour pose, studio beauty lighting, excessive portrait-mode blur, strong HDR, oversharpening, duplicated background objects, physically implausible reflections, distorted face or hands, extra fingers, text, watermark, logo"
+  ja:"アニメ、イラスト、CG、3Dレンダリング、AI風の肌、ビューティーフィルター、プラスチック肌、陶器肌、過度な肌の平滑化、完璧すぎる左右対称、ドールのような顔、過度に大きい目、実在のセレブや実在人物、強すぎるハイファッションの演出、グラマーポーズ、スタジオのビューティーライティング、過度なポートレートぼけ、強すぎるHDR、過剰なシャープネス、二重の背景物、物理的に不自然な反射、顔や手の崩れ、余分な指、指定以外の文字、ロゴ",
+  en:"anime, illustration, CGI, 3D render, AI-looking skin, beauty filter, plastic or porcelain skin, over-smoothed skin, perfect facial symmetry, doll-like face, exaggerated eyes, any real celebrity or real person, overly editorial high-fashion styling, glamour pose, studio beauty lighting, excessive portrait-mode blur, strong HDR, oversharpening, duplicated background objects, physically implausible reflections, distorted face or hands, extra fingers, unrelated text, logos"
 };
+const copyrightMark = {
+  ja:"画像の右下に、明朝体で小さく控えめな著作権表記「© 見かけた気になる女性」を入れる。ほかの文字やロゴは入れない",
+  en:"Place a small, unobtrusive Japanese Mincho-style copyright mark reading “© 見かけた気になる女性” in the bottom-right corner. Do not add any other text or logos"
+};
+const postLines = [
+  "朝の光の中、ふと立ち止まった横顔が印象に残った。",
+  "カフェの窓際で、静かにページをめくる姿がきれいだった。",
+  "急ぎ足なのに、装いまで自然に整って見えた。",
+  "仕事の合間らしい、肩の力が抜けた一瞬に目を奪われた。",
+  "雨上がりの街で、軽い足取りがよく似合っていた。",
+  "信号待ちの短い時間に、品のある佇まいが残った。",
+  "何気ない仕草なのに、なぜかもう一度見たくなった。"
+];
+const postTags = ["#街角スナップ", "#今日の一枚", "#オフィスカジュアル", "#日常の一コマ", "#東京の日常"];
 const moments = {
   student: [
     {ja:"静かな大学図書館で、開いた本のページをゆっくりめくる", en:"slowly turning a page in an open book at a quiet university library"},
@@ -257,12 +261,11 @@ function makePrompt() {
   const faceEn = `A fictional ${age}-year-old adult Japanese woman. ${x.face.en}. ${adultFaceCore.en}. ${appearance.en}. ${everydayAttractiveness.en}. ${x.eyes.en}, ${x.brows.en}. ${x.noseMouth.en}. ${x.skin.en}. A naturally asymmetric, non-identifiable face. She has not noticed the camera and is naturally looking ahead or at what she is doing`;
   const demeanorJa = x.expression.ja;
   const demeanorEn = x.expression.en;
-  const sceneJa = scene.ja.replace(/【[^】]+】/, '');
+  const postJa = `${pick(postLines)} #今日見かけた気になる女性 ${pick(postTags)}`;
   return {
-    ja: `次の条件で画像を1枚作成してください。恵比寿の共有された公共空間で、十分な自然な距離から撮ったフォトリアルな日常のスマホ写真。撮影設定: ${temporal.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。服装系統: ${fashion.ja}。${ebisuStyle.ja}。${demeanorJa}。場面: ${scene.ja}。${upperBodyFocus.ja}。${capture.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
-    en: `Create one image using this exact specification. Photorealistic everyday phone photo taken from a respectful ordinary public distance in a shared public setting in Ebisu. Time, place, weather, and seasonal clothing: ${temporal.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. Fashion direction: ${fashion.en}. ${ebisuStyle.en}. ${demeanorEn}. Scene: ${scene.en}. ${upperBodyFocus.en}. ${capture.en}. ${backgroundCrowd.en}. ${phoneRealism.en}.\n\nNegative prompt: ${negativePrompt.en}`,
-    storyJa: `今日、恵比寿でこんな女性を見かけた。${sceneJa}。${profile.ja}らしいきちんとした雰囲気の中に、${fashion.ja}が自然になじんでいた。ふと目に入った${demeanorJa}と、時間帯の光に映える装いが印象に残った。`,
-    summaryJa: `架空の${age}歳の成人日本人女性／${profile.ja}。${temporal.ja}。<br>服装: ${fashion.ja}。<br>場面: ${sceneJa}。<br>表情: ${demeanorJa}。十分な自然な公共距離から、iPhone 15の2倍クロップで上半身を捉える設定です。`
+    ja: `次の条件で画像を1枚作成してください。恵比寿の共有された公共空間で、十分な自然な距離から撮ったフォトリアルな日常のスマホ写真。撮影設定: ${temporal.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。服装系統: ${fashion.ja}。${ebisuStyle.ja}。${demeanorJa}。場面: ${scene.ja}。${upperBodyFocus.ja}。${capture.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。${copyrightMark.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
+    en: `Create one image using this exact specification. Photorealistic everyday phone photo taken from a respectful ordinary public distance in a shared public setting in Ebisu. Time, place, weather, and seasonal clothing: ${temporal.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. Fashion direction: ${fashion.en}. ${ebisuStyle.en}. ${demeanorEn}. Scene: ${scene.en}. ${upperBodyFocus.en}. ${capture.en}. ${backgroundCrowd.en}. ${phoneRealism.en}. ${copyrightMark.en}.\n\nNegative prompt: ${negativePrompt.en}`,
+    postJa
   };
 }
 function copyText(text, button) {
@@ -279,13 +282,8 @@ function fallbackCopy(text, done) {
   area.select();
   try { document.execCommand('copy'); done(); } finally { area.remove(); }
 }
-async function sharePage() {
-  const button = document.querySelector('#share-page');
-  if (location.protocol === 'file:') {
-    alert('このパソコン上のファイルは、そのままiPhoneへ共有できません。Google DriveでこのHTMLの共有リンクを作成してから、iPhoneのSafariでそのリンクを開いてください。');
-    return;
-  }
-  const shareData = { title: document.title, text: '今日恵比寿ですれ違った素敵な女性｜画像プロンプトメーカー', url: location.href };
+async function shareApp(button) {
+  const shareData = { title: document.title, text: '街で見かけた架空の女性の画像が作れます。', url: location.href };
   try {
     if (navigator.share) await navigator.share(shareData);
     else copyText(location.href, button);
@@ -293,15 +291,25 @@ async function sharePage() {
     if (error.name !== 'AbortError') copyText(location.href, button);
   }
 }
+async function sharePost(button) {
+  const shareData = { title: document.title, text: currentPrompt.postJa, url: location.href };
+  try {
+    if (navigator.share) await navigator.share(shareData);
+    else copyText(currentPrompt.postJa, button);
+  } catch (error) {
+    if (error.name !== 'AbortError') copyText(currentPrompt.postJa, button);
+  }
+}
 let currentPrompt;
 function generate() {
   const out = document.querySelector('#results');
   currentPrompt = makePrompt();
-  out.innerHTML = `<article><h2>今日こんな女性を見かけた</h2><p class="story">${currentPrompt.storyJa}</p><h2>日本語概要</h2><p class="summary">${currentPrompt.summaryJa}</p><div class="copy-row"><button class="secondary copy-one" data-lang="en">イメージ作成プロンプトをコピー</button></div><p class="meta">コピー後、ChatGPTまたはGeminiに貼り付けて送信してください。</p></article>`;
-  document.querySelectorAll('.copy-one').forEach(button => button.addEventListener('click', () => copyText(currentPrompt[button.dataset.lang], button)));
+  out.innerHTML = `<article><h2>日本語概要</h2><p class="post-summary">${currentPrompt.postJa}</p><div class="action-row"><button class="secondary copy-one">プロンプトコピー</button><button class="secondary" id="reroll">ランダム再生→別の日</button></div><div class="share-row"><button class="secondary" id="share-app">アプリ共有</button><button class="secondary" id="share-post">SNS投稿</button></div><p class="meta">コピー後、ChatGPTまたはGeminiに貼り付けて送信してください。</p></article>`;
+  document.querySelector('.copy-one').addEventListener('click', button => copyText(currentPrompt.en, button.currentTarget));
+  document.querySelector('#reroll').addEventListener('click', generate);
+  document.querySelector('#share-app').addEventListener('click', button => shareApp(button.currentTarget));
+  document.querySelector('#share-post').addEventListener('click', button => sharePost(button.currentTarget));
 }
-document.querySelector('#generate').addEventListener('click', generate);
-document.querySelector('#share-page').addEventListener('click', sharePage);
 generate();
 </script>
 </body>
