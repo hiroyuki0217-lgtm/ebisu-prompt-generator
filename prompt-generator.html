@@ -8,25 +8,25 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <title>恵比寿で見かけた気になる女性</title>
   <style>
-    :root { color-scheme: light; --ink:#2e2a2a; --muted:#716b6b; --paper:#fffdfb; --wash:#f7efe9; --accent:#9b6571; --line:#e8dcd6; }
-    * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; } body { margin:0; color:var(--ink); background:var(--wash); font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif; }
-    main { max-width:1040px; margin:0 auto; padding:42px max(20px, env(safe-area-inset-right)) max(56px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left)); } h1 { font-size:clamp(24px,4vw,38px); margin:0 0 4px; letter-spacing:.03em; } .product-name { margin:0 0 10px; color:var(--accent); font-size:14px; font-weight:700; letter-spacing:.08em; } .lead { color:var(--muted); margin:0 0 28px; line-height:1.7; }
-    .panel { background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:22px; box-shadow:0 8px 30px #7f5d5210; } .controls { display:flex; flex-wrap:wrap; gap:12px; align-items:end; }
-    label { display:grid; gap:6px; color:var(--muted); font-size:13px; font-weight:600; } select, button { min-height:44px; border-radius:10px; padding:10px 12px; font:inherit; } select { min-width:175px; border:1px solid var(--line); background:white; color:var(--ink); } button { touch-action:manipulation; cursor:pointer; border:0; background:var(--accent); color:white; font-weight:700; } button:hover { filter:brightness(.95); } button.secondary { background:white; color:var(--accent); border:1px solid var(--accent); }
-    #results { display:grid; gap:16px; margin-top:24px; } article { background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:22px; scroll-margin-top:16px; } h2 { font-size:15px; margin:0 0 10px; color:var(--accent); } pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font:14px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace; } .copy-row { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 22px; } .copy-row button { min-height:44px; padding:7px 10px; font-size:12px; } .meta { margin:12px 0 0; font-size:12px; color:var(--muted); }
-    .story { margin:0 0 20px; padding:14px 16px; border-left:3px solid var(--accent); background:#fff8f4; color:var(--ink); font-size:15px; line-height:1.85; } .summary { margin:0; color:var(--ink); font-size:15px; line-height:1.85; } .notes { margin:26px 0 0; color:var(--muted); font-size:13px; line-height:1.7; } .mobile-tip { margin:16px 0 0; padding:14px 16px; background:#fff8f4; border:1px solid var(--line); border-radius:14px; color:var(--muted); font-size:13px; line-height:1.65; } .mobile-tip strong { color:var(--ink); } code { color:#69444c; }
+    :root { color-scheme:light; --ink:#29231f; --muted:#6e6257; --paper:#fffdf7; --wash:#e9e1d3; --accent:#594439; --line:#baae9f; }
+    * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; } body { margin:0; color:var(--ink); background:radial-gradient(#ffffff55 1px,transparent 1px),var(--wash); background-size:5px 5px; font-family:"Yu Mincho","YuMincho","Hiragino Mincho ProN","Hiragino Mincho Pro",serif; }
+    main { max-width:800px; margin:0 auto; padding:58px max(24px, env(safe-area-inset-right)) max(64px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); } h1 { text-align:center; font-size:clamp(27px,4vw,42px); font-weight:400; margin:0 0 10px; letter-spacing:.14em; } .product-name { text-align:center; margin:0 0 18px; color:var(--accent); font-size:13px; font-weight:400; letter-spacing:.2em; } .lead { text-align:center; color:var(--muted); margin:0 auto 34px; max-width:38em; line-height:2; }
+    .panel { border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:17px 0; } .controls { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; align-items:end; }
+    label { display:grid; gap:6px; color:var(--muted); font-size:13px; font-weight:600; } select, button { min-height:44px; border-radius:0; padding:10px 18px; font:inherit; letter-spacing:.08em; } select { min-width:175px; border:1px solid var(--line); background:white; color:var(--ink); } button { touch-action:manipulation; cursor:pointer; border:1px solid var(--accent); background:var(--accent); color:#fffdf7; font-weight:400; } button:hover { background:#433229; } button.secondary { background:transparent; color:var(--accent); border:1px solid var(--accent); }
+    #results { display:grid; gap:16px; margin-top:34px; } article { border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:28px 0; scroll-margin-top:16px; } h2 { font-size:15px; font-weight:400; margin:0 0 13px; color:var(--accent); letter-spacing:.16em; } h2::before { content:"— "; } h2::after { content:" —"; } pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font:14px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace; } .copy-row { display:flex; flex-wrap:wrap; gap:8px; margin:22px 0 16px; } .copy-row button { min-height:44px; padding:7px 16px; font-size:13px; } .meta { margin:12px 0 0; font-size:12px; color:var(--muted); }
+    .story { margin:0 0 28px; padding:0; color:var(--ink); font-size:16px; line-height:2.15; text-indent:1em; } .story::first-letter { font-size:1.35em; } .summary { margin:0; color:var(--ink); font-size:15px; line-height:2; } .notes { margin:32px 0 0; color:var(--muted); font-size:13px; line-height:1.9; } .mobile-tip { margin:22px 0 0; padding:16px 0; border-top:1px dotted var(--line); border-bottom:1px dotted var(--line); color:var(--muted); font-size:13px; line-height:1.8; } .mobile-tip strong { color:var(--ink); font-weight:400; } code { color:#69444c; }
     @media (max-width:600px) {
-      main { padding-top:24px; padding-bottom:max(32px, env(safe-area-inset-bottom)); }
-      h1 { font-size:25px; line-height:1.35; }
+      main { padding-top:38px; padding-bottom:max(32px, env(safe-area-inset-bottom)); }
+      h1 { font-size:26px; line-height:1.5; letter-spacing:.1em; }
       .lead { margin-bottom:20px; font-size:14px; }
-      .panel, article { border-radius:14px; padding:16px; }
       .controls { display:grid; grid-template-columns:1fr 1fr; align-items:stretch; gap:10px; }
       .controls select, .controls button { width:100%; min-width:0; }
       #generate { grid-column:1 / -1; }
       #share-page { grid-column:1 / -1; }
       #results { margin-top:16px; gap:12px; }
       h2 { font-size:14px; }
-      .story, .summary { font-size:14px; line-height:1.8; }
+      article { padding:22px 0; }
+      .story, .summary { font-size:14px; line-height:2; }
       .copy-row { margin-bottom:18px; }
       .copy-row button { width:100%; }
       .meta, .notes, .mobile-tip { font-size:12px; }
@@ -261,7 +261,7 @@ function makePrompt() {
   return {
     ja: `次の条件で画像を1枚作成してください。恵比寿の共有された公共空間で、十分な自然な距離から撮ったフォトリアルな日常のスマホ写真。撮影設定: ${temporal.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。服装系統: ${fashion.ja}。${ebisuStyle.ja}。${demeanorJa}。場面: ${scene.ja}。${upperBodyFocus.ja}。${capture.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
     en: `Create one image using this exact specification. Photorealistic everyday phone photo taken from a respectful ordinary public distance in a shared public setting in Ebisu. Time, place, weather, and seasonal clothing: ${temporal.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. Fashion direction: ${fashion.en}. ${ebisuStyle.en}. ${demeanorEn}. Scene: ${scene.en}. ${upperBodyFocus.en}. ${capture.en}. ${backgroundCrowd.en}. ${phoneRealism.en}.\n\nNegative prompt: ${negativePrompt.en}`,
-    storyJa: `今日こんな女性を見かけた。${sceneJa}。${profile.ja}らしいきちんとした雰囲気の中に、${fashion.ja}が自然になじんでいた。ふと目に入った${demeanorJa}と、時間帯の光に映える装いが印象に残った。`,
+    storyJa: `今日、恵比寿でこんな女性を見かけた。${sceneJa}。${profile.ja}らしいきちんとした雰囲気の中に、${fashion.ja}が自然になじんでいた。ふと目に入った${demeanorJa}と、時間帯の光に映える装いが印象に残った。`,
     summaryJa: `架空の${age}歳の成人日本人女性／${profile.ja}。${temporal.ja}。<br>服装: ${fashion.ja}。<br>場面: ${sceneJa}。<br>表情: ${demeanorJa}。十分な自然な公共距離から、iPhone 15の2倍クロップで上半身を捉える設定です。`
   };
 }
