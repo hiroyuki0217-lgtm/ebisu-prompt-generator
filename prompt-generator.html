@@ -187,14 +187,42 @@ const postEpilogues = [
   "それだけのことが、今日の記憶を少し明るくした。",
   "名前を尋ねないまま、そっと通り過ぎた。"
 ];
+const postFramings = [
+  "理由はわからないが、目が留まった。",
+  "あとになってから、こんな一場面を思い出した。",
+  "彼女は気づかなかっただろう。ただ、こちらの記憶には残った。",
+  "最初は何でもない景色だと思っていた。",
+  "目をそらしてから、なぜかもう一度思い出した。",
+  "通り過ぎたあとで、印象だけがゆっくり輪郭を持った。",
+  "ほんの数秒のことなのに、不思議と時間が伸びたように感じた。",
+  "今日の記憶に、ひとつだけ小さな栞が挟まった。"
+];
+const postTransitions = [
+  "そのあとで気づいた。",
+  "言葉にする前に、目で追っていた。",
+  "立ち去る背中を見て、ふと思った。",
+  "それだけのことが、なぜか引っかかった。",
+  "気づけば、景色のほうが少し静かになっていた。",
+  "誰にも話さないまま、心の中で一度だけ振り返った。",
+  "説明できないまま、余韻だけが残った。"
+];
+const postTemplates = [
+  () => `${pick(postOpenings)}${pick(postImpressions)}${pick(postQuestions)}${pick(postClosings)}`,
+  () => `${pick(postFramings)}${pick(postOpenings)}${pick(postImpressions)}${pick(postClosings)}`,
+  () => `${pick(postQuestions)}${pick(postImpressions)}${pick(postOpenings)}${pick(postClosings)}`,
+  () => `${pick(postOpenings)}${pick(postTransitions)}${pick(postImpressions)}${pick(postClosings)}`,
+  () => `${pick(postFramings)}${pick(postImpressions)}${pick(postQuestions)}${pick(postClosings)}`,
+  () => `${pick(postOpenings)}${pick(postClosings)}${pick(postTransitions)}${pick(postQuestions)}`,
+  () => `${pick(postQuestions)}${pick(postFramings)}${pick(postImpressions)}${pick(postClosings)}`
+];
 function makePostText() {
   const fixedTag = ' #今日見かけた気になる女性';
   let postBody = '';
   for (let attempt = 0; attempt < 40; attempt += 1) {
-    const candidate = `${pick(postOpenings)}${pick(postImpressions)}${pick(postQuestions)}${pick(postClosings)}`;
+    const candidate = pick(postTemplates)();
     if (`${candidate}${fixedTag}`.length < 140) { postBody = candidate; break; }
   }
-  if (!postBody) postBody = '花屋の前で、淡い色の一輪を目で追う横顔があった。選び抜いたのではなく、自然に似合っている色合わせが魅力的だった。あの短い微笑みの先には、どんな思い出があるのだろうか。名前も知らないまま、その一瞬だけが静かに記憶へ残った。';
+  if (!postBody) postBody = '最初は何でもない景色だと思っていた。花屋の前で、淡い色の一輪を目で追う横顔があった。選び抜いたのではなく、自然に似合っている色合わせがその人らしさを物語っていた。名前も知らないまま、その一瞬だけが静かに記憶へ残った。';
   const fittingEpilogues = postEpilogues.filter(epilogue => `${postBody}${epilogue}${fixedTag}`.length < 140);
   if (!fittingEpilogues.length) return `${postBody}${fixedTag}`;
   const longest = Math.max(...fittingEpilogues.map(epilogue => epilogue.length));
