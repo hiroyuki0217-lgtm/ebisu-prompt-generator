@@ -741,7 +741,7 @@ function makeSeasonalStory(profile) {
   };
 }
 function makePrompt() {
-  const age = pick([22, 23, 24, 25, 26, 27, 28, 29]);
+  const age = 19;
   const x = Object.fromEntries(Object.entries(data).map(([key, values]) => { const i = Math.floor(Math.random() * values.length); return [key, { en: values[i], ja: ja[key][i] }]; }));
   const profile = pick(ebisuProfiles);
   const appearance = pick(adultAppearances);
