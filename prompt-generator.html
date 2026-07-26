@@ -466,19 +466,20 @@ const workActionScenesByRole = [
     {ja:"受付前で到着した来客に挨拶する", en:"at the reception desk, greeting an arriving visitor", actionJa:"明るく手を添えて案内し、丁寧に一礼していた", actionEn:"offering a clear welcoming gesture and giving a polite bow"}
   ],
   [
-    {ja:"打ち合わせへ向かう途中、電話で確認を取る", en:"on the way to a meeting, confirming a detail on a phone call", actionJa:"少し早足で歩きながら、短く的確に返事をしていた", actionEn:"walking briskly while giving short, precise replies"}
+    {ja:"打ち合わせへ向かう途中、電話で確認を取る", en:"on the way to a meeting, confirming a detail on a phone call", actionJa:"少し早足で歩きながら、短く的確に返事をしていた", actionEn:"walking briskly while giving short, precise replies", motion:"walk"}
   ],
   [
-    {ja:"共有ラウンジの椅子に座り、ノートPCの前で足を組む", en:"seated in a shared lounge with one leg crossed before her laptop", actionJa:"画面を見つめたまま、考えを整理するように指先を止めていた", actionEn:"pausing her fingers as if organizing her thoughts while studying the screen"}
+    {ja:"共有ラウンジの椅子に座り、ノートPCの前で足を組む", en:"seated in a shared lounge with one leg crossed before her laptop", actionJa:"画面を見つめたまま、考えを整理するように指先を止めていた", actionEn:"pausing her fingers as if organizing her thoughts while studying the screen", motion:"crossLeg"},
+    {ja:"窓際の丸テーブルに腰を下ろし、タブレットを開く", en:"settling at a round window-side table and opening a tablet", actionJa:"椅子を少し引き寄せ、前かがみになって画面へ集中していた", actionEn:"drawing her chair in slightly and leaning forward to focus on the screen", motion:"sit"}
   ],
   [
-    {ja:"撮影スタッフと別れたあと、歩きながら振り返る", en:"after parting from a photo crew, looking back while walking", actionJa:"声をかけられて笑い、レザートートを軽く持ち上げていた", actionEn:"smiling at a call from behind and lifting her leather tote slightly"}
+    {ja:"撮影スタッフと別れたあと、歩きながら振り返る", en:"after parting from a photo crew, looking back while walking", actionJa:"声をかけられて笑い、レザートートを軽く持ち上げていた", actionEn:"smiling at a call from behind and lifting her leather tote slightly", motion:"walk"}
   ],
   [
     {ja:"ホテルロビーで到着した宿泊客に声をかける", en:"in a hotel lobby, addressing newly arrived guests", actionJa:"落ち着いた笑顔で道を示し、深く丁寧にお辞儀していた", actionEn:"indicating the way with a calm smile and giving a deep, polished bow"}
   ],
   [
-    {ja:"急な予定変更の連絡を受け、ビルの前でスマートフォンを見る", en:"outside a building after receiving a last-minute schedule change on her phone", actionJa:"少し苛立ったように眉を寄せたあと、すぐにメモ帳を開いて歩き出していた", actionEn:"briefly drawing her brows in mild frustration, then opening her notebook and moving on"}
+    {ja:"急な予定変更の連絡を受け、ビルの前でスマートフォンを見る", en:"outside a building after receiving a last-minute schedule change on her phone", actionJa:"少し苛立ったように眉を寄せたあと、すぐにメモ帳を開いて歩き出していた", actionEn:"briefly drawing her brows in mild frustration, then opening her notebook and moving on", motion:"walk"}
   ],
   [
     {ja:"会議の合間にラウンジで冷たい飲み物をひと口飲む", en:"in a lounge between meetings, taking a sip of a cold drink", actionJa:"ボトルのふたを閉じ、次の会議室へ向けて軽やかに立ち上がっていた", actionEn:"closing the bottle cap and rising lightly toward the next meeting room"}
@@ -487,13 +488,13 @@ const workActionScenesByRole = [
     {ja:"ショールームを出たところで、同僚の呼びかけに振り返る", en:"just outside a showroom, turning back at a colleague's call", actionJa:"髪を揺らして振り返り、資料を胸元に抱え直していた", actionEn:"turning back with her hair in motion and readjusting materials against her chest"}
   ],
   [
-    {ja:"駅へ向かう前に、片耳へイヤフォンをつける", en:"before heading to the station, putting an earbud in one ear", actionJa:"通知を確認してから、歩幅を広げて人の流れへ入っていった", actionEn:"checking a notification and lengthening her stride into the public flow"}
+    {ja:"駅へ向かう前に、片耳へイヤフォンをつける", en:"before heading to the station, putting an earbud in one ear", actionJa:"通知を確認してから、歩幅を広げて人の流れへ入っていった", actionEn:"checking a notification and lengthening her stride into the public flow", motion:"walk"}
   ],
   [
-    {ja:"素材見本が落ちそうになり、ロビーでさっとしゃがむ", en:"in a lobby, quickly crouching as a material sample is about to fall", actionJa:"見本を拾い上げ、立ち上がる勢いでトートを持ち直していた", actionEn:"picking up the sample and readjusting her tote in the momentum of standing"}
+    {ja:"素材見本が落ちそうになり、ロビーでさっとしゃがむ", en:"in a lobby, quickly crouching as a material sample is about to fall", actionJa:"見本を拾い上げ、立ち上がる勢いでトートを持ち直していた", actionEn:"picking up the sample and readjusting her tote in the momentum of standing", motion:"crouch"}
   ],
   [
-    {ja:"会食会場へ急ぐため、通りでタクシーに手を上げる", en:"on the street, raising a hand to hail a taxi for a business dinner", actionJa:"構築的なバッグを抱え、車が寄るのを見て小走りになっていた", actionEn:"holding her structured bag and breaking into a light run as the car approached"}
+    {ja:"会食会場へ急ぐため、通りでタクシーに手を上げる", en:"on the street, raising a hand to hail a taxi for a business dinner", actionJa:"構築的なバッグを抱え、車が寄るのを見て小走りになっていた", actionEn:"holding her structured bag and breaking into a light run as the car approached", motion:"jog"}
   ],
   [
     {ja:"コスメの試作品を前に、色を真剣に選ぶ", en:"in front of cosmetics prototypes, carefully choosing a color", actionJa:"数本を並べてから、ひとつを選び取るように静かに手を伸ばしていた", actionEn:"lining up several options before reaching calmly to select one"}
@@ -502,7 +503,7 @@ const workActionScenesByRole = [
     {ja:"試作ドリンクを手に、カフェの外で味を確かめる", en:"outside a café, tasting a prototype drink", actionJa:"ひと口飲んで少し笑い、タブレットへ感想を素早く入力していた", actionEn:"taking a sip, smiling slightly, and quickly entering an impression into her tablet"}
   ],
   [
-    {ja:"搬入後のギャラリーを小走りで横切る", en:"moving at a light run across a gallery after an installation", actionJa:"同僚に手を振り、ファイルを抱えたまま次の壁面へ向かっていた", actionEn:"waving to a colleague and heading toward the next wall with a file in hand"}
+    {ja:"搬入後のギャラリーを小走りで横切る", en:"moving at a light run across a gallery after an installation", actionJa:"同僚に手を振り、ファイルを抱えたまま次の壁面へ向かっていた", actionEn:"waving to a colleague and heading toward the next wall with a file in hand", motion:"jog"}
   ],
   [
     {ja:"スタジオの入口で帰る会員に手を振る", en:"at a studio entrance, waving to a departing member", actionJa:"相手の笑い声につられて明るく笑い、次の来客へ向けて歩き出していた", actionEn:"laughing brightly in response and walking toward the next arrival"}
@@ -643,6 +644,43 @@ const dynamicMotions = [
   {ja:"バッグを肩に掛け直す勢いで、", en:"in the momentum of readjusting her bag on her shoulder and"},
   {ja:"視線を上げて、ためらいなく、", en:"lifting her gaze and, without hesitation,"}
 ];
+const bodyMotionVariants = {
+  walk:[
+    {ja:"歩幅を大きく取り、コートの裾を軽く揺らしながら、", en:"taking longer strides as the hem of her coat moved lightly while"},
+    {ja:"横断歩道を渡るような速さで、腕を自然に振りながら、", en:"moving at a crosswalk pace with a natural swing of her arms while"},
+    {ja:"バッグが肩で揺れるのを押さえつつ、足取りを速めて、", en:"steadying her bag as it moved on her shoulder and quickening her pace while"},
+    {ja:"ヒールの音を小さく響かせ、まっすぐ前へ進みながら、", en:"letting the soft sound of her heels mark a direct forward stride while"},
+    {ja:"風に動く髪を片手で押さえ、歩調を崩さず、", en:"holding back wind-moved hair with one hand without breaking her pace and"}
+  ],
+  jog:[
+    {ja:"短い距離だけ小走りになり、バッグを体の近くへ引き寄せながら、", en:"breaking into a short light run and drawing her bag close to her body while"},
+    {ja:"信号が変わる前に急ぐように、軽く駆け出して、", en:"setting off in a light run as if to catch the changing signal and"},
+    {ja:"資料を抱え直し、足先でリズムを取るように小走りで、", en:"readjusting her materials and moving in a light rhythmic run while"},
+    {ja:"髪の毛先を後ろへ流しながら、数歩だけ勢いよく走り、", en:"letting her hair ends stream back as she ran decisively for several steps and"},
+    {ja:"肩をすこし前へ入れ、急ぎ足から自然に小走りへ変えながら、", en:"leaning forward slightly and naturally shifting from a brisk walk into a light run while"}
+  ],
+  sit:[
+    {ja:"椅子の背にもたれず、浅く腰をかけて姿勢を整え、", en:"sitting lightly without leaning back and settling into a composed posture while"},
+    {ja:"椅子を少し引き寄せ、身体を前へ傾けながら、", en:"drawing her chair in slightly and leaning her body forward while"},
+    {ja:"座面へなめらかに腰を下ろし、スカートの裾を自然に整えながら、", en:"lowering herself smoothly into the seat and naturally settling the hem of her skirt while"},
+    {ja:"片手をテーブルの端に置き、座る勢いを静かに受け止めながら、", en:"placing one hand on the table edge to settle the momentum of sitting while"},
+    {ja:"一度だけ座り直し、肩の力を抜いて、", en:"readjusting her seat once and relaxing her shoulders while"}
+  ],
+  crossLeg:[
+    {ja:"組んだ足をゆっくり入れ替え、つま先の向きを整えながら、", en:"slowly switching her crossed legs and settling the direction of her toes while"},
+    {ja:"片足をもう一方の膝に軽く重ね、背筋を伸ばしながら、", en:"lightly crossing one leg over the other knee and straightening her back while"},
+    {ja:"足をほどいてからもう一度自然に組み、考えを深めるように、", en:"uncrossing and then naturally crossing her legs again as if deepening a thought while"},
+    {ja:"足首を小さく揺らし、椅子の端で姿勢を整えながら、", en:"gently moving one ankle and adjusting her posture at the edge of the chair while"},
+    {ja:"組んだ足を少し斜めに向け、視線を画面へ戻しながら、", en:"angling her crossed legs slightly and returning her gaze to the screen while"}
+  ],
+  crouch:[
+    {ja:"片膝を深く曲げてすばやくしゃがみ、片手を床へ伸ばしながら、", en:"bending one knee deeply to crouch quickly and extending one hand toward the floor while"},
+    {ja:"ヒールの重心を保ったまま腰を低く落とし、", en:"lowering herself while keeping her balance in heels and"},
+    {ja:"バッグを腕に掛けたまま、両膝をそろえてしゃがみ込み、", en:"crouching with both knees together while keeping her bag on her arm and"},
+    {ja:"落ちたものへ素早く手を伸ばし、髪が前へ流れながら、", en:"reaching quickly toward the fallen item as her hair moved forward and"},
+    {ja:"片手を軽く床につき、なめらかにしゃがみ込んで、", en:"briefly touching one hand to the floor and lowering herself smoothly while"}
+  ]
+};
 function makeSeasonalStory(profile) {
   const setting = pick(seasonalStorySettings);
   const profileIndex = ebisuProfiles.indexOf(profile);
@@ -651,7 +689,7 @@ function makeSeasonalStory(profile) {
   const activity = pick([...baseScenes, ...actionScenes, ...actionScenes]);
   const light = pick(storyLights[setting.period]);
   const impression = pick(storyImpressions);
-  const motion = pick(dynamicMotions);
+  const motion = activity.motion ? pick(bodyMotionVariants[activity.motion]) : pick(dynamicMotions);
   const actionJa = `${activity.ja}彼女は、${motion.ja}${activity.actionJa}`;
   const postActionJa = `${activity.ja}最中に、${motion.ja}${activity.actionJa}`;
   const actionEn = `${activity.en}, ${motion.en} ${activity.actionEn}`;
@@ -664,6 +702,7 @@ function makeSeasonalStory(profile) {
     actionEn,
     motionJa: motion.ja,
     motionEn: motion.en,
+    movementType: activity.motion || 'general',
     lightJa: light.ja,
     lightEn: light.en,
     postJa: `${setting.openingJa}、${profile.ja}の彼女は、${postActionJa}。${light.ja}、${impression.ja}`,
@@ -694,6 +733,7 @@ function makePrompt() {
     storyAction: story.postActionJa,
     storyActionEn: story.actionEn,
     storyAnchorEn: story.anchorEn,
+    movementType: story.movementType,
     occupation: profile.ja,
     occupationEn: profile.en,
     temporalContext: story.promptJa,
