@@ -168,6 +168,28 @@ const refinedAtmosphere = {
     '軽やかな雰囲気がその場の空気を少しだけ変えていた'
   ]
 };
+const periodStoryMoods = {
+  morning:[
+    '低い朝の光が彼女の髪の輪郭をやわらかくなぞっていた',
+    'まだ少し硬い朝の空気が彼女の横顔を澄んで見せていた',
+    '街が動き出す前の静けさが彼女のまわりに残っていた'
+  ],
+  noon:[
+    '昼の拡散した光が彼女の装いを軽やかに見せていた',
+    '人の流れのなかでも彼女の足取りだけが穏やかに見えた',
+    '明るい昼の空気が彼女の表情を自然にほどいていた'
+  ],
+  evening:[
+    '夕方のやわらかな光が彼女の横顔に静かな陰影をつくっていた',
+    '仕事終わりらしい軽さが彼女の歩幅ににじんでいた',
+    '移ろう空の色が彼女の装いを少しだけ印象深くしていた'
+  ],
+  night:[
+    '夜の街灯と店の灯りが彼女のまわりをやわらかく照らしていた',
+    '澄んだ夜気のなかで彼女の足取りは落ち着いて見えた',
+    '灯りのある街角で彼女の横顔だけが静かに残った'
+  ]
+};
 const storyWorld = {
   ja:"恵比寿を中心に、代官山・中目黒までを含む働く人の日常圏。通勤・昼休み・退勤後の一瞬を描き、季節ごとの服装、朝の低い光、雨上がりの拡散光、夕方の自然な混合光などを日時と場面に無理なく合わせる。実在人物ではなく、その場の記憶から創作した架空の成人女性として表現する",
   en:"a working-day neighborhood centered on Ebisu and extending naturally into Daikanyama and Nakameguro. Depict a brief moment from a commute, lunch break, or after work, matching seasonal clothing and plausible light such as low morning sun, diffuse post-rain light, or natural evening mixed light to the stated time and scene. She is a fictional adult woman created from the atmosphere of the moment, never a real person"
@@ -335,10 +357,12 @@ function takePostInitial() {
   if (!postInitialQueue.length) postInitialQueue = [...postInitials].sort(() => Math.random() - 0.5);
   return postInitialQueue.pop();
 }
-function makePostText(scene, temporal, storyMood) {
+function makePostText(scene, temporal, storyMood, usesGeneralMood) {
   const fixedTag = ' #今日見かけた気になる彼女';
   const opening = takePostInitial();
-  const body = `${opening}${temporal.storyJa}${scene.proseJa}。${storyMood}。`;
+  const canonical = () => `${opening}${temporal.storyJa}、${scene.proseJa}。${storyMood}。`;
+  const sceneFirst = () => `${opening}${scene.proseJa}。${temporal.storyJa}、${storyMood}。`;
+  const body = usesGeneralMood ? pick([canonical, sceneFirst])() : canonical();
   return `${body}${fixedTag}`;
 }
 const moments = {
@@ -470,12 +494,13 @@ function makePrompt() {
   const temporal = pick(temporalScenes.filter(option => sceneTimePeriods[sceneIndex].includes(option.period)));
   const fashion = pick(fashionDirections);
   const faceProfile = takeFaceProfile();
-  const storyMood = pick(refinedAtmosphere.storyJa);
+  const usesGeneralMood = Math.random() < 0.55;
+  const storyMood = pick(usesGeneralMood ? refinedAtmosphere.storyJa : periodStoryMoods[temporal.period]);
   const faceJa = `架空の${age}歳の成人日本人の彼女。顔構造プロファイル${faceProfile.id}: ${faceProfile.ja}。${faceSeparation.ja}。${adultFaceCore.ja}。${appearance.ja}。${everydayAttractiveness.ja}。髪型（顔の識別条件には使わない）: ${x.hair.ja}。${x.skin.ja}。${makeupDirection.ja}。${refinedAtmosphere.ja}。カメラには気づかず、前方や自分の用事へ自然に視線を向けている`;
   const faceEn = `A fictional ${age}-year-old adult Japanese woman. FACE ARCHITECTURE PROFILE ${faceProfile.id}: ${faceProfile.en}. ${faceSeparation.en}. ${adultFaceCore.en}. ${appearance.en}. ${everydayAttractiveness.en}. Hair only, not an identity cue: ${x.hair.en}. ${x.skin.en}. ${makeupDirection.en}. ${refinedAtmosphere.en}. She has not noticed the camera and is naturally looking ahead or at what she is doing`;
   const demeanorJa = x.expression.ja;
   const demeanorEn = x.expression.en;
-  const postJa = makePostText(scene, temporal, storyMood);
+  const postJa = makePostText(scene, temporal, storyMood, usesGeneralMood);
   return {
     ja: `次の条件で画像を1枚作成してください。恵比寿を中心とする共有された公共空間で、十分な自然な距離から撮ったフォトリアルな日常のスマホ写真。撮影設定: ${temporal.ja}。${storyWorld.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。服装系統: ${fashion.ja}。${ebisuStyle.ja}。${demeanorJa}。場面: ${scene.ja}。${upperBodyFocus.ja}。${capture.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。${copyrightMark.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
     en: `Create one image using this exact specification. Photorealistic everyday phone photo taken from a respectful ordinary public distance in a shared public setting centered on Ebisu. Time, place, weather, and seasonal clothing: ${temporal.en}. ${storyWorld.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. Fashion direction: ${fashion.en}. ${ebisuStyle.en}. ${demeanorEn}. Scene: ${scene.en}. ${upperBodyFocus.en}. ${capture.en}. ${backgroundCrowd.en}. ${phoneRealism.en}. ${copyrightMark.en}.\n\nNegative prompt: ${negativePrompt.en}`,
