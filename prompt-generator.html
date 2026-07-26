@@ -82,13 +82,48 @@ const ja = {
   worker:["小さな木の机のそばにある、質素で現代的な一人暮らしのワンルーム","小さな木のテーブルがある静かな近所のカフェの隅","少し開いたノートPC、陶器のマグカップ、少しずれた数冊の本がある生活感のある自宅の机まわり","雨粒のついた窓のそばにある、落ち着いたアパートの居間"],
 };
 const adultFaceCore = {
-  ja:"年齢相応の大人らしい骨格と、作り込みすぎない自然な表情。実在人物を想起させない",
-  en:"adult, age-appropriate facial structure and an unforced everyday expression; non-identifiable and not based on a real person"
+  ja:"年齢相応の大人らしい骨格と、作り込みすぎない自然な表情。実在人物を想起させず、自然な左右差を残す",
+  en:"adult, age-appropriate facial structure and an unforced everyday expression; non-identifiable, not based on a real person, with natural asymmetry"
 };
 const everydayAttractiveness = {
-  ja:"女優・アイドル・モデルのように整った、印象的で容姿端麗な架空の成人の彼女。ただし実在人物を想起させない非識別的な顔立ちで、日常になじむ自然で親しみやすい可愛さを持つ",
-  en:"a strikingly beautiful fictional adult woman with the polished, memorable appeal associated with an actress, idol, or model, while remaining non-identifiable and not based on any real person; naturally approachable and believable in everyday life"
+  ja:"この人物固有の骨格から生まれる、日常になじむ自然な魅力。既製のアイドル顔・小顔美人テンプレートへ平均化しない",
+  en:"natural, everyday attractiveness that comes from this individual's facial architecture; do not average her into a default idol, model, small-oval-face beauty template"
 };
+const faceSeparation = {
+  ja:"この顔構造プロファイルは最優先の固定条件。髪型、服、ほくろだけで差を作らず、顔の縦横比・中顔面・頬骨・下顎・目の配置・鼻の構造を指定どおり明確に描き分ける。他の生成の一般的な小さな卵型顔、大きな目、小さな鼻、短い中顔面、細いV字顎へ戻さない",
+  en:"This facial-architecture profile is a hard structural requirement. Do not create difference only through hair, clothing, or moles. Clearly preserve the stated face proportion, midface, cheekbones, jaw, eye placement, and nose structure. Do not drift back to a generic small oval face, large eyes, tiny nose, short midface, or narrow V-line jaw"
+};
+const faceProfiles = [
+  {id:'A', ja:"横に広い短顔、低く幅のある頬骨、目頭間の距離がやや狭い、鼻翼が広めで丸い鼻先、短く丸い顎先", en:"broad short face; low, wide cheekbones; slightly close-set eyes; broad nasal alae with a rounded tip; short rounded chin"},
+  {id:'B', ja:"細長い縦長顔、長めの中顔面、高めで狭い頬骨、やや長い鼻筋、横幅の狭い口元", en:"narrow long face; distinctly long midface; high narrow cheekbones; a somewhat long nasal bridge; narrow mouth width"},
+  {id:'C', ja:"ひし形寄りの顔、頬骨が高く最も幅が出る、深めの眼窩、鼻先が少し前に出る、細く長い顎先", en:"diamond-leaning face; high cheekbones at the widest point; deeper-set eye sockets; subtly projecting nasal tip; narrow elongated chin"},
+  {id:'D', ja:"下顎に幅がある顔、横長でやや切れ長の目、眉と目の距離が近い、口幅が広め、平らすぎない顎先", en:"face with a broad lower jaw; horizontally long slightly tapered eyes; close brow-to-eye distance; broad mouth width; a chin with gentle projection"},
+  {id:'E', ja:"額が広い逆三角形寄りの顔、目の間隔が広め、短めでやや上向きの鼻、頬骨は高すぎない、細い顎先", en:"broad-forehead inverted-triangle face; wide-set eyes; short slightly upturned nose; low-to-moderate cheekbones; narrow chin tip"},
+  {id:'F', ja:"下重心の丸顔、目は小さめで横幅も控えめ、長めの人中、やや厚い下唇、丸みのある広めの下顎", en:"lower-heavy round face; smaller, modest-width eyes; longer philtrum; slightly fuller lower lip; rounded broad lower jaw"},
+  {id:'G', ja:"縦長の長方形顔、額から顎まで直線的な輪郭、頬骨の張りは控えめ、鼻筋はまっすぐ長め、顎先は四角寄り", en:"long rectangular face; a straighter contour from forehead to chin; restrained cheekbone width; straight longer nose bridge; subtly square chin"},
+  {id:'H', ja:"こめかみから頬にかけて幅のあるハート形寄りの顔、目尻がやや上向き、短い鼻、口角の左右差、細いあご先", en:"heart-leaning face broad from temples to cheeks; slightly upturned outer eye corners; short nose; asymmetric mouth corners; fine chin tip"},
+  {id:'I', ja:"柔らかい四角顔、下顎幅と頬幅が近い、目の間隔は標準、低めの鼻根、口幅は中程度で上唇が薄め", en:"soft square face; jaw width close to cheek width; average eye spacing; low nasal root; medium mouth width with a thinner upper lip"},
+  {id:'J', ja:"面長の卵型だが下顔面が長い、頬骨は中央より少し下、まぶたの被さりが強め、細い鼻柱、長めの顎", en:"long oval face with a notably long lower face; cheekbones slightly below center; more hooded lids; narrow columella; long chin"},
+  {id:'K', ja:"頬に横幅のある楕円顔、やや離れ目、鼻先は小さく前方へ出すぎない、口幅は広め、顎先は短く平ら", en:"wide-cheeked oval face; slightly wide-set eyes; small non-projecting nasal tip; broad mouth width; short flatter chin"},
+  {id:'L', ja:"短い中顔面と高めの頬骨、目は縦の開きが小さい、鼻は長さがあり小鼻は細め、下顎はすっきりだがV字ではない", en:"short midface with high cheekbones; eyes with limited vertical opening; longer nose with narrow alae; a clean jaw that is not V-shaped"},
+  {id:'M', ja:"額が低めで中顔面が長い顔、目はやや近く下がり気味、鼻根は高めで鼻先は細め、口は小さく顎先は丸い", en:"low forehead with a long midface; slightly close-set downturned eyes; higher nasal root and fine tip; small mouth and rounded chin"},
+  {id:'N', ja:"丸みの少ない逆三角形顔、頬骨は中程度で横幅を抑え、目は横長、鼻翼は広め、顎先はやや前に出る", en:"less-rounded inverted-triangle face; moderate restrained cheekbone width; horizontally long eyes; broad nasal alae; slightly projecting chin"},
+  {id:'O', ja:"頬骨が低く下顎が強めの顔、目は大きくしすぎず眉との距離が広い、鼻は短く幅がある、唇は上下とも薄め", en:"low cheekbones with a stronger jaw; non-enlarged eyes and a wider brow-to-eye distance; short broad nose; thinner upper and lower lips"},
+  {id:'P', ja:"縦横比がほぼ均衡した丸すぎない顔、左右でまぶたの見え方が少し異なる、目の間隔は広め、鼻筋は短め、口角に軽い左右差", en:"balanced face that is not overly round; slightly different lid exposure left and right; wide eye spacing; shorter nose bridge; subtle mouth-corner asymmetry"},
+  {id:'Q', ja:"頬骨が高く外側へ張る顔、目は細めで眼窩が深い、鼻先は丸く小鼻は中程度、下顎は狭すぎず顎先は短い", en:"high outward cheekbones; narrower eyes with deeper sockets; rounded nasal tip and moderate alae; jaw not too narrow with a short chin"},
+  {id:'R', ja:"長い額と短い下顔面、目はやや大きいが丸くしない、鼻は小鼻より鼻筋の存在感がある、下唇がやや厚く顎先は小さい", en:"long forehead with a short lower face; somewhat larger but not round eyes; nose defined more by bridge than alae; slightly fuller lower lip and small chin"},
+  {id:'S', ja:"頬がふっくらしすぎない短めの顔、目尻が下がりすぎない一重寄りの目、鼻は長さ中程度で鼻先は平ら、口幅は広め", en:"short face without overly full cheeks; near-monolid eyes without strongly downturned corners; medium-length nose with a flatter tip; broad mouth width"},
+  {id:'T', ja:"下顎角が少し見える縦長顔、頬骨は狭め、目の間隔は標準よりやや狭い、鼻は細く長い、長めの人中と薄い唇", en:"long face with subtly visible jaw angles; narrow cheekbones; slightly close-set eyes; fine long nose; longer philtrum and thin lips"},
+  {id:'U', ja:"頬骨が中央で最も広い短い楕円顔、目はやや離れていて横幅中程度、鼻先は丸いが小さくしすぎない、下顎は丸く広い", en:"short oval face widest at mid-cheek; slightly wide-set medium-width eyes; rounded but not tiny nasal tip; rounded broad jaw"},
+  {id:'V', ja:"細い顔幅と高い額、目は横長で目尻が少し上がる、鼻根は低く鼻先は前に出る、口は小さめで顎は長い", en:"narrow face width and high forehead; horizontally long eyes with subtly lifted outer corners; low nasal root with a projecting tip; smaller mouth and long chin"},
+  {id:'W', ja:"横幅のある顔と短い額、目は小さめで左右の高さに微差、鼻翼は広く鼻筋は控えめ、口幅は中程度で下顎はやや角張る", en:"broad face with a short forehead; smaller eyes with slight height asymmetry; broad alae and restrained bridge; medium mouth width and mildly angular jaw"},
+  {id:'X', ja:"面長だが頬骨が外側に張る顔、まぶたは片側だけ少し被さる、鼻は中程度で鼻先が細い、顎先は幅があり短い", en:"long face with outward cheekbones; one lid slightly more hooded; medium nose with a fine tip; broad short chin"}
+];
+let faceProfileQueue = [];
+function takeFaceProfile() {
+  if (!faceProfileQueue.length) faceProfileQueue = [...faceProfiles].sort(() => Math.random() - 0.5);
+  return faceProfileQueue.pop();
+}
 const ebisuStyle = {
   ja:"上質な国内外コンテンポラリーブランドを、ロゴを見せず自然に着こなす恵比寿らしい洗練された装い。選んだ服装系統と日時・気温・天候に合わせた現実的なレイヤードを優先し、肌見せは季節に応じて首元・肩まわり・腕を中心に品よく取り入れる",
   en:"refined Ebisu styling in well-made contemporary Japanese and international brands, naturally worn without visible logos. Prioritize the selected fashion direction and realistic seasonal layering for the stated date, temperature, and weather; use a tasteful, work-appropriate amount of visible neckline, shoulders, or arms only when seasonally plausible"
@@ -120,8 +155,8 @@ const phoneRealism = {
   en:"a plausible, near-unedited iPhone 15 image taken from a comfortably respectful public distance using the main camera's 2x crop (52mm-equivalent field of view, f/1.6 appearance). It has gentle real-world telephoto compression from shooting a little farther away. A soft, incidental foreground edge—such as a tree branch, railing, or café frame—may appear lightly out of focus, while remaining a non-intrusive shared-public-space photograph. Use natural smartphone exposure settings appropriate to the stated light: about 1/250 s at ISO 100 in strong sun, 1/120 s at ISO 200 under bright overcast, or 1/60 s at ISO 400–640 at dusk. Exposure, shadows, and reflections are consistent with one available-light direction; realistic dynamic range; restrained smartphone-JPEG edge processing and slight small-sensor noise. Show natural tonal variation, pores, fine vellus hair, small moles, or faint freckles only where they would be visible at this distance. Preserve individual flyaway hairs, believable clothing wrinkles, contact shadows, and physically plausible scale and contact among hands, furniture, and background. Use beautiful natural light; no cinematic color grade, unnatural portrait-mode blur, or extreme clarity"
 };
 const negativePrompt = {
-  ja:"アニメ、イラスト、CG、3Dレンダリング、AI風の肌、ビューティーフィルター、プラスチック肌、陶器肌、過度な肌の平滑化、完璧すぎる左右対称、ドールのような顔、過度に大きい目、実在のセレブや実在人物、強すぎるハイファッションの演出、グラマーポーズ、スタジオのビューティーライティング、過度なポートレートぼけ、強すぎるHDR、過剰なシャープネス、二重の背景物、物理的に不自然な反射、顔や手の崩れ、余分な指、指定以外の文字、ロゴ",
-  en:"anime, illustration, CGI, 3D render, AI-looking skin, beauty filter, plastic or porcelain skin, over-smoothed skin, perfect facial symmetry, doll-like face, exaggerated eyes, any real celebrity or real person, overly editorial high-fashion styling, glamour pose, studio beauty lighting, excessive portrait-mode blur, strong HDR, oversharpening, duplicated background objects, physically implausible reflections, distorted face or hands, extra fingers, unrelated text, logos"
+  ja:"アニメ、イラスト、CG、3Dレンダリング、AI風の肌、ビューティーフィルター、プラスチック肌、陶器肌、過度な肌の平滑化、完璧すぎる左右対称、ドールのような顔、過度に大きい目、同じ顔の再利用、一般的な小顔の卵型美人顔、短い中顔面、極端に小さい鼻、細いV字顎、実在のセレブや実在人物、強すぎるハイファッションの演出、グラマーポーズ、スタジオのビューティーライティング、過度なポートレートぼけ、強すぎるHDR、過剰なシャープネス、二重の背景物、物理的に不自然な反射、顔や手の崩れ、余分な指、指定以外の文字、ロゴ",
+  en:"anime, illustration, CGI, 3D render, AI-looking skin, beauty filter, plastic or porcelain skin, over-smoothed skin, perfect facial symmetry, doll-like face, exaggerated eyes, reused face, same person as previous image, generic East Asian beauty face, small oval face, short midface, tiny nose, narrow V-line jaw, any real celebrity or real person, overly editorial high-fashion styling, glamour pose, studio beauty lighting, excessive portrait-mode blur, strong HDR, oversharpening, duplicated background objects, physically implausible reflections, distorted face or hands, extra fingers, unrelated text, logos"
 };
 const copyrightMark = {
   ja:"画像の右下に、明朝体で小さく控えめな著作権表記「© 見かけた気になる彼女」を入れる。ほかの文字やロゴは入れない",
@@ -244,14 +279,25 @@ const postTemplates = [
   () => `${pick(postOpenings)}${pick(postClosings)}${pick(postTransitions)}${pick(postQuestions)}`,
   () => `${pick(postQuestions)}${pick(postOpenings)}${pick(postImpressions)}${pick(postClosings)}`
 ];
+let usedPostInitials = new Set();
+function choosePostBody(avoidRepeatedInitial) {
+  const fixedTag = ' #今日見かけた気になる彼女';
+  for (let attempt = 0; attempt < 100; attempt += 1) {
+    const candidate = pick(postTemplates)();
+    const initial = Array.from(candidate)[0];
+    if (`${candidate}${fixedTag}`.length < 140 && (!avoidRepeatedInitial || !usedPostInitials.has(initial))) return candidate;
+  }
+  return '';
+}
 function makePostText() {
   const fixedTag = ' #今日見かけた気になる彼女';
-  let postBody = '';
-  for (let attempt = 0; attempt < 40; attempt += 1) {
-    const candidate = pick(postTemplates)();
-    if (`${candidate}${fixedTag}`.length < 140) { postBody = candidate; break; }
+  let postBody = choosePostBody(true);
+  if (!postBody) {
+    usedPostInitials.clear();
+    postBody = choosePostBody(false);
   }
   if (!postBody) postBody = '最初は何でもない景色だと思っていた。駅のホームの端で、到着案内を見上げたまま静かに立つ彼女がいた。待つ時間を持て余さない落ち着きが、静かに印象に残った。名前も知らないまま、その一瞬だけが静かに記憶へ残った。';
+  usedPostInitials.add(Array.from(postBody)[0]);
   const fittingEpilogues = postEpilogues.filter(epilogue => `${postBody}${epilogue}${fixedTag}`.length < 140);
   if (!fittingEpilogues.length) return `${postBody}${fixedTag}`;
   const longest = Math.max(...fittingEpilogues.map(epilogue => epilogue.length));
@@ -379,8 +425,9 @@ function makePrompt() {
   const capture = pick(ebisuCaptures);
   const temporal = pick(temporalScenes);
   const fashion = pick(fashionDirections);
-  const faceJa = `架空の${age}歳の成人日本人の彼女。${x.face.ja}。${adultFaceCore.ja}。${appearance.ja}。${everydayAttractiveness.ja}。${x.eyes.ja}、${x.brows.ja}。${x.noseMouth.ja}。${x.skin.ja}。実在人物を想起させない、自然な左右差のある顔。カメラには気づかず、前方や自分の用事へ自然に視線を向けている`;
-  const faceEn = `A fictional ${age}-year-old adult Japanese woman. ${x.face.en}. ${adultFaceCore.en}. ${appearance.en}. ${everydayAttractiveness.en}. ${x.eyes.en}, ${x.brows.en}. ${x.noseMouth.en}. ${x.skin.en}. A naturally asymmetric, non-identifiable face. She has not noticed the camera and is naturally looking ahead or at what she is doing`;
+  const faceProfile = takeFaceProfile();
+  const faceJa = `架空の${age}歳の成人日本人の彼女。顔構造プロファイル${faceProfile.id}: ${faceProfile.ja}。${faceSeparation.ja}。${adultFaceCore.ja}。${appearance.ja}。${everydayAttractiveness.ja}。髪型（顔の識別条件には使わない）: ${x.hair.ja}。${x.skin.ja}。カメラには気づかず、前方や自分の用事へ自然に視線を向けている`;
+  const faceEn = `A fictional ${age}-year-old adult Japanese woman. FACE ARCHITECTURE PROFILE ${faceProfile.id}: ${faceProfile.en}. ${faceSeparation.en}. ${adultFaceCore.en}. ${appearance.en}. ${everydayAttractiveness.en}. Hair only, not an identity cue: ${x.hair.en}. ${x.skin.en}. She has not noticed the camera and is naturally looking ahead or at what she is doing`;
   const demeanorJa = x.expression.ja;
   const demeanorEn = x.expression.en;
   const postJa = makePostText();
