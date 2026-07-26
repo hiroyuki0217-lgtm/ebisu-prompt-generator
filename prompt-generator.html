@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#f7efe9" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <title>今日恵比寿ですれ違った素敵な女性｜画像プロンプトメーカー</title>
+  <title>恵比寿で見かけた気になる女性</title>
   <style>
     :root { color-scheme: light; --ink:#2e2a2a; --muted:#716b6b; --paper:#fffdfb; --wash:#f7efe9; --accent:#9b6571; --line:#e8dcd6; }
     * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; } body { margin:0; color:var(--ink); background:var(--wash); font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif; }
@@ -14,7 +14,7 @@
     .panel { background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:22px; box-shadow:0 8px 30px #7f5d5210; } .controls { display:flex; flex-wrap:wrap; gap:12px; align-items:end; }
     label { display:grid; gap:6px; color:var(--muted); font-size:13px; font-weight:600; } select, button { min-height:44px; border-radius:10px; padding:10px 12px; font:inherit; } select { min-width:175px; border:1px solid var(--line); background:white; color:var(--ink); } button { touch-action:manipulation; cursor:pointer; border:0; background:var(--accent); color:white; font-weight:700; } button:hover { filter:brightness(.95); } button.secondary { background:white; color:var(--accent); border:1px solid var(--accent); }
     #results { display:grid; gap:16px; margin-top:24px; } article { background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:22px; scroll-margin-top:16px; } h2 { font-size:15px; margin:0 0 10px; color:var(--accent); } pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font:14px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace; } .copy-row { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 22px; } .copy-row button { min-height:44px; padding:7px 10px; font-size:12px; } .meta { margin:12px 0 0; font-size:12px; color:var(--muted); }
-    .summary { margin:0; color:var(--ink); font-size:15px; line-height:1.85; } .notes { margin:26px 0 0; color:var(--muted); font-size:13px; line-height:1.7; } .mobile-tip { margin:16px 0 0; padding:14px 16px; background:#fff8f4; border:1px solid var(--line); border-radius:14px; color:var(--muted); font-size:13px; line-height:1.65; } .mobile-tip strong { color:var(--ink); } code { color:#69444c; }
+    .story { margin:0 0 20px; padding:14px 16px; border-left:3px solid var(--accent); background:#fff8f4; color:var(--ink); font-size:15px; line-height:1.85; } .summary { margin:0; color:var(--ink); font-size:15px; line-height:1.85; } .notes { margin:26px 0 0; color:var(--muted); font-size:13px; line-height:1.7; } .mobile-tip { margin:16px 0 0; padding:14px 16px; background:#fff8f4; border:1px solid var(--line); border-radius:14px; color:var(--muted); font-size:13px; line-height:1.65; } .mobile-tip strong { color:var(--ink); } code { color:#69444c; }
     @media (max-width:600px) {
       main { padding-top:24px; padding-bottom:max(32px, env(safe-area-inset-bottom)); }
       h1 { font-size:25px; line-height:1.35; }
@@ -26,7 +26,7 @@
       #share-page { grid-column:1 / -1; }
       #results { margin-top:16px; gap:12px; }
       h2 { font-size:14px; }
-      .summary { font-size:14px; line-height:1.8; }
+      .story, .summary { font-size:14px; line-height:1.8; }
       .copy-row { margin-bottom:18px; }
       .copy-row button { width:100%; }
       .meta, .notes, .mobile-tip { font-size:12px; }
@@ -35,18 +35,18 @@
 </head>
 <body>
 <main>
-  <h1>今日恵比寿ですれ違った素敵な女性</h1>
-  <p class="product-name">画像プロンプトメーカー</p>
-  <p class="lead">恵比寿で働く架空の成人女性を、通勤・昼休み・帰宅途中のさりげない一瞬として組み合わせます。すべて実在人物とは無関係の22〜29歳の成人女性で、容姿・職業・ファッション・場面を毎回変えます。</p>
-  <section class="panel" aria-label="生成設定">
+  <h1>恵比寿で見かけた気になる女性</h1>
+  <p class="product-name">サイト概要</p>
+  <p class="lead">恵比寿の日常にいそうな、架空の成人女性のワンシーンを作ります。</p>
+  <section class="panel" aria-label="作成設定">
     <div class="controls">
       <button id="generate">ランダム生成</button>
-      <button class="secondary" id="share-page">この生成器を共有</button>
+      <button class="secondary" id="share-page">このサイトを共有</button>
     </div>
   </section>
   <div id="results" aria-live="polite"></div>
-  <p class="mobile-tip"><strong>iPhoneで使うには:</strong> このHTMLをGoogle Driveで共有し、iPhoneのSafariで共有リンクを開いてください。Safariの共有メニューから「ホーム画面に追加」を選ぶと、アプリのようにすぐ開けます。下の共有ボタンは、公開・共有済みのURLで開いたときに使えます。</p>
-  <p class="notes">設計メモ: 仕事設定・服装・動作・背景・構図を毎回ランダムに組み合わせます。すべて、恵比寿の共有された公共空間で自然な距離から撮った、ポーズを取っていない架空の成人女性の一枚です。盗撮や隠し撮りの表現、実在人物の再現は含めません。</p>
+  <p class="mobile-tip"><strong>使い方:</strong> 1.「ランダム生成」を押す　2.「イメージ作成プロンプトをコピー」を押す　3. ChatGPTまたはGeminiアプリを開き、貼り付けて送信します。</p>
+  <p class="notes">人物はすべて架空の成人女性です。共有された公共空間で、周囲に配慮した自然な写真表現として設計しています。</p>
 </main>
 <script>
 const pick = a => a[Math.floor(Math.random() * a.length)];
@@ -125,8 +125,8 @@ const backgroundCrowd = {
   en:"include several natural passersby in the Ebisu background. Keep the street, clothing, and main subject moderately legible overall; neither the subject nor background is overly blurred, with no strong background blur or extreme contrast. Only the passersby’s facial details are indistinct because of distance, softly blurred or very lightly pixelated so that nobody is identifiable"
 };
 const phoneRealism = {
-  ja:"少し離れた自然な公共距離から、iPhone 15のメインカメラを2倍クロップ（52mm相当の画角・f/1.6相当）で使って撮った、未加工に近い現実的なスマホ写真。望遠らしい自然な圧縮感はあるが、盗撮ではなく周囲に配慮した非侵襲的な共有空間の撮影。撮影条件に合わせ、晴天下は1/250秒・ISO 100前後、曇天は1/120秒・ISO 200前後、夕方は1/60秒・ISO 400〜640程度の自然なシャッター速度と感度。ひとつの自然な光源方向に整合する露出・影・反射、現実的なダイナミックレンジ、控えめなスマホJPEGの輪郭処理と小センサー由来のわずかなノイズ。撮影距離で見える範囲だけに、肌の色むら・毛穴・うぶ毛・小さなほくろや薄いそばかすを自然に写す。個々の後れ毛、衣服の自然なしわ、接地部の影、手・家具・背景の正しい縮尺と物理的な接触を保つ。映画的な色調補正、不自然なポートレートぼけ、極端な明瞭度は加えない",
-  en:"a plausible, near-unedited iPhone 15 image taken from a respectful ordinary public distance using the main camera's 2x crop (52mm-equivalent field of view, f/1.6 appearance). It has gentle real-world telephoto compression without being voyeuristic or intrusive. Use natural smartphone exposure settings appropriate to the stated light: about 1/250 s at ISO 100 in strong sun, 1/120 s at ISO 200 under bright overcast, or 1/60 s at ISO 400–640 at dusk. Exposure, shadows, and reflections are consistent with one available-light direction; realistic dynamic range; restrained smartphone-JPEG edge processing and slight small-sensor noise. Show natural tonal variation, pores, fine vellus hair, small moles, or faint freckles only where they would be visible at this distance. Preserve individual flyaway hairs, believable clothing wrinkles, contact shadows, and physically plausible scale and contact among hands, furniture, and background. No cinematic color grade, unnatural portrait-mode blur, or extreme clarity"
+  ja:"十分な自然な公共距離から、iPhone 15のメインカメラを2倍クロップ（52mm相当の画角・f/1.6相当）で使って撮った、未加工に近い現実的なスマホ写真。少し遠くから撮ることで生まれる自然な圧縮感があり、前景の端には街路樹・手すり・カフェのフレームなどがごく薄く前ボケとして入ることがある。ただし盗撮ではなく、周囲に配慮した非侵襲的な共有空間の撮影。撮影条件に合わせ、晴天下は1/250秒・ISO 100前後、曇天は1/120秒・ISO 200前後、夕方は1/60秒・ISO 400〜640程度の自然なシャッター速度と感度。ひとつの自然な光源方向に整合する露出・影・反射、現実的なダイナミックレンジ、控えめなスマホJPEGの輪郭処理と小センサー由来のわずかなノイズ。撮影距離で見える範囲だけに、肌の色むら・毛穴・うぶ毛・小さなほくろや薄いそばかすを自然に写す。個々の後れ毛、衣服の自然なしわ、接地部の影、手・家具・背景の正しい縮尺と物理的な接触を保つ。自然光をきれいに活かし、映画的な色調補正、不自然なポートレートぼけ、極端な明瞭度は加えない",
+  en:"a plausible, near-unedited iPhone 15 image taken from a comfortably respectful public distance using the main camera's 2x crop (52mm-equivalent field of view, f/1.6 appearance). It has gentle real-world telephoto compression from shooting a little farther away. A soft, incidental foreground edge—such as a tree branch, railing, or café frame—may appear lightly out of focus, while remaining a non-intrusive shared-public-space photograph. Use natural smartphone exposure settings appropriate to the stated light: about 1/250 s at ISO 100 in strong sun, 1/120 s at ISO 200 under bright overcast, or 1/60 s at ISO 400–640 at dusk. Exposure, shadows, and reflections are consistent with one available-light direction; realistic dynamic range; restrained smartphone-JPEG edge processing and slight small-sensor noise. Show natural tonal variation, pores, fine vellus hair, small moles, or faint freckles only where they would be visible at this distance. Preserve individual flyaway hairs, believable clothing wrinkles, contact shadows, and physically plausible scale and contact among hands, furniture, and background. Use beautiful natural light; no cinematic color grade, unnatural portrait-mode blur, or extreme clarity"
 };
 const negativePrompt = {
   ja:"アニメ、イラスト、CG、3Dレンダリング、AI風の肌、ビューティーフィルター、プラスチック肌、陶器肌、過度な肌の平滑化、完璧すぎる左右対称、ドールのような顔、過度に大きい目、実在のセレブや実在人物、強すぎるハイファッションの演出、グラマーポーズ、スタジオのビューティーライティング、過度なポートレートぼけ、強すぎるHDR、過剰なシャープネス、二重の背景物、物理的に不自然な反射、顔や手の崩れ、余分な指、文字、透かし、ロゴ",
@@ -257,10 +257,12 @@ function makePrompt() {
   const faceEn = `A fictional ${age}-year-old adult Japanese woman. ${x.face.en}. ${adultFaceCore.en}. ${appearance.en}. ${everydayAttractiveness.en}. ${x.eyes.en}, ${x.brows.en}. ${x.noseMouth.en}. ${x.skin.en}. A naturally asymmetric, non-identifiable face. She has not noticed the camera and is naturally looking ahead or at what she is doing`;
   const demeanorJa = x.expression.ja;
   const demeanorEn = x.expression.en;
+  const sceneJa = scene.ja.replace(/【[^】]+】/, '');
   return {
-    ja: `恵比寿の共有された公共空間で、少し離れた通常の立ち位置から撮ったフォトリアルな日常のスマホ写真。撮影設定: ${temporal.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。服装系統: ${fashion.ja}。${ebisuStyle.ja}。${demeanorJa}。場面: ${scene.ja}。${upperBodyFocus.ja}。${capture.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
-    en: `Photorealistic everyday phone photo taken from a respectful ordinary public distance in a shared public setting in Ebisu. Time, place, weather, and seasonal clothing: ${temporal.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. Fashion direction: ${fashion.en}. ${ebisuStyle.en}. ${demeanorEn}. Scene: ${scene.en}. ${upperBodyFocus.en}. ${capture.en}. ${backgroundCrowd.en}. ${phoneRealism.en}.\n\nNegative prompt: ${negativePrompt.en}`,
-    summaryJa: `架空の${age}歳の成人日本人女性／${profile.ja}。${temporal.ja}。<br>服装: ${fashion.ja}。<br>場面: ${scene.ja.replace(/【[^】]+】/, '')}。<br>表情: ${demeanorJa}。少し離れた自然な公共距離から、iPhone 15の2倍クロップで上半身を捉える設定です。`
+    ja: `次の条件で画像を1枚作成してください。恵比寿の共有された公共空間で、十分な自然な距離から撮ったフォトリアルな日常のスマホ写真。撮影設定: ${temporal.ja}。${faceJa}。${profile.ja}。職業に合う髪型・メイク・小物: ${profile.groomJa}。服装系統: ${fashion.ja}。${ebisuStyle.ja}。${demeanorJa}。場面: ${scene.ja}。${upperBodyFocus.ja}。${capture.ja}。${backgroundCrowd.ja}。${phoneRealism.ja}。\n\nネガティブプロンプト: ${negativePrompt.ja}`,
+    en: `Create one image using this exact specification. Photorealistic everyday phone photo taken from a respectful ordinary public distance in a shared public setting in Ebisu. Time, place, weather, and seasonal clothing: ${temporal.en}. ${faceEn}. ${profile.en}. Role-appropriate hair, makeup, and accessories: ${profile.groomEn}. Fashion direction: ${fashion.en}. ${ebisuStyle.en}. ${demeanorEn}. Scene: ${scene.en}. ${upperBodyFocus.en}. ${capture.en}. ${backgroundCrowd.en}. ${phoneRealism.en}.\n\nNegative prompt: ${negativePrompt.en}`,
+    storyJa: `今日こんな女性を見かけた。${sceneJa}。${profile.ja}らしいきちんとした雰囲気の中に、${fashion.ja}が自然になじんでいた。ふと目に入った${demeanorJa}と、時間帯の光に映える装いが印象に残った。`,
+    summaryJa: `架空の${age}歳の成人日本人女性／${profile.ja}。${temporal.ja}。<br>服装: ${fashion.ja}。<br>場面: ${sceneJa}。<br>表情: ${demeanorJa}。十分な自然な公共距離から、iPhone 15の2倍クロップで上半身を捉える設定です。`
   };
 }
 function copyText(text, button) {
@@ -295,7 +297,7 @@ let currentPrompt;
 function generate() {
   const out = document.querySelector('#results');
   currentPrompt = makePrompt();
-  out.innerHTML = `<article><h2>今回の日本語概要</h2><p class="summary">${currentPrompt.summaryJa}</p><div class="copy-row"><button class="secondary copy-one" data-lang="en">画像生成用の英語プロンプトをコピー</button><button class="secondary copy-one" data-lang="ja">日本語プロンプトをコピー</button></div><p class="meta">詳細なプロンプト本文は画面に表示せず、ボタンからそのままコピーできます。</p></article>`;
+  out.innerHTML = `<article><h2>今日こんな女性を見かけた</h2><p class="story">${currentPrompt.storyJa}</p><h2>日本語概要</h2><p class="summary">${currentPrompt.summaryJa}</p><div class="copy-row"><button class="secondary copy-one" data-lang="en">イメージ作成プロンプトをコピー</button></div><p class="meta">コピー後、ChatGPTまたはGeminiに貼り付けて送信してください。</p></article>`;
   document.querySelectorAll('.copy-one').forEach(button => button.addEventListener('click', () => copyText(currentPrompt[button.dataset.lang], button)));
 }
 document.querySelector('#generate').addEventListener('click', generate);
